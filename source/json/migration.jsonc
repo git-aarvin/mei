@@ -1,0 +1,71 @@
+/*
+	Data sourced from Vals AI's Code Migration v1.1. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data and
+	methodology are attributed to Vals AI.
+*/
+[
+	{
+		"author": "Anthropic",
+		"cost": 6.2,
+		"family": "Haiku",
+		"model": "Claude",
+		"pass": 0.524,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 72.4,
+		"family": "Opus",
+		"model": "Claude",
+		"pass": 0.81,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 43.88,
+		"family": "Sonnet",
+		"model": "Claude",
+		"pass": 0.869,
+		"series": 5.5,
+	},
+	{
+		"author": "DeepSeek",
+		"cost": 1.09,
+		"family": "Flash",
+		"model": "DeepSeek",
+		"pass": 0.589,
+		"series": 4.1,
+	},
+	{
+		"author": "Google",
+		"cost": 44.79,
+		"family": "Argon",
+		"model": "Gemini",
+		"pass": 0.708,
+		"series": 4,
+	},
+	{
+		"author": "OpenAI",
+		"cost": 9.51,
+		"family": "Sol",
+		"model": "GPT",
+		"pass": 0.773,
+		"series": 6.1,
+	},
+	{
+		"author": "Zhipu AI",
+		"cost": 8.96,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.516,
+		"series": 5.3,
+	},
+	{
+		"author": "xAI",
+		"cost": 38.05,
+		"family": "Grok",
+		"model": "Grok",
+		"pass": 0.532,
+		"series": 4.7,
+	},
+]

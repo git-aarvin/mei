@@ -1,0 +1,47 @@
+/*
+	Data sourced from Vals AI's Vibe Code Bench 1–100. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Vals AI.
+*/
+[
+	{
+		"author": "Anthropic",
+		"cost": 8.3,
+		"family": "Haiku",
+		"model": "Claude",
+		"pass": 0.204,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 44.12,
+		"family": "Opus",
+		"model": "Claude",
+		"pass": 0.304,
+		"series": 5.5,
+	},
+	{
+		"author": "DeepSeek",
+		"cost": 0.69,
+		"family": "Flash",
+		"model": "DeepSeek",
+		"pass": 0.164,
+		"series": 4.1,
+	},
+	{
+		"author": "Google",
+		"cost": 18.66,
+		"family": "Argon",
+		"model": "Gemini",
+		"pass": 0.212,
+		"series": 4,
+	},
+	{
+		"author": "Zhipu AI",
+		"cost": 0.93,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.16,
+		"series": 5.3,
+	},
+]

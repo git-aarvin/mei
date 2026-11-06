@@ -1,0 +1,20 @@
+/*
+	Data sourced from Laude's Terminal-Bench 4.0. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to the Laude Institute.
+*/
+[
+	{
+		"author": "xAI",
+		"family": "Grok",
+		"levels": [
+			{
+				"name": "extra",
+				"price": 11.21,
+				"score": 0.376,
+			},
+		],
+		"model": "Grok",
+		"series": 4.7,
+	},
+]

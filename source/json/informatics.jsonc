@@ -1,0 +1,71 @@
+/*
+	Data sourced from Vals AI's IOI v2. Benchmark results are reproduced for
+	aggregation and comparison purposes. All benchmark data and methodology are
+	attributed to Vals AI.
+*/
+[
+	{
+		"author": "Anthropic",
+		"cost": 0.83,
+		"family": "Haiku",
+		"model": "Claude",
+		"pass": 0.473,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 5.26,
+		"family": "Opus",
+		"model": "Claude",
+		"pass": 0.951,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 7.52,
+		"family": "Sonnet",
+		"model": "Claude",
+		"pass": 0.831,
+		"series": 5.5,
+	},
+	{
+		"author": "DeepSeek",
+		"cost": 0.24,
+		"family": "Flash",
+		"model": "DeepSeek",
+		"pass": 0.403,
+		"series": 4.1,
+	},
+	{
+		"author": "Google",
+		"cost": 5.31,
+		"family": "Argon",
+		"model": "Gemini",
+		"pass": 1,
+		"series": 4,
+	},
+	{
+		"author": "OpenAI",
+		"cost": 1.26,
+		"family": "Sol",
+		"model": "GPT",
+		"pass": 0.969,
+		"series": 6.1,
+	},
+	{
+		"author": "Zhipu AI",
+		"cost": 0.43,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.525,
+		"series": 5.3,
+	},
+	{
+		"author": "xAI",
+		"cost": 12.71,
+		"family": "Grok",
+		"model": "Grok",
+		"pass": 0.577,
+		"series": 4.7,
+	},
+]

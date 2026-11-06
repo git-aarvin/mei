@@ -1,0 +1,79 @@
+/*
+	Data sourced from Vals AI's Vibe Code Bench v1.1. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data and
+	methodology are attributed to Vals AI.
+*/
+[
+	{
+		"author": "Anthropic",
+		"cost": 6.07,
+		"family": "Haiku",
+		"model": "Claude",
+		"pass": 0.904,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 57.92,
+		"family": "Opus",
+		"model": "Claude",
+		"pass": 0.903,
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"cost": 31.25,
+		"family": "Sonnet",
+		"model": "Claude",
+		"pass": 0.924,
+		"series": 5.5,
+	},
+	{
+		"author": "DeepSeek",
+		"cost": 0.41,
+		"family": "Flash",
+		"model": "DeepSeek",
+		"pass": 0.847,
+		"series": 4.1,
+	},
+	{
+		"author": "Google",
+		"cost": 8.11,
+		"family": "Argon",
+		"model": "Gemini",
+		"pass": 0.919,
+		"series": 4,
+	},
+	{
+		"author": "Google",
+		"cost": 8.25,
+		"family": "Carbon",
+		"model": "Gemini",
+		"pass": 0.891,
+		"series": 4,
+	},
+	{
+		"author": "OpenAI",
+		"cost": 6.23,
+		"family": "Sol",
+		"model": "GPT",
+		"pass": 0.889,
+		"series": 6.1,
+	},
+	{
+		"author": "Zhipu AI",
+		"cost": 4.7,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.308,
+		"series": 5.3,
+	},
+	{
+		"author": "xAI",
+		"cost": 15.83,
+		"family": "Grok",
+		"model": "Grok",
+		"pass": 0.862,
+		"series": 4.7,
+	},
+]

@@ -6,143 +6,58 @@
 [
 	{
 		"author": "Anthropic",
+		"cost": 0.56,
 		"family": "Haiku",
-		"levels": [
-			{
-				"name": "extra",
-				"price": 0.56,
-				"score": 0.443,
-			},
-			{
-				"name": "high",
-				"price": 0.32,
-				"score": 0.423,
-			},
-			{
-				"name": "medium",
-				"price": 0.17,
-				"score": 0.369,
-			},
-		],
 		"model": "Claude",
+		"pass": 0.443,
 		"series": 5.5,
 	},
 	{
 		"author": "Anthropic",
+		"cost": 6.98,
 		"family": "Opus",
-		"levels": [
-			{
-				"name": "extra",
-				"price": 6.98,
-				"score": 0.56,
-			},
-			{
-				"name": "high",
-				"price": 3.97,
-				"score": 0.56,
-			},
-			{
-				"name": "medium",
-				"price": 2.91,
-				"score": 0.525,
-			},
-		],
 		"model": "Claude",
+		"pass": 0.56,
 		"series": 5.5,
 	},
 	{
 		"author": "Anthropic",
+		"cost": 2.81,
 		"family": "Sonnet",
-		"levels": [
-			{
-				"name": "extra",
-				"price": 2.81,
-				"score": 0.531,
-			},
-			{
-				"name": "high",
-				"price": 1.2,
-				"score": 0.478,
-			},
-			{
-				"name": "medium",
-				"price": 0.52,
-				"score": 0.392,
-			},
-		],
 		"model": "Claude",
+		"pass": 0.531,
 		"series": 5.5,
 	},
 	{
 		"author": "DeepSeek",
+		"cost": 0.77,
 		"family": "Flash",
-		"levels": [
-			{
-				"name": "high",
-				"price": 0.77,
-				"score": 0.456,
-			},
-			{
-				"name": "medium",
-				"price": 0.8,
-				"score": 0.463,
-			},
-		],
 		"model": "DeepSeek",
+		"pass": 0.456,
 		"series": 4.1,
 	},
 	{
 		"author": "Google",
+		"cost": 4.57,
 		"family": "Argon",
-		"levels": [
-			{
-				"name": "high",
-				"price": 4.57,
-				"score": 0.529,
-			},
-			{
-				"name": "medium",
-				"price": 4.39,
-				"score": 0.528,
-			},
-		],
 		"model": "Gemini",
+		"pass": 0.529,
 		"series": 4,
 	},
 	{
 		"author": "Zhipu AI",
+		"cost": 0.25,
 		"family": "Flash",
-		"levels": [
-			{
-				"name": "high",
-				"price": 0.25,
-				"score": 0.311,
-			},
-		],
 		"model": "GLM",
+		"pass": 0.311,
 		"series": 5.3,
 	},
 	{
 		"author": "xAI",
+		"cost": 6.01,
 		"family": "Grok",
-		"levels": [
-			{
-				"name": "extra",
-				"price": 6.01,
-				"score": 0.463,
-			},
-			{
-				"name": "high",
-				"price": 4.69,
-				"score": 0.439,
-			},
-			{
-				"name": "medium",
-				"price": 3.49,
-				"score": 0.416,
-			},
-		],
 		"model": "Grok",
+		"pass": 0.463,
 		"series": 4.7,
 	},
 ]

@@ -37,6 +37,14 @@
 		"series": 4,
 	},
 	{
+		"author": "OpenAI",
+		"cost": 84.72,
+		"family": "Astra",
+		"model": "GPT",
+		"pass": 0.2764,
+		"series": 6,
+	},
+	{
 		"author": "Zhipu AI",
 		"cost": 0.93,
 		"family": "Flash",

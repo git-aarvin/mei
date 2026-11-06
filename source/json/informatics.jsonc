@@ -46,6 +46,22 @@
 	},
 	{
 		"author": "OpenAI",
+		"cost": 6.5,
+		"family": "Astra",
+		"model": "GPT",
+		"pass": 1.0,
+		"series": 6,
+	},
+	{
+		"author": "OpenAI",
+		"cost": 0.2,
+		"family": "Luna",
+		"model": "GPT",
+		"pass": 0.5556,
+		"series": 6,
+	},
+	{
+		"author": "OpenAI",
 		"cost": 1.26,
 		"family": "Sol",
 		"model": "GPT",

@@ -1,0 +1,148 @@
+/*
+	Data sourced from Cursor's CursorBench 4.0. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Cursor.
+*/
+[
+	{
+		"author": "Anthropic",
+		"family": "Haiku",
+		"levels": [
+			{
+				"name": "extra",
+				"price": 0.56,
+				"score": 0.443,
+			},
+			{
+				"name": "high",
+				"price": 0.32,
+				"score": 0.423,
+			},
+			{
+				"name": "medium",
+				"price": 0.17,
+				"score": 0.369,
+			},
+		],
+		"model": "Claude",
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"family": "Opus",
+		"levels": [
+			{
+				"name": "extra",
+				"price": 6.98,
+				"score": 0.56,
+			},
+			{
+				"name": "high",
+				"price": 3.97,
+				"score": 0.56,
+			},
+			{
+				"name": "medium",
+				"price": 2.91,
+				"score": 0.525,
+			},
+		],
+		"model": "Claude",
+		"series": 5.5,
+	},
+	{
+		"author": "Anthropic",
+		"family": "Sonnet",
+		"levels": [
+			{
+				"name": "extra",
+				"price": 2.81,
+				"score": 0.531,
+			},
+			{
+				"name": "high",
+				"price": 1.2,
+				"score": 0.478,
+			},
+			{
+				"name": "medium",
+				"price": 0.52,
+				"score": 0.392,
+			},
+		],
+		"model": "Claude",
+		"series": 5.5,
+	},
+	{
+		"author": "DeepSeek",
+		"family": "Flash 1017",
+		"levels": [
+			{
+				"name": "high",
+				"price": 0.77,
+				"score": 0.456,
+			},
+			{
+				"name": "medium",
+				"price": 0.8,
+				"score": 0.463,
+			},
+		],
+		"model": "DeepSeek",
+		"series": 4.1,
+	},
+	{
+		"author": "Google",
+		"family": "Argon",
+		"levels": [
+			{
+				"name": "high",
+				"price": 4.57,
+				"score": 0.529,
+			},
+			{
+				"name": "medium",
+				"price": 4.39,
+				"score": 0.528,
+			},
+		],
+		"model": "Gemini",
+		"series": 4,
+	},
+	{
+		"author": "Zhipu AI",
+		"family": "Flash",
+		"levels": [
+			{
+				"name": "high",
+				"price": 0.25,
+				"score": 0.311,
+			},
+		],
+		"model": "GLM",
+		"series": 5.3,
+	},
+	{
+		"author": "xAI",
+		"family": "Grok",
+		"levels": [
+			{
+				"name": "extra",
+				"price": 6.01,
+				"score": 0.463,
+			},
+			{
+				"name": "high",
+				"price": 4.69,
+				"score": 0.439,
+			},
+			{
+				"name": "medium",
+				"price": 3.49,
+				"score": 0.416,
+			},
+		],
+		"model": "Grok",
+		"series": 4.7,
+	},
+]

@@ -5,6 +5,14 @@
 */
 [
 	{
+		"author": "Alibaba",
+		"cost": 11.59,
+		"family": "Max",
+		"model": "Qwen",
+		"pass": 0.2483,
+		"series": "3.8 0902"
+	},
+	{
 		"author": "Anthropic",
 		"cost": 41.49,
 		"family": "Fable",
@@ -59,5 +67,21 @@
 		"model": "GPT",
 		"pass": 0.2764,
 		"series": "6"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 8.24,
+		"family": "",
+		"model": "GLM",
+		"pass": 0.1999,
+		"series": "5.3"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 0.93,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.1603,
+		"series": "5.3"
 	}
 ]

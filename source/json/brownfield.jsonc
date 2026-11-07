@@ -10,7 +10,7 @@
 		"family": "Fable",
 		"model": "Claude",
 		"pass": 0.28,
-		"series": 5.1,
+		"series": "5.1"
 	},
 	{
 		"author": "Anthropic",
@@ -18,7 +18,7 @@
 		"family": "Haiku",
 		"model": "Claude",
 		"pass": 0.2041,
-		"series": 5.5,
+		"series": "5.5"
 	},
 	{
 		"author": "Anthropic",
@@ -26,7 +26,7 @@
 		"family": "Opus",
 		"model": "Claude",
 		"pass": 0.3036,
-		"series": 5.5,
+		"series": "5.5"
 	},
 	{
 		"author": "Google",
@@ -34,7 +34,7 @@
 		"family": "Argon",
 		"model": "Gemini",
 		"pass": 0.212,
-		"series": 4,
+		"series": "4"
 	},
 	{
 		"author": "Meta",
@@ -42,7 +42,7 @@
 		"family": "Wonder",
 		"model": "Muse",
 		"pass": 0.2655,
-		"series": 1,
+		"series": "1"
 	},
 	{
 		"author": "Meta",
@@ -50,7 +50,7 @@
 		"family": "Wonder Full",
 		"model": "Muse",
 		"pass": 0.3398,
-		"series": 1,
+		"series": "1"
 	},
 	{
 		"author": "OpenAI",
@@ -58,6 +58,6 @@
 		"family": "Astra",
 		"model": "GPT",
 		"pass": 0.2764,
-		"series": 6,
-	},
+		"series": "6"
+	}
 ]

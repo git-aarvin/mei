@@ -6,10 +6,18 @@
 [
 	{
 		"author": "Anthropic",
+		"cost": 41.49,
+		"family": "Fable",
+		"model": "Claude",
+		"pass": 0.28,
+		"series": 5.1,
+	},
+	{
+		"author": "Anthropic",
 		"cost": 8.3,
 		"family": "Haiku",
 		"model": "Claude",
-		"pass": 0.204,
+		"pass": 0.2041,
 		"series": 5.5,
 	},
 	{
@@ -17,16 +25,8 @@
 		"cost": 44.12,
 		"family": "Opus",
 		"model": "Claude",
-		"pass": 0.304,
+		"pass": 0.3036,
 		"series": 5.5,
-	},
-	{
-		"author": "DeepSeek",
-		"cost": 0.69,
-		"family": "Flash",
-		"model": "DeepSeek",
-		"pass": 0.164,
-		"series": 4.1,
 	},
 	{
 		"author": "Google",
@@ -37,19 +37,27 @@
 		"series": 4,
 	},
 	{
+		"author": "Meta",
+		"cost": 13.72,
+		"family": "Wonder",
+		"model": "Muse",
+		"pass": 0.2655,
+		"series": 1,
+	},
+	{
+		"author": "Meta",
+		"cost": 19.54,
+		"family": "Wonder Full",
+		"model": "Muse",
+		"pass": 0.3398,
+		"series": 1,
+	},
+	{
 		"author": "OpenAI",
 		"cost": 84.72,
 		"family": "Astra",
 		"model": "GPT",
 		"pass": 0.2764,
 		"series": 6,
-	},
-	{
-		"author": "Zhipu AI",
-		"cost": 0.93,
-		"family": "Flash",
-		"model": "GLM",
-		"pass": 0.16,
-		"series": 5.3,
 	},
 ]

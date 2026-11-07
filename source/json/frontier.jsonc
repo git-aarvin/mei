@@ -40,9 +40,9 @@
 		"author": "DeepSeek",
 		"cost": 0.27,
 		"family": "Flash",
-		"model": "DeepSeek",
+		"model": "",
 		"pass": 0.182,
-		"series": "4.1 1017"
+		"series": "V4.1 1017"
 	},
 	{
 		"author": "Google",
@@ -66,7 +66,23 @@
 		"family": "Wonder",
 		"model": "Muse",
 		"pass": 0.243,
-		"series": "1"
+		"series": ""
+	},
+	{
+		"author": "Mistral",
+		"cost": 1.55,
+		"family": "Large",
+		"model": "",
+		"pass": 0.197,
+		"series": "4"
+	},
+	{
+		"author": "Moonshot",
+		"cost": 2.36,
+		"family": "Pro",
+		"model": "Kimi",
+		"pass": 0.173,
+		"series": "K3.1"
 	},
 	{
 		"author": "OpenAI",
@@ -93,11 +109,35 @@
 		"series": "6.1"
 	},
 	{
+		"author": "Reflection",
+		"cost": 1.13,
+		"family": "",
+		"model": "Beam",
+		"pass": 0.028,
+		"series": "1.0"
+	},
+	{
 		"author": "xAI",
 		"cost": 14.36,
-		"family": "Grok",
+		"family": "",
 		"model": "Grok",
 		"pass": 0.286,
 		"series": "4.7"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 5.18,
+		"family": "",
+		"model": "GLM",
+		"pass": 0.168,
+		"series": "5.3"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 0.58,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.124,
+		"series": "5.3"
 	}
 ]

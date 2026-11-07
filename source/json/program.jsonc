@@ -6,11 +6,19 @@
 [
 	{
 		"author": "Anthropic",
+		"cost": 58.52,
+		"family": "Fable",
+		"model": "Claude",
+		"pass": 0.7,
+		"series": 5.1
+	},
+	{
+		"author": "Anthropic",
 		"cost": 6.83,
 		"family": "Haiku",
 		"model": "Claude",
 		"pass": 0.025,
-		"series": 5.5,
+		"series": 5.5
 	},
 	{
 		"author": "Anthropic",
@@ -18,7 +26,7 @@
 		"family": "Opus",
 		"model": "Claude",
 		"pass": 0.185,
-		"series": 5.5,
+		"series": 5.5
 	},
 	{
 		"author": "Anthropic",
@@ -26,7 +34,7 @@
 		"family": "Sonnet",
 		"model": "Claude",
 		"pass": 0.065,
-		"series": 5.5,
+		"series": 5.5
 	},
 	{
 		"author": "DeepSeek",
@@ -34,7 +42,7 @@
 		"family": "Flash",
 		"model": "DeepSeek",
 		"pass": 0.005,
-		"series": 4.1,
+		"series": 4.1
 	},
 	{
 		"author": "Google",
@@ -42,7 +50,15 @@
 		"family": "Argon",
 		"model": "Gemini",
 		"pass": 0.025,
-		"series": 4,
+		"series": 4
+	},
+	{
+		"author": "Meta",
+		"cost": 28.65,
+		"family": "Wonder Full",
+		"model": "Muse",
+		"pass": 0.005,
+		"series": 6
 	},
 	{
 		"author": "OpenAI",
@@ -50,7 +66,7 @@
 		"family": "Astra",
 		"model": "GPT",
 		"pass": 0.055,
-		"series": 6,
+		"series": 6
 	},
 	{
 		"author": "OpenAI",
@@ -58,7 +74,7 @@
 		"family": "Luna",
 		"model": "GPT",
 		"pass": 0.005,
-		"series": 6,
+		"series": 6
 	},
 	{
 		"author": "OpenAI",
@@ -66,15 +82,7 @@
 		"family": "Sol",
 		"model": "GPT",
 		"pass": 0.03,
-		"series": 6.1,
-	},
-	{
-		"author": "Zhipu AI",
-		"cost": 1.6,
-		"family": "Flash",
-		"model": "GLM",
-		"pass": 0,
-		"series": 5.3,
+		"series": 6.1
 	},
 	{
 		"author": "xAI",
@@ -82,6 +90,6 @@
 		"family": "Grok",
 		"model": "Grok",
 		"pass": 0.005,
-		"series": 4.7,
-	},
+		"series": 4.7
+	}
 ]

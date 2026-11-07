@@ -88,7 +88,7 @@ interface RawBenchmarkRecord {
 	author?: unknown;
 	model?: unknown;
 	family?: unknown;
-	series?: unknown;
+	series?: string;
 	cost?: unknown;
 	pass?: unknown;
 }
@@ -299,7 +299,7 @@ function additiveColumnEffects(matrix: readonly number[][]): number[] {
 function modelName(row: RawBenchmarkRecord): string {
 	if (row.label) return String(row.label);
 	if (row.author === `Meta`) return `${row.model} ${row.family}`.trim();
-	let series = String(row.series ?? ``).trim();
+	let series = (row.series ?? ``).trim();
 	return `${row.model} ${row.family} ${series}`.trim();
 }
 function loadRows(dataDir: string = DATA_DIR): BenchmarkRow[] {
@@ -505,7 +505,7 @@ function displayName(point: ModelPoint): string {
 	return (SHORT_NAMES[point.n] ?? point.n).replace(
 		RegExp(`^${point.author}\\s+`, `i`),
 		``,
-	);
+	).replace(/\b(?:Muse|1017)\b/gi, ``).replace(/\s+/g, ` `).trim();
 }
 const textWidth = (s: string, size: number): number =>
 	s.length * size * .6;

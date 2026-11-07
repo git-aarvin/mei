@@ -63,9 +63,17 @@
 	{
 		"author": "xAI",
 		"cost": 6.01,
-		"family": "Grok",
+		"family": "",
 		"model": "Grok",
 		"pass": 0.463,
 		"series": "4.7"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 0.24,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.311,
+		"series": "5.3"
 	}
 ]

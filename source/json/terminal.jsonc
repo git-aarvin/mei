@@ -42,7 +42,7 @@
 		"family": "Flash",
 		"model": "",
 		"pass": 0.3182,
-		"series": "4.1 1017"
+		"series": "V4.1 1017"
 	},
 	{
 		"author": "Google",
@@ -109,14 +109,6 @@
 		"series": "6.1"
 	},
 	{
-		"author": "Reflection",
-		"cost": 1.37,
-		"family": "",
-		"model": "Beam",
-		"pass": 0.0404,
-		"series": "1.0"
-	},
-	{
 		"author": "xAI",
 		"cost": 18.01,
 		"family": "",
@@ -128,7 +120,7 @@
 		"author": "Xiaomi",
 		"cost": 0.21,
 		"family": "Flash",
-		"model": "Mimo",
+		"model": "MiMo",
 		"pass": 0.2424,
 		"series": "V2.6"
 	},

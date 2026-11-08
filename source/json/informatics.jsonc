@@ -103,7 +103,7 @@
 	{
 		"author": "xAI",
 		"cost": 12.71,
-		"family": "Grok",
+		"family": "",
 		"model": "Grok",
 		"pass": 0.577,
 		"series": "4.7"

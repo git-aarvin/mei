@@ -77,14 +77,6 @@
 		"series": "1"
 	},
 	{
-		"author": "Mistral",
-		"cost": 11.72,
-		"family": "Large",
-		"model": "",
-		"pass": 0.8156,
-		"series": "4"
-	},
-	{
 		"author": "Moonshot",
 		"cost": 7.49,
 		"family": "Pro",

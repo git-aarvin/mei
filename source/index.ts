@@ -571,8 +571,6 @@ function placeLabels(
 	for (let it of items.slice().sort((a, b) => crowd(b) - crowd(a))) {
 		let w = textWidth(it.text, size),
 			candidates: Array<[number, number, TextAnchor]> = [];
-		// Try compact positions first, then progressively wider offsets. Every
-		// candidate is a standalone label placed clear of points and other labels.
 		for (let k of [1, 1.7, 2.5, 3.5, 4.7, 6]) {
 			let g = (it.r + 8) * k, d = g * .78;
 			candidates.push(
@@ -586,11 +584,15 @@ function placeLabels(
 				[it.px - d, it.py + d + h * .6, `end`],
 			);
 		}
+		if (it.text === `Luna 6`) {
+			candidates.unshift([it.px - 18, it.py + 25, `end`]);
+		}
 		if (it.text === `V2.6-Flash`) {
+			candidates.unshift([it.px - 12, it.py + 35, `end`]);
 			let rightEdgeCandidates = candidates.map(([, y]) =>
 				[bounds.right, y, `end`] as [number, number, TextAnchor]
 			);
-			candidates.unshift(...rightEdgeCandidates);
+			candidates.push(...rightEdgeCandidates);
 		}
 		let best: Omit<LabelPlacement, `it`> | null = null;
 		for (let [i, [x, y, anchor]] of candidates.entries()) {

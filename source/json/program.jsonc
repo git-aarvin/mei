@@ -79,9 +79,41 @@
 	{
 		"author": "xAI",
 		"cost": 46.49,
-		"family": "Grok",
+		"family": "",
 		"model": "Grok",
 		"pass": 0.005,
 		"series": "4.7"
+	},
+	{
+		"author": "Xiaomi",
+		"cost": 0.47,
+		"family": "Flash",
+		"model": "MiMo",
+		"pass": 0.005,
+		"series": "V2.6"
+	},
+	{
+		"author": "Xiaomi",
+		"cost": 0.73,
+		"family": "Pro",
+		"model": "MiMo",
+		"pass": 0.005,
+		"series": "V2.6"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 21.96,
+		"family": "",
+		"model": "GLM",
+		"pass": 0.015,
+		"series": "5.3"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 1.6,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0,
+		"series": "5.3"
 	}
 ]

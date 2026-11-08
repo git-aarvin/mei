@@ -40,7 +40,7 @@
 		"author": "DeepSeek",
 		"cost": 0.54,
 		"family": "Flash",
-		"model": "DeepSeek",
+		"model": "",
 		"pass": 0.3182,
 		"series": "4.1 1017"
 	},
@@ -115,7 +115,7 @@
 		"model": "Beam",
 		"pass": 0.0404,
 		"series": "1.0"
-	}
+	},
 	{
 		"author": "xAI",
 		"cost": 18.01,
@@ -136,7 +136,7 @@
 		"author": "Xiaomi",
 		"cost": 0.46,
 		"family": "Pro",
-		"model": "Mimo",
+		"model": "MiMo",
 		"pass": 0.3131,
 		"series": "V2.6"
 	},

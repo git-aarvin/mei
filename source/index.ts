@@ -165,17 +165,93 @@ const label = (p: Point): string =>
 	(SHORT[p.name] ?? p.name).replace(RegExp(`^${p.author}\\s+`, `i`), ``)
 		.replace(/\b(?:Muse|1017)\b/gi, ``).replace(/\s+/g, ` `).trim();
 // Greedy label placement: try spots around each dot, keep the least overlapping.
+// Dots of one author that nearly coincide are labelled as a group instead: the
+// labels are stacked with the higher score on top, each tied to its dot by a
+// leader line, since identical colours leave no other way to tell them apart.
 type Box = [number, number, number, number];
-function placeLabels(
-	items: Array<{ px: number; py: number; text: string }>,
-	obstacles: Array<[Box, number]>,
-) {
+interface Item {
+	px: number;
+	py: number;
+	text: string;
+	author: string;
+	score: number;
+}
+interface Placed extends Item {
+	x: number;
+	y: number;
+	a: string;
+	box: Box;
+	leader?: [number, number];
+}
+const MERGE = 24, LINE = FONT * 1.35;
+function placeLabels(items: Item[], obstacles: Array<[Box, number]>): Placed[] {
 	let taken: Box[] = [],
+		out: Placed[] = [],
 		hit = (a: Box, b: Box, pad: number) =>
 			a[0] < b[2] + pad && a[2] + pad > b[0] && a[1] < b[3] + pad
-			&& a[3] + pad > b[1];
-	return items.map(it => {
-		let w = it.text.length * FONT * .68,
+			&& a[3] + pad > b[1],
+		width = (t: string) => t.length * FONT * .68,
+		// Horizontal shift that keeps a label inside the plot.
+		fit = (x0: number, w: number) =>
+			Math.max(P.left + 6 - x0, Math.min(0, P.right - 6 - x0 - w)),
+		penalty = (box: Box) => {
+			let s = box[1] < P.top - 20 || box[3] > P.bottom - 4 ? 4e3 : 0;
+			for (let [o, weight] of obstacles) hit(box, o, 2) && (s += weight);
+			for (let t of taken) hit(box, t, 5) && (s += 1600);
+			return s;
+		},
+		// Cluster nearby same-author dots (union-find).
+		root = items.map((_, i) => i),
+		find = (i: number): number => root[i] === i ? i : root[i] = find(root[i]);
+	items.forEach((a, i) =>
+		items.forEach((b, j) =>
+			j > i && a.author === b.author && Math.hypot(a.px - b.px, a.py - b.py) < MERGE
+			&& (root[find(j)] = find(i))
+		)
+	);
+	items.forEach((_, n) => {
+		if (out[n]) return;
+		let group = items.map((_, i) => i).filter(i => find(i) === find(n));
+		if (group.length > 1) {
+			// Higher score first, so its label sits higher.
+			let order = group.sort((a, b) =>
+					items[b].score - items[a].score || items[a].py - items[b].py
+				),
+				cx = mean(order.map(i => items[i].px)),
+				cy = mean(order.map(i => items[i].py)),
+				best = { score: Infinity, placed: [] as Placed[] },
+				blocks: Box[] = items.map(p => [p.px - R - 3, p.py - R - 3, p.px + R + 3, p.py + R + 3]);
+			for (let side of [`start`, `end`])
+				for (let dx of [26, 42, 62])
+					for (let oy of [0, -26, 26, -52, 52]) {
+						let score = dx * .05 + Math.abs(oy) * .05, placed: Placed[] = [];
+						order.forEach((i, r) => {
+							let it = items[i], w = width(it.text),
+								y = cy + oy + (r - (order.length - 1) / 2) * LINE + FONT * .3,
+								x = cx + (side === `start` ? dx : -dx),
+								x0 = side === `start` ? x : x - w,
+								s = fit(x0, w),
+								box: Box = [x0 + s, y - FONT * .78, x0 + s + w, y + FONT * .24],
+								lead: [number, number] = [
+									side === `start` ? box[0] - 3 : box[2] + 3,
+									y - FONT * .28,
+								];
+							score += penalty(box) + Math.abs(s) * .35;
+							// Leader lines should not run through other dots or labels.
+							for (let t = .2; t <= 1; t += .1) {
+								let lx = it.px + (lead[0] - it.px) * t, ly = it.py + (lead[1] - it.py) * t,
+									pt: Box = [lx, ly, lx, ly];
+								blocks.forEach((b, k) => !group.includes(k) && hit(pt, b, 0) && (score += 900));
+								taken.forEach(b => hit(pt, b, 0) && (score += 400));
+							}
+							placed.push({ ...it, x: x + s, y, a: side, box, leader: lead });
+						});
+						score < best.score && (best = { score, placed });
+					}
+			order.forEach((i, r) => (out[i] = best.placed[r], taken.push(best.placed[r].box)));
+			return;
+		}
+		let it = items[n], w = width(it.text),
 			best = { score: Infinity, x: 0, y: 0, a: `start`, box: [0, 0, 0, 0] as Box },
 			tries = 0;
 		for (let k of [1, 1.7, 2.5, 3.5, 4.7]) {
@@ -194,17 +270,15 @@ function placeLabels(
 			) {
 				let x = it.px + dx, y = it.py + dy,
 					x0 = a === `start` ? x : a === `end` ? x - w : x - w / 2,
-					s = Math.max(P.left + 6 - x0, Math.min(0, P.right - 6 - x0 - w)),
+					s = fit(x0, w),
 					box: Box = [x0 + s, y - FONT * .78, x0 + s + w, y + FONT * .24],
-					score = tries++ * .35 + Math.abs(s) * .35
-						+ (box[1] < P.top - 20 || box[3] > P.bottom - 4 ? 4e3 : 0);
-				for (let [o, weight] of obstacles) hit(box, o, 2) && (score += weight);
-				for (let t of taken) hit(box, t, 5) && (score += 1600);
+					score = tries++ * .35 + Math.abs(s) * .35 + penalty(box);
 				score < best.score && (best = { score, x: x + s, y, a, box });
 			}
 		}
-		return taken.push(best.box), { ...it, ...best };
+		taken.push(best.box), out[n] = { ...it, ...best };
 	});
+	return out;
 }
 const TITLES = { cost: `Cost`, tokens: `Tokens` } as const;
 /** SVG scatter of performance (up) against relative `metric` (cheaper/leaner to the right). */
@@ -247,7 +321,7 @@ export function chart(metric: Metric): string {
 			}),
 		],
 		labels = placeLabels(
-			pts.map(p => ({ px: X(p.x), py: Y(p.y), text: label(p) })),
+			pts.map(p => ({ px: X(p.x), py: Y(p.y), text: label(p), author: p.author, score: p.y })),
 			obstacles,
 		),
 		orgs = Object.keys(COLORS).filter(o => pts.some(p => p.author === o)),
@@ -269,6 +343,9 @@ export function chart(metric: Metric): string {
 				`<g transform="translate(${P.right - 44 * (orgs.length - i) + 22} ${P.top - 46}) scale(.917)" fill="${shade(COLORS[o], -.2)}" fill-rule="evenodd"><title>${esc(o)}</title>${LOGOS[o].map(d => `<path d="${d}"/>`).join(``)}</g>`
 			),
 			`<polyline points="${stairs.join(` `)}" fill="none" stroke="#a3a398" stroke-width="1.25" stroke-linejoin="round"/>`,
+			...labels.filter(l => l.leader).map(l =>
+				`<line x1="${l.px}" y1="${l.py}" x2="${num(l.leader![0])}" y2="${num(l.leader![1])}" stroke="${COLORS[l.author]}" stroke-width="1.25"/>`
+			),
 			...pts.map(p => `<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${R}" fill="${COLORS[p.author]}"/>`),
 			...labels.flatMap((l, i) => {
 				let at = `x="${num(l.x)}" y="${num(l.y)}" text-anchor="${l.a}"`;

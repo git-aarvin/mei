@@ -106,7 +106,6 @@ const mean = (v: number[]): number => {
 			Math.round(c * (1 + k)).toString(16).padStart(2, `0`)
 		).join(``);
 	};
-// Fits score = row effect + model effect on a matrix with gaps (NaN).
 function modelEffects(m: number[][]): number[] {
 	let a = m.map(() => 0), s: number[] = m[0].map(() => 0);
 	for (let i = 0; i < 500; i++) {
@@ -115,7 +114,6 @@ function modelEffects(m: number[][]): number[] {
 	}
 	return s.map(v => v - mean(s));
 }
-// One point per model: x is relative `metric` (1 = typical), y is a 0-100ish index.
 function points(metric: Metric): Point[] {
 	let cells = new Map<string, { perf: number[]; use: number[] }>(),
 		author = new Map<string, string>();
@@ -164,10 +162,6 @@ function points(metric: Metric): Point[] {
 const label = (p: Point): string =>
 	(SHORT[p.name] ?? p.name).replace(RegExp(`^${p.author}\\s+`, `i`), ``)
 		.replace(/\b(?:Muse|1017)\b/gi, ``).replace(/\s+/g, ` `).trim();
-// Greedy label placement: try spots around each dot, keep the least overlapping.
-// Dots of one author that nearly coincide are labelled as a group instead: the
-// labels are stacked with the higher score on top, each tied to its dot by a
-// leader line, since identical colours leave no other way to tell them apart.
 type Box = [number, number, number, number];
 interface Item {
 	px: number;
@@ -191,7 +185,6 @@ function placeLabels(items: Item[], obstacles: Array<[Box, number]>): Placed[] {
 			a[0] < b[2] + pad && a[2] + pad > b[0] && a[1] < b[3] + pad
 			&& a[3] + pad > b[1],
 		width = (t: string) => t.length * FONT * .68,
-		// Horizontal shift that keeps a label inside the plot.
 		fit = (x0: number, w: number) =>
 			Math.max(P.left + 6 - x0, Math.min(0, P.right - 6 - x0 - w)),
 		penalty = (box: Box) => {
@@ -200,7 +193,6 @@ function placeLabels(items: Item[], obstacles: Array<[Box, number]>): Placed[] {
 			for (let t of taken) hit(box, t, 5) && (s += 1600);
 			return s;
 		},
-		// Cluster nearby same-author dots (union-find).
 		root = items.map((_, i) => i),
 		find = (i: number): number => root[i] === i ? i : root[i] = find(root[i]);
 	items.forEach((a, i) =>
@@ -213,7 +205,6 @@ function placeLabels(items: Item[], obstacles: Array<[Box, number]>): Placed[] {
 		if (out[n]) return;
 		let group = items.map((_, i) => i).filter(i => find(i) === find(n));
 		if (group.length > 1) {
-			// Higher score first, so its label sits higher.
 			let order = group.sort((a, b) =>
 					items[b].score - items[a].score || items[a].py - items[b].py
 				),
@@ -237,7 +228,6 @@ function placeLabels(items: Item[], obstacles: Array<[Box, number]>): Placed[] {
 									y - FONT * .28,
 								];
 							score += penalty(box) + Math.abs(s) * .35;
-							// Leader lines should not run through other dots or labels.
 							for (let t = .2; t <= 1; t += .1) {
 								let lx = it.px + (lead[0] - it.px) * t, ly = it.py + (lead[1] - it.py) * t,
 									pt: Box = [lx, ly, lx, ly];
@@ -281,7 +271,6 @@ function placeLabels(items: Item[], obstacles: Array<[Box, number]>): Placed[] {
 	return out;
 }
 const TITLES = { cost: `Cost`, tokens: `Tokens` } as const;
-/** SVG scatter of performance (up) against relative `metric` (cheaper/leaner to the right). */
 export function chart(metric: Metric): string {
 	let pts = points(metric),
 		xs = pts.map(p => p.x),

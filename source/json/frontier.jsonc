@@ -101,14 +101,6 @@
 		"series": "6.1"
 	},
 	{
-		"author": "Reflection",
-		"cost": 1.13,
-		"family": "",
-		"model": "Beam",
-		"pass": 0.028,
-		"series": "1.0"
-	},
-	{
 		"author": "xAI",
 		"cost": 14.36,
 		"family": "",

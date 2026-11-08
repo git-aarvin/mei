@@ -50,15 +50,6 @@
 		"tokens": 27020000
 	},
 	{
-		"author": "Meta",
-		"cost": 28.65,
-		"family": "Wonder Full",
-		"model": "Muse",
-		"pass": 0.005,
-		"series": "6",
-		"tokens": null
-	},
-	{
 		"author": "OpenAI",
 		"cost": 11.57,
 		"family": "Astra",

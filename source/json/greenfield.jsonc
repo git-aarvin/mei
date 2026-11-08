@@ -77,6 +77,22 @@
 		"series": "1"
 	},
 	{
+		"author": "Mistral",
+		"cost": 11.72,
+		"family": "Large",
+		"model": "",
+		"pass": 0.8156,
+		"series": "4"
+	},
+	{
+		"author": "Moonshot",
+		"cost": 7.49,
+		"family": "Pro",
+		"model": "Kimi",
+		"pass": 0.8489,
+		"series": "K3.1"
+	},
+	{
 		"author": "OpenAI",
 		"cost": 38.51,
 		"family": "Astra",
@@ -101,11 +117,51 @@
 		"series": "6.1"
 	},
 	{
+		"author": "Reflection",
+		"cost": 0.47,
+		"family": "",
+		"model": "Beam",
+		"pass": 0.6644,
+		"series": "1.0"
+	},
+	{
 		"author": "xAI",
 		"cost": 15.83,
 		"family": "Grok",
 		"model": "Grok",
 		"pass": 0.862,
 		"series": "4.7"
+	},
+	{
+		"author": "Xiaomi",
+		"cost": 0.56,
+		"family": "Flash",
+		"model": "MiMo",
+		"pass": 0.7896,
+		"series": "V2.6"
+	},
+	{
+		"author": "Xiaomi",
+		"cost": 1.04,
+		"family": "Pro",
+		"model": "MiMo",
+		"pass": 0.8522,
+		"series": "V2.6"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 12.45,
+		"family": "",
+		"model": "GLM",
+		"pass": 0.7813,
+		"series": "5.3"
+	},
+	{
+		"author": "Z.ai",
+		"cost": 4.7,
+		"family": "Flash",
+		"model": "GLM",
+		"pass": 0.3076,
+		"series": "5.3"
 	}
 ]

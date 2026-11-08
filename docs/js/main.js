@@ -332,6 +332,8 @@ function svgChart(models, metric) {
 		xTicks.map(value =>
 			`<text class="tick" x="${round(X(value))}" y="${plot.bottom + 16}" text-anchor="middle">${value}×</text>`
 		).join(""),
+		`<line class="crosshair crosshair-x" x1="${plot.left}" y1="${plot.top}" x2="${plot.left}" y2="${plot.bottom}"/>`,
+		`<line class="crosshair crosshair-y" x1="${plot.left}" y1="${plot.top}" x2="${plot.right}" y2="${plot.top}"/>`,
 		stairs.length > 1
 			? `<polyline class="front" points="${stairs.map(([x, y]) => `${round(x)},${round(y)}`).join(" ")}"/>`
 			: "",
@@ -378,6 +380,29 @@ function tableView(models, sort) {
 const chartEl = document.getElementById("chart");
 const tableEl = document.getElementById("table");
 const metricButtons = [...document.querySelectorAll(".metric")];
+chartEl.addEventListener("pointermove", event => {
+	const svg = chartEl.querySelector("svg");
+	const vertical = svg?.querySelector(".crosshair-x");
+	const horizontal = svg?.querySelector(".crosshair-y");
+	if (!vertical) return;
+	const point = svg.createSVGPoint();
+	point.x = event.clientX;
+	point.y = event.clientY;
+	const { x, y } = point.matrixTransform(svg.getScreenCTM().inverse());
+	const cx = Math.max(+horizontal.getAttribute("x1"), Math.min(+horizontal.getAttribute("x2"), x));
+	const cy = Math.max(+vertical.getAttribute("y1"), Math.min(+vertical.getAttribute("y2"), y));
+	const gap = 14;
+	const top = +vertical.getAttribute("y1");
+	const bottom = +vertical.getAttribute("y2");
+	const left = +horizontal.getAttribute("x1");
+	const right = +horizontal.getAttribute("x2");
+	vertical.setAttribute("x1", cx);
+	vertical.setAttribute("x2", cx);
+	horizontal.setAttribute("y1", cy);
+	horizontal.setAttribute("y2", cy);
+	vertical.setAttribute("stroke-dasharray", `${Math.max(0, cy - gap - top)} ${gap * 2} ${Math.max(0, bottom - cy - gap)}`);
+	horizontal.setAttribute("stroke-dasharray", `${Math.max(0, cx - gap - left)} ${gap * 2} ${Math.max(0, right - cx - gap)}`);
+});
 let models = [];
 let metric = "cost";
 let sort = { key: "y", dir: -1 };

@@ -33,6 +33,10 @@ const __filename = fileURLToPath(import.meta.url),
 		xAI: `#6659b5`,
 		DeepSeek: `#4e70a8`,
 		Meta: `#35949c`,
+		Moonshot: `#6b7785`,
+		"Z.ai": `#a8508f`,
+		Xiaomi: `#dc7a30`,
+		Reflection: `#7f9a3c`,
 	} as const,
 	LOGOS = {
 		Anthropic: [
@@ -56,6 +60,18 @@ const __filename = fileURLToPath(import.meta.url),
 		Meta: [
 			`M6.897 4c1.915 0 3.516.932 5.43 3.376l.282-.373c.19-.246.383-.484.58-.71l.313-.35C14.588 4.788 15.792 4 17.225 4c1.273 0 2.469.557 3.491 1.516l.218.213c1.73 1.765 2.917 4.71 3.053 8.026l.011.392.002.25c0 1.501-.28 2.759-.818 3.7l-.14.23-.108.153c-.301.42-.664.758-1.086 1.009l-.265.142-.087.04a3.493 3.493 0 01-.302.118 4.117 4.117 0 01-1.33.208c-.524 0-.996-.067-1.438-.215-.614-.204-1.163-.56-1.726-1.116l-.227-.235c-.753-.812-1.534-1.976-2.493-3.586l-1.43-2.41-.544-.895-1.766 3.13-.343.592C7.597 19.156 6.227 20 4.356 20c-1.21 0-2.205-.42-2.936-1.182l-.168-.184c-.484-.573-.837-1.311-1.043-2.189l-.067-.32a8.69 8.69 0 01-.136-1.288L0 14.468c.002-.745.06-1.49.174-2.23l.1-.573c.298-1.53.828-2.958 1.536-4.157l.209-.34c1.177-1.83 2.789-3.053 4.615-3.16L6.897 4zm-.033 2.615l-.201.01c-.83.083-1.606.673-2.252 1.577l-.138.199-.01.018c-.67 1.017-1.185 2.378-1.456 3.845l-.004.022a12.591 12.591 0 00-.207 2.254l.002.188c.004.18.017.36.04.54l.043.291c.092.503.257.908.486 1.208l.117.137c.303.323.698.492 1.17.492 1.1 0 1.796-.676 3.696-3.641l2.175-3.4.454-.701-.139-.198C9.11 7.3 8.084 6.616 6.864 6.616zm10.196-.552l-.176.007c-.635.048-1.223.359-1.82.933l-.196.198c-.439.462-.887 1.064-1.367 1.807l.266.398c.18.274.362.56.55.858l.293.475 1.396 2.335.695 1.114c.583.926 1.03 1.6 1.408 2.082l.213.262c.282.326.529.54.777.673l.102.05c.227.1.457.138.718.138.176.002.35-.023.518-.073.338-.104.61-.32.813-.637l.095-.163.077-.162c.194-.459.29-1.06.29-1.785l-.006-.449c-.08-2.871-.938-5.372-2.2-6.798l-.176-.189c-.67-.683-1.444-1.074-2.27-1.074z`,
 		],
+		Moonshot: [
+			`M1.052 16.916l9.539 2.552a21.007 21.007 0 00.06 2.033l5.956 1.593a11.997 11.997 0 01-5.586.865l-.18-.016-.044-.004-.084-.009-.094-.01a11.605 11.605 0 01-.157-.02l-.107-.014-.11-.016a11.962 11.962 0 01-.32-.051l-.042-.008-.075-.013-.107-.02-.07-.015-.093-.019-.075-.016-.095-.02-.097-.023-.094-.022-.068-.017-.088-.022-.09-.024-.095-.025-.082-.023-.109-.03-.062-.02-.084-.025-.093-.028-.105-.034-.058-.019-.08-.026-.09-.031-.066-.024a6.293 6.293 0 01-.044-.015l-.068-.025-.101-.037-.057-.022-.08-.03-.087-.035-.088-.035-.079-.032-.095-.04-.063-.028-.063-.027a5.655 5.655 0 01-.041-.018l-.066-.03-.103-.047-.052-.024-.096-.046-.062-.03-.084-.04-.086-.044-.093-.047-.052-.027-.103-.055-.057-.03-.058-.032a6.49 6.49 0 01-.046-.026l-.094-.053-.06-.034-.051-.03-.072-.041-.082-.05-.093-.056-.052-.032-.084-.053-.061-.039-.079-.05-.07-.047-.053-.035a7.785 7.785 0 01-.054-.036l-.044-.03-.044-.03a6.066 6.066 0 01-.04-.028l-.057-.04-.076-.054-.069-.05-.074-.054-.056-.042-.076-.057-.076-.059-.086-.067-.045-.035-.064-.052-.074-.06-.089-.073-.046-.039-.046-.039a7.516 7.516 0 01-.043-.037l-.045-.04-.061-.053-.07-.062-.068-.06-.062-.058-.067-.062-.053-.05-.088-.084a13.28 13.28 0 01-.099-.097l-.029-.028-.041-.042-.069-.07-.05-.051-.05-.053a6.457 6.457 0 01-.168-.179l-.08-.088-.062-.07-.071-.08-.042-.049-.053-.062-.058-.068-.046-.056a7.175 7.175 0 01-.027-.033l-.045-.055-.066-.082-.041-.052-.05-.064-.02-.025a11.99 11.99 0 01-1.44-2.402zm-1.02-5.794l11.353 3.037a20.468 20.468 0 00-.469 2.011l10.817 2.894a12.076 12.076 0 01-1.845 2.005L.657 15.923l-.016-.046-.035-.104a11.965 11.965 0 01-.05-.153l-.007-.023a11.896 11.896 0 01-.207-.741l-.03-.126-.018-.08-.021-.097-.018-.081-.018-.09-.017-.084-.018-.094c-.026-.141-.05-.283-.071-.426l-.017-.118-.011-.083-.013-.102a12.01 12.01 0 01-.019-.161l-.005-.047a12.12 12.12 0 01-.034-2.145zm1.593-5.15l11.948 3.196c-.368.605-.705 1.231-1.01 1.875l11.295 3.022c-.142.82-.368 1.612-.668 2.365l-11.55-3.09L.124 10.26l.015-.1.008-.049.01-.067.015-.087.018-.098c.026-.148.056-.295.088-.442l.028-.124.02-.085.024-.097c.022-.09.045-.18.07-.268l.028-.102.023-.083.03-.1.025-.082.03-.096.026-.082.031-.095a11.896 11.896 0 011.01-2.232zm4.442-4.4L17.352 4.59a20.77 20.77 0 00-1.688 1.721l7.823 2.093c.267.852.442 1.744.513 2.665L2.106 5.213l.045-.065.027-.04.04-.055.046-.065.055-.076.054-.072.064-.086.05-.065.057-.073.055-.07.06-.074.055-.069.065-.077.054-.066.066-.077.053-.06.072-.082.053-.06.067-.074.054-.058.073-.078.058-.06.063-.067.168-.17.1-.098.059-.056.076-.071a12.084 12.084 0 012.272-1.677zM12.017 0h.097l.082.001.069.001.054.002.068.002.046.001.076.003.047.002.06.003.054.002.087.005.105.007.144.011.088.007.044.004.077.008.082.008.047.005.102.012.05.006.108.014.081.01.042.006.065.01.207.032.07.012.065.011.14.026.092.018.11.022.046.01.075.016.041.01L14.7.3l.042.01.065.015.049.012.071.017.096.024.112.03.113.03.113.032.05.015.07.02.078.024.073.023.05.016.05.016.076.025.099.033.102.036.048.017.064.023.093.034.11.041.116.045.1.04.047.02.06.024.041.018.063.026.04.018.057.025.11.048.1.046.074.035.075.036.06.028.092.046.091.045.102.052.053.028.049.026.046.024.06.033.041.022.052.029.088.05.106.06.087.051.057.034.053.032.096.059.088.055.098.062.036.024.064.041.084.056.04.027.062.042.062.043.023.017c.054.037.108.075.161.114l.083.06.065.048.056.043.086.065.082.064.04.03.05.041.086.069.079.065.085.071c.712.6 1.353 1.283 1.909 2.031L7.222.994l.062-.027.065-.028.081-.034.086-.035c.113-.045.227-.09.341-.131l.096-.035.093-.033.084-.03.096-.031c.087-.03.176-.058.264-.085l.091-.027.086-.025.102-.03.085-.023.1-.026L9.04.37l.09-.023.091-.022.095-.022.09-.02.098-.021.091-.02.095-.018.092-.018.1-.018.091-.016.098-.017.092-.014.097-.015.092-.013.102-.013.091-.012.105-.012.09-.01.105-.01c.093-.01.186-.018.28-.024l.106-.008.09-.005.11-.006.093-.004.1-.004.097-.002.099-.002.197-.002z`,
+		],
+		"Z.ai": [
+			`M12.105 2L9.927 4.953H.653L2.83 2h9.276zM23.254 19.048L21.078 22h-9.242l2.174-2.952h9.244zM24 2L9.264 22H0L14.736 2H24z`,
+		],
+		Xiaomi: [
+			`M12 0C8.016 0 4.756.255 2.493 2.516.23 4.776 0 8.033 0 12.012c0 3.98.23 7.235 2.494 9.497C4.757 23.77 8.017 24 12 24c3.983 0 7.243-.23 9.506-2.491C23.77 19.247 24 15.99 24 12.012c0-3.984-.233-7.243-2.502-9.504C19.234.252 15.978 0 12 0zM4.906 7.405h5.624c1.47 0 3.007.068 3.764.827.746.746.827 2.233.83 3.676v4.54a.15.15 0 0 1-.152.147h-1.947a.15.15 0 0 1-.152-.148V11.83c-.002-.806-.048-1.634-.464-2.051-.358-.36-1.026-.441-1.72-.458H7.158a.15.15 0 0 0-.151.147v6.98a.15.15 0 0 1-.152.148H4.906a.15.15 0 0 1-.15-.148V7.554a.15.15 0 0 1 .15-.149zm12.131 0h1.949a.15.15 0 0 1 .15.15v8.892a.15.15 0 0 1-.15.148h-1.949a.15.15 0 0 1-.151-.148V7.554a.15.15 0 0 1 .151-.149zM8.92 10.948h2.046c.083 0 .15.066.15.147v5.352a.15.15 0 0 1-.15.148H8.92a.15.15 0 0 1-.152-.148v-5.352a.15.15 0 0 1 .152-.147Z`,
+		],
+		Reflection: [
+			`M24 12a5.718 5.718 0 1 1-11.437 0A5.718 5.718 0 0 1 24 12M5.718 6.282a5.718 5.718 0 1 0 0 11.436 5.718 5.718 0 0 0 0-11.436M10.31 12a4.591 4.591 0 1 1-9.182 0 4.591 4.591 0 0 1 9.182 0`,
+		],
 	} as const,
 	SHORT_NAMES: Record<string, string> = {
 		"Claude Opus 5.5": `Opus 5.5`,
@@ -64,10 +80,14 @@ const __filename = fileURLToPath(import.meta.url),
 		"Claude Haiku 5.5": `Haiku 5.5`,
 		"Gemini Carbon 4": `Carbon 4`,
 		"Gemini Argon 4": `Argon 4`,
+		"Flash V4.1 1017": `V4.1 Flash`,
 		"GPT Astra 6": `Astra 6`,
 		"GPT Sol 6.1": `Sol 6.1`,
 		"GPT Luna 6": `Luna 6`,
-		"Grok Grok 4.7": `Grok 4.7`,
+		"GLM Flash 5.3": `5.3 Flash`,
+		"Kimi Pro K3.1": `K3.1 Pro`,
+		"MiMo Flash V2.6": `V2.6-Flash`,
+		"MiMo Pro V2.6": `V2.6-Pro`,
 	} as const,
 	CHART = {
 		width: 1100,
@@ -76,7 +96,6 @@ const __filename = fileURLToPath(import.meta.url),
 		markerRadius: 5,
 		labelSize: 18,
 		xTicks: [4, 2, 1, .5, .25, .1],
-		costPower: .5,
 	} as const;
 type Benchmark = typeof FILE_TO_BENCH[keyof typeof FILE_TO_BENCH];
 type Family = typeof BENCH_TO_FAMILY[Benchmark];
@@ -144,8 +163,6 @@ interface Obstacle extends Box {
 interface ChartItem {
 	px: number;
 	py: number;
-	yLo: number;
-	yHi: number;
 	r: number;
 	weight: number;
 	text: string;
@@ -157,7 +174,6 @@ interface LabelPlacement {
 	y: number;
 	anchor: TextAnchor;
 	box: Box;
-	leader: boolean;
 	penalty: number;
 }
 interface LabelOptions {
@@ -300,7 +316,8 @@ function modelName(row: RawBenchmarkRecord): string {
 	if (row.label) return String(row.label);
 	if (row.author === `Meta`) return `${row.model} ${row.family}`.trim();
 	let series = (row.series ?? ``).trim();
-	return `${row.model} ${row.family} ${series}`.trim();
+	return `${row.model} ${row.family} ${series}`.replace(/\s+/g, ` `)
+		.trim();
 }
 function loadRows(dataDir: string = DATA_DIR): BenchmarkRow[] {
 	let rows: BenchmarkRow[] = [], seen = new Set<string>();
@@ -508,7 +525,7 @@ function displayName(point: ModelPoint): string {
 	).replace(/\b(?:Muse|1017)\b/gi, ``).replace(/\s+/g, ` `).trim();
 }
 const textWidth = (s: string, size: number): number =>
-	s.length * size * .6;
+	s.length * size * .68;
 function stairVertices(
 	frontierPx: readonly PointXY[],
 ): Array<[number, number]> {
@@ -553,50 +570,43 @@ function placeLabels(
 		placed: LabelPlacement[] = [];
 	for (let it of items.slice().sort((a, b) => crowd(b) - crowd(a))) {
 		let w = textWidth(it.text, size),
-			candidates: Array<[number, number, TextAnchor, boolean]> = [];
-		for (let k of [1, 2.1, 3.2]) {
-			let g = (it.r + 8) * k, d = g * .78, lead = k > 1;
+			candidates: Array<[number, number, TextAnchor]> = [];
+		// Try compact positions first, then progressively wider offsets. Every
+		// candidate is a standalone label placed clear of points and other labels.
+		for (let k of [1, 1.7, 2.5, 3.5, 4.7, 6]) {
+			let g = (it.r + 8) * k, d = g * .78;
 			candidates.push(
-				[it.px + g, it.py + h * .34, `start`, lead],
-				[it.px - g, it.py + h * .34, `end`, lead],
-				[it.px, it.py - g - 3, `middle`, lead],
-				[it.px, it.py + g + h * .78, `middle`, lead],
-				[it.px + d, it.py - d, `start`, lead],
-				[it.px + d, it.py + d + h * .6, `start`, lead],
-				[it.px - d, it.py - d, `end`, lead],
-				[it.px - d, it.py + d + h * .6, `end`, lead],
+				[it.px + g, it.py + h * .34, `start`],
+				[it.px - g, it.py + h * .34, `end`],
+				[it.px, it.py - g - 3, `middle`],
+				[it.px, it.py + g + h * .78, `middle`],
+				[it.px + d, it.py - d, `start`],
+				[it.px + d, it.py + d + h * .6, `start`],
+				[it.px - d, it.py - d, `end`],
+				[it.px - d, it.py + d + h * .6, `end`],
 			);
 		}
-		candidates.push(
-			[it.px, it.yHi - 10, `middle`, !1],
-			[it.px, it.yLo + 10 + h * .78, `middle`, !1],
-		);
+		if (it.text === `V2.6-Flash`) {
+			let rightEdgeCandidates = candidates.map(([, y]) =>
+				[bounds.right, y, `end`] as [number, number, TextAnchor]
+			);
+			candidates.unshift(...rightEdgeCandidates);
+		}
 		let best: Omit<LabelPlacement, `it`> | null = null;
-		for (let [i, [x, y, anchor, leader]] of candidates.entries()) {
+		for (let [i, [x, y, anchor]] of candidates.entries()) {
 			let box = boxFor(x, y, anchor, w), shift = 0;
 			box.x0 < bounds.left
 				? shift = bounds.left - box.x0
 				: box.x1 > bounds.right && (shift = bounds.right - box.x1),
 				shift
 				&& (box = { ...box, x0: box.x0 + shift, x1: box.x1 + shift });
-			let penalty = i * .5 + Math.abs(shift) * .5;
+			let penalty = i * .35 + Math.abs(shift) * .35;
 			(box.y0 < bounds.top || box.y1 > bounds.bottom)
-				&& (penalty += 1e3);
-			let dist = (o: ChartItem): number =>
-					Math.hypot(
-						Math.max(box.x0 - o.px, 0, o.px - box.x1),
-						Math.max(box.y0 - o.py, 0, o.py - box.y1),
-					),
-				own = Math.hypot(
-					Math.max(box.x0 - it.px, 0, it.px - box.x1),
-					Math.max(box.y0 - it.yLo, 0, it.yHi - box.y1),
-				);
-			items.some(o => o !== it && dist(o) < own + 4)
-				&& (penalty += 300);
+				&& (penalty += 4e3);
 			for (let o of obstacles) hit(box, o, 2) && (penalty += o.weight);
-			for (let p of placed) hit(box, p.box, 5) && (penalty += 500);
+			for (let p of placed) hit(box, p.box, 5) && (penalty += 1600);
 			(!best || penalty < best.penalty)
-				&& (best = { penalty, x: x + shift, y, anchor, box, leader });
+				&& (best = { penalty, x: x + shift, y, anchor, box });
 		}
 		best && placed.push({ it, ...best });
 	}
@@ -610,9 +620,9 @@ function renderSvg(
 		pts = computed.models,
 		xMin = Math.min(...pts.map(p => p.x)) * .9,
 		xMax = Math.max(...pts.map(p => p.x)) * 1.1,
-		yMin = Math.floor(Math.min(...pts.map(p => p.lo)) / 10) * 10,
-		yMax = Math.ceil(Math.max(...pts.map(p => p.hi)) / 10) * 10,
-		costT = (v: number): number => v ** CHART.costPower,
+		yMin = Math.floor(Math.min(...pts.map(p => p.y)) / 10) * 10,
+		yMax = Math.ceil(Math.max(...pts.map(p => p.y)) / 10) * 10,
+		costT = (v: number): number => Math.log10(v),
 		tMin = costT(xMin),
 		tMax = costT(xMax),
 		xScale = (v: number): number =>
@@ -634,8 +644,6 @@ function renderSvg(
 		items: ChartItem[] = pts.map(p => ({
 			px: xScale(p.x),
 			py: yScale(p.y),
-			yLo: yScale(p.lo),
-			yHi: yScale(p.hi),
 			r: R,
 			weight: 500,
 			text: displayName(p),
@@ -651,15 +659,8 @@ function renderSvg(
 			x1: it.px + R + 3,
 			y0: it.py - R - 3,
 			y1: it.py + R + 3,
-			weight: 400,
-		}),
-			obstacles.push({
-				x0: it.px - 2,
-				x1: it.px + 2,
-				y0: it.yHi,
-				y1: it.yLo,
-				weight: 200,
-			});
+			weight: 1800,
+		});
 	}
 	for (let i = 1; i < stairs.length; i++) {
 		let [x1, y1] = stairs[i - 1], [x2, y2] = stairs[i];
@@ -668,7 +669,7 @@ function renderSvg(
 			x1: Math.max(x1, x2) + 2,
 			y0: Math.min(y1, y2) - 2,
 			y1: Math.max(y1, y2) + 2,
-			weight: 150,
+			weight: 120,
 		});
 	}
 	let labels = placeLabels(items, {
@@ -683,8 +684,7 @@ function renderSvg(
 		}),
 		xEdges = [...pts.map(p => xScale(p.x)), ...tickXs.map(xScale)],
 		yEdges = [
-			...pts.map(p => yScale(p.lo)),
-			...pts.map(p => yScale(p.hi)),
+			...pts.map(p => yScale(p.y)),
 			...tickYs.map(yScale),
 		],
 		axisX = plot.left - 14,
@@ -696,7 +696,7 @@ function renderSvg(
 			`<?xml version="1.0" encoding="UTF-8"?>`,
 			`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="title desc">`,
 			`<title id="title">Model performance versus relative benchmark cost</title>`,
-			`<desc id="desc">${pts.length} models, colored by lab. Higher is better performing; further right is cheaper. A thin line on each point shows the range of its index when each benchmark family is left out in turn. The stepped line joins models that no other model beats on both cost and performance.</desc>`,
+			`<desc id="desc">${pts.length} models, colored by lab. Higher is better performing; further right is cheaper. The stepped line joins models that no other model beats on both cost and performance.</desc>`,
 			`<rect width="${W}" height="${H}" fill="#ffffff"/>`,
 			`<g transform="translate(0 35)">`,
 			`<style>
@@ -772,29 +772,6 @@ function renderSvg(
 				stairs.map(v => v.join(`,`)).join(` `)
 			}" fill="none" stroke="#a3a398" stroke-width="1.25" stroke-linejoin="round"/>`,
 		);
-	for (let it of items) {
-		let bar = (
-			x1: number,
-			y1: number,
-			x2: number,
-			y2: number,
-		): string =>
-			`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${it.color}" stroke-width="1.5" opacity="0.55"/>`;
-		svg.push(
-			bar(it.px, it.yHi, it.px, it.yLo),
-			bar(num(it.px - 5), it.yHi, num(it.px + 5), it.yHi),
-			bar(num(it.px - 5), it.yLo, num(it.px + 5), it.yLo),
-		);
-	}
-	for (let l of labels.filter(l => l.leader)) {
-		svg.push(
-			`<line x1="${l.it.px}" y1="${l.it.py}" x2="${
-				num((l.box.x0 + l.box.x1) / 2)
-			}" y2="${
-				num((l.box.y0 + l.box.y1) / 2)
-			}" stroke="${l.it.color}" stroke-width="0.9" opacity="0.7"/>`,
-		);
-	}
 	for (let it of items) {
 		svg.push(
 			`<circle cx="${it.px}" cy="${it.py}" r="${R}" fill="${it.color}"/>`,

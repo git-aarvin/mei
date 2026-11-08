@@ -1,5 +1,15 @@
 Mei&mdash;or, the **M**odels **E**ngineering **I**ndex&mdash;calculates language models' practical performance on engineering tasks.
 
-[![Scatter plot comparing Performance (vertical axis, 30–70) with Cost $ (horizontal axis, decreasing from 4× on the left to 0.1× on the right). Opus 5.5 is highest in performance, around 68, but near the expensive end. Sol 6.1 and several models around Carbon 4 and Astra 6 score roughly 58–62. Toward the lower-cost end, V4.1 Flash scores about 46, V2.6-Pro about 39, and Luna 6 and V2.8-Flash about 34–36; 5.3 Flash is lowest, around 32.](https://raw.githubusercontent.com/git-aarvin/mei/refs/heads/main/source/index.png?hash=1cec15728b5046c65963d5757ae991dafed9267b)](https://github.com/git-aarvin/mei/blob/main/source/index.png)
+---
+
+**Performance versus cost:**
+
+[![Scatter plot of AI model performance (30–70, vertical axis) versus cost (horizontal axis). Opus 5.5 scores highest at about 68; Astra, Carbon, and Sonnet 5.5 are near 62–64. Most other models score around 32–57, with Flash variants and Luna toward the right side.](https://raw.githubusercontent.com/git-aarvin/mei/refs/heads/main/source/cost.png?hash=5319907cde4069bab48431d0065052414832ce9e)](https://github.com/git-aarvin/mei/blob/main/source/cost.png)
+
+**Performance versus tokens:**
+
+[![Scatter plot of AI model performance (30–70, vertical axis) versus tokens (horizontal axis). Opus 5.5 and Astra score near 68; Sol and Sol 6.1 are around 58–62. Most other models range from about 32 to 56, including Grok 4.7, Luna, Flash variants, and Wonder Full.](https://raw.githubusercontent.com/git-aarvin/mei/refs/heads/main/source/tokens.png?hash=5319907cde4069bab48431d0065052414832ce9e)](https://github.com/git-aarvin/mei/blob/main/source/tokens.png)
+
+---
 
 _Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org) and [Vals AI](https://vals.ai)._

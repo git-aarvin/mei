@@ -5,14 +5,6 @@
 */
 [
 	{
-		"author": "Alibaba",
-		"cost": 11.59,
-		"family": "Max",
-		"model": "Qwen",
-		"pass": 0.2483,
-		"series": "3.8 0902"
-	},
-	{
 		"author": "Anthropic",
 		"cost": 41.49,
 		"family": "Fable",

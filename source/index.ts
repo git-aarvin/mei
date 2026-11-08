@@ -225,6 +225,8 @@ export function chart(metric: Metric): string {
 		yt = [...Array((y1 - y0) / 10 + 1)].map((_, i) => y0 + i * 10),
 		ax = P.left - 14,
 		ay = P.bottom + 14,
+		xAxisStart = Math.min(...xt.map(X)),
+		xAxisEnd = Math.max(...xt.map(X)),
 		front = pts.filter(p =>
 			!pts.some(q => q.x <= p.x && q.y >= p.y && (q.x < p.x || q.y > p.y))
 		).sort((a, b) => b.x - a.x).map(p => [X(p.x), Y(p.y)]),
@@ -258,7 +260,7 @@ export function chart(metric: Metric): string {
 			`<style>text{font-family:Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#222}.t{font-size:15px;fill:#777}.k{font-size:15px;fill:#555}.l{font-size:${FONT}px}.h{font-size:${FONT}px;fill:#fff;stroke:#fff;stroke-width:6px;stroke-linejoin:round}.g{stroke:#e7e4d8}</style>`,
 			...yt.map(v => `<line class="g" x1="${ax}" y1="${Y(v)}" x2="${P.right}" y2="${Y(v)}"/>`),
 			...xt.map(v => `<line class="g" x1="${X(v)}" y1="${P.top}" x2="${X(v)}" y2="${ay}"/>`),
-			`<path d="M${ax} ${Y(y1)}V${Y(y0)}M${ax} ${ay}H${P.right}" stroke="#777" fill="none"/>`,
+			`<path d="M${ax} ${Y(y1)}V${Y(y0)}M${xAxisStart} ${ay}H${xAxisEnd}" stroke="#777" fill="none"/>`,
 			...yt.map(v => `<text class="t" x="${ax - 8}" y="${Y(v) + 5}" text-anchor="end">${v}</text>`),
 			...xt.map(v => `<text class="t" x="${X(v)}" y="${ay + 24}" text-anchor="middle">${v}×</text>`),
 			`<text class="k" x="${ax}" y="${P.top - 28}">Performance</text>`,

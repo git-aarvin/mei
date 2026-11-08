@@ -10,7 +10,8 @@
 		"family": "Fable",
 		"model": "Claude",
 		"pass": 0.516,
-		"series": "5.1"
+		"series": "5.1",
+		"tokens": 87294
 	},
 	{
 		"author": "Anthropic",
@@ -18,7 +19,8 @@
 		"family": "Haiku",
 		"model": "Claude",
 		"pass": 0.443,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 143813
 	},
 	{
 		"author": "Anthropic",
@@ -26,7 +28,8 @@
 		"family": "Opus",
 		"model": "Claude",
 		"pass": 0.56,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 101083
 	},
 	{
 		"author": "Anthropic",
@@ -34,7 +37,8 @@
 		"family": "Sonnet",
 		"model": "Claude",
 		"pass": 0.531,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 100158
 	},
 	{
 		"author": "DeepSeek",
@@ -42,7 +46,8 @@
 		"family": "Flash",
 		"model": "",
 		"pass": 0.456,
-		"series": "V4.1 1017"
+		"series": "V4.1 1017",
+		"tokens": 385196
 	},
 	{
 		"author": "Google",
@@ -50,7 +55,8 @@
 		"family": "Argon",
 		"model": "Gemini",
 		"pass": 0.529,
-		"series": "4"
+		"series": "4",
+		"tokens": 109500
 	},
 	{
 		"author": "Meta",
@@ -58,7 +64,8 @@
 		"family": "Wonder",
 		"model": "Muse",
 		"pass": 0.482,
-		"series": ""
+		"series": "",
+		"tokens": 39564
 	},
 	{
 		"author": "xAI",
@@ -66,7 +73,8 @@
 		"family": "",
 		"model": "Grok",
 		"pass": 0.463,
-		"series": "4.7"
+		"series": "4.7",
+		"tokens": 70141
 	},
 	{
 		"author": "Z.ai",
@@ -74,6 +82,7 @@
 		"family": "Flash",
 		"model": "GLM",
 		"pass": 0.311,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 35104
 	}
 ]

@@ -10,7 +10,8 @@
 		"family": "Fable",
 		"model": "Claude",
 		"pass": 0.9078,
-		"series": "5.1"
+		"series": "5.1",
+		"tokens": 6280000
 	},
 	{
 		"author": "Anthropic",
@@ -18,7 +19,8 @@
 		"family": "Haiku",
 		"model": "Claude",
 		"pass": 0.473,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 5810000
 	},
 	{
 		"author": "Anthropic",
@@ -26,7 +28,8 @@
 		"family": "Opus",
 		"model": "Claude",
 		"pass": 0.951,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 4700000
 	},
 	{
 		"author": "Anthropic",
@@ -34,7 +37,8 @@
 		"family": "Sonnet",
 		"model": "Claude",
 		"pass": 0.831,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 18050000
 	},
 	{
 		"author": "Google",
@@ -42,7 +46,8 @@
 		"family": "Argon",
 		"model": "Gemini",
 		"pass": 1,
-		"series": "4"
+		"series": "4",
+		"tokens": 8220000
 	},
 	{
 		"author": "Meta",
@@ -50,7 +55,8 @@
 		"family": "Wonder Full",
 		"model": "Muse",
 		"pass": 0.7983,
-		"series": "1"
+		"series": "1",
+		"tokens": 7000000
 	},
 	{
 		"author": "Meta",
@@ -58,7 +64,8 @@
 		"family": "Wonder",
 		"model": "Muse",
 		"pass": 0.6694,
-		"series": "1"
+		"series": "1",
+		"tokens": 7790000
 	},
 	{
 		"author": "Moonshot",
@@ -66,7 +73,8 @@
 		"family": "Pro",
 		"model": "Kimi",
 		"pass": 0.8189,
-		"series": "K3.1"
+		"series": "K3.1",
+		"tokens": 9520000
 	},
 	{
 		"author": "OpenAI",
@@ -74,7 +82,8 @@
 		"family": "Astra",
 		"model": "GPT",
 		"pass": 1,
-		"series": "6"
+		"series": "6",
+		"tokens": 963670
 	},
 	{
 		"author": "OpenAI",
@@ -82,7 +91,8 @@
 		"family": "Luna",
 		"model": "GPT",
 		"pass": 0.5556,
-		"series": "6"
+		"series": "6",
+		"tokens": 4460000
 	},
 	{
 		"author": "OpenAI",
@@ -90,7 +100,8 @@
 		"family": "Sol",
 		"model": "GPT",
 		"pass": 0.969,
-		"series": "6.1"
+		"series": "6.1",
+		"tokens": 967870
 	},
 	{
 		"author": "xAI",
@@ -98,7 +109,8 @@
 		"family": "",
 		"model": "Grok",
 		"pass": 0.577,
-		"series": "4.7"
+		"series": "4.7",
+		"tokens": 10870000
 	},
 	{
 		"author": "Xiaomi",
@@ -106,7 +118,8 @@
 		"family": "Flash",
 		"model": "MiMo",
 		"pass": 0.4767,
-		"series": "V2.6"
+		"series": "V2.6",
+		"tokens": 20850000
 	},
 	{
 		"author": "Xiaomi",
@@ -114,7 +127,8 @@
 		"family": "Pro",
 		"model": "MiMo",
 		"pass": 0.3933,
-		"series": "V2.6"
+		"series": "V2.6",
+		"tokens": 7100000
 	},
 	{
 		"author": "Z.ai",
@@ -122,7 +136,8 @@
 		"family": "",
 		"model": "GLM",
 		"pass": 0.6844,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 20340000
 	},
 	{
 		"author": "Z.ai",
@@ -130,6 +145,7 @@
 		"family": "Flash",
 		"model": "GLM",
 		"pass": 0.525,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 18180000
 	}
 ]

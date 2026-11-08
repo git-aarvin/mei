@@ -10,7 +10,8 @@
 		"family": "Fable",
 		"model": "Claude",
 		"pass": 0.324,
-		"series": "5.1"
+		"series": "5.1",
+		"tokens": 92813
 	},
 	{
 		"author": "Anthropic",
@@ -18,7 +19,8 @@
 		"family": "Haiku",
 		"model": "Claude",
 		"pass": 0.223,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 127735
 	},
 	{
 		"author": "Anthropic",
@@ -26,7 +28,8 @@
 		"family": "Opus",
 		"model": "Claude",
 		"pass": 0.434,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 88053
 	},
 	{
 		"author": "Anthropic",
@@ -34,7 +37,8 @@
 		"family": "Sonnet",
 		"model": "Claude",
 		"pass": 0.348,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 80433
 	},
 	{
 		"author": "DeepSeek",
@@ -42,7 +46,8 @@
 		"family": "Flash",
 		"model": "",
 		"pass": 0.182,
-		"series": "V4.1 1017"
+		"series": "V4.1 1017",
+		"tokens": 57169
 	},
 	{
 		"author": "Google",
@@ -50,7 +55,8 @@
 		"family": "Argon",
 		"model": "Gemini",
 		"pass": 0.263,
-		"series": "4"
+		"series": "4",
+		"tokens": 148569
 	},
 	{
 		"author": "Google",
@@ -58,7 +64,8 @@
 		"family": "Carbon",
 		"model": "Gemini",
 		"pass": 0.4,
-		"series": "4"
+		"series": "4",
+		"tokens": 109126
 	},
 	{
 		"author": "Meta",
@@ -66,7 +73,8 @@
 		"family": "Wonder",
 		"model": "Muse",
 		"pass": 0.243,
-		"series": ""
+		"series": "",
+		"tokens": 32832
 	},
 	{
 		"author": "Moonshot",
@@ -74,7 +82,8 @@
 		"family": "Pro",
 		"model": "Kimi",
 		"pass": 0.173,
-		"series": "K3.1"
+		"series": "K3.1",
+		"tokens": 27628
 	},
 	{
 		"author": "OpenAI",
@@ -82,7 +91,8 @@
 		"family": "Astra",
 		"model": "GPT",
 		"pass": 0.414,
-		"series": "6"
+		"series": "6",
+		"tokens": 20869
 	},
 	{
 		"author": "OpenAI",
@@ -90,7 +100,8 @@
 		"family": "Luna",
 		"model": "GPT",
 		"pass": 0.184,
-		"series": "6"
+		"series": "6",
+		"tokens": 50565
 	},
 	{
 		"author": "OpenAI",
@@ -98,7 +109,8 @@
 		"family": "Sol",
 		"model": "GPT",
 		"pass": 0.348,
-		"series": "6.1"
+		"series": "6.1",
+		"tokens": 22419
 	},
 	{
 		"author": "xAI",
@@ -106,7 +118,8 @@
 		"family": "",
 		"model": "Grok",
 		"pass": 0.286,
-		"series": "4.7"
+		"series": "4.7",
+		"tokens": 110790
 	},
 	{
 		"author": "Z.ai",
@@ -114,7 +127,8 @@
 		"family": "",
 		"model": "GLM",
 		"pass": 0.168,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 73247
 	},
 	{
 		"author": "Z.ai",
@@ -122,6 +136,7 @@
 		"family": "Flash",
 		"model": "GLM",
 		"pass": 0.124,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 56914
 	}
 ]

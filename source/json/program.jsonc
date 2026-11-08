@@ -10,7 +10,8 @@
 		"family": "Fable",
 		"model": "Claude",
 		"pass": 0.07,
-		"series": "5.1"
+		"series": "5.1",
+		"tokens": null
 	},
 	{
 		"author": "Anthropic",
@@ -18,7 +19,8 @@
 		"family": "Haiku",
 		"model": "Claude",
 		"pass": 0.025,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": null
 	},
 	{
 		"author": "Anthropic",
@@ -26,7 +28,8 @@
 		"family": "Opus",
 		"model": "Claude",
 		"pass": 0.185,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 128900000
 	},
 	{
 		"author": "Anthropic",
@@ -34,7 +37,8 @@
 		"family": "Sonnet",
 		"model": "Claude",
 		"pass": 0.065,
-		"series": "5.5"
+		"series": "5.5",
+		"tokens": 134430000
 	},
 	{
 		"author": "Google",
@@ -42,7 +46,8 @@
 		"family": "Argon",
 		"model": "Gemini",
 		"pass": 0.025,
-		"series": "4"
+		"series": "4",
+		"tokens": 27020000
 	},
 	{
 		"author": "Meta",
@@ -50,7 +55,8 @@
 		"family": "Wonder Full",
 		"model": "Muse",
 		"pass": 0.005,
-		"series": "6"
+		"series": "6",
+		"tokens": null
 	},
 	{
 		"author": "OpenAI",
@@ -58,7 +64,8 @@
 		"family": "Astra",
 		"model": "GPT",
 		"pass": 0.055,
-		"series": "6"
+		"series": "6",
+		"tokens": 3870000
 	},
 	{
 		"author": "OpenAI",
@@ -66,7 +73,8 @@
 		"family": "Luna",
 		"model": "GPT",
 		"pass": 0.005,
-		"series": "6"
+		"series": "6",
+		"tokens": 7000000
 	},
 	{
 		"author": "OpenAI",
@@ -74,7 +82,8 @@
 		"family": "Sol",
 		"model": "GPT",
 		"pass": 0.03,
-		"series": "6.1"
+		"series": "6.1",
+		"tokens": 5170000
 	},
 	{
 		"author": "xAI",
@@ -82,7 +91,8 @@
 		"family": "",
 		"model": "Grok",
 		"pass": 0.005,
-		"series": "4.7"
+		"series": "4.7",
+		"tokens": 20290000
 	},
 	{
 		"author": "Xiaomi",
@@ -90,7 +100,8 @@
 		"family": "Flash",
 		"model": "MiMo",
 		"pass": 0.005,
-		"series": "V2.6"
+		"series": "V2.6",
+		"tokens": 77480000
 	},
 	{
 		"author": "Xiaomi",
@@ -98,7 +109,8 @@
 		"family": "Pro",
 		"model": "MiMo",
 		"pass": 0.005,
-		"series": "V2.6"
+		"series": "V2.6",
+		"tokens": 41010000
 	},
 	{
 		"author": "Z.ai",
@@ -106,7 +118,8 @@
 		"family": "",
 		"model": "GLM",
 		"pass": 0.015,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 75450000
 	},
 	{
 		"author": "Z.ai",
@@ -114,6 +127,7 @@
 		"family": "Flash",
 		"model": "GLM",
 		"pass": 0,
-		"series": "5.3"
+		"series": "5.3",
+		"tokens": 44940000
 	}
 ]

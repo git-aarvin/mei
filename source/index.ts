@@ -2,31 +2,18 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
-const __filename = fileURLToPath(import.meta.url),
-	__dirname = path.dirname(__filename),
-	DATA_DIR = path.join(__dirname, `json`),
-	DEFAULT_OUTPUT = path.join(__dirname, `model-performance-cost.svg`),
-	FILE_TO_BENCH = {
-		"cursor.jsonc": `cursor`,
-		"frontier.jsonc": `frontier`,
-		"migration.jsonc": `code-migration`,
-		"informatics.jsonc": `ioi`,
-		"program.jsonc": `programbench`,
-		"terminal.jsonc": `terminal-vals`,
-		"brownfield.jsonc": `vcb-1-100`,
-		"greenfield.jsonc": `vibe-code`,
-	} as const,
-	BENCH_TO_FAMILY = {
-		cursor: `CursorBench`,
-		frontier: `FrontierCode`,
-		"code-migration": `Code Migration`,
-		ioi: `IOI`,
-		programbench: `ProgramBench`,
-		"terminal-vals": `Terminal-Bench`,
-		"vcb-1-100": `Vibe Code`,
-		"vibe-code": `Vibe Code`,
-	} as const,
-	ORG_COLORS = {
+const DIR = path.dirname(fileURLToPath(import.meta.url)),
+	FILES = {
+		"cursor.jsonc": `CursorBench`,
+		"frontier.jsonc": `FrontierCode`,
+		"migration.jsonc": `Code Migration`,
+		"informatics.jsonc": `IOI`,
+		"program.jsonc": `ProgramBench`,
+		"terminal.jsonc": `Terminal-Bench`,
+		"brownfield.jsonc": `Vibe Code`,
+		"greenfield.jsonc": `Vibe Code`,
+	},
+	COLORS: Record<string, string> = {
 		Anthropic: `#c66e53`,
 		OpenAI: `#40947d`,
 		Google: `#c28b3f`,
@@ -37,8 +24,8 @@ const __filename = fileURLToPath(import.meta.url),
 		"Z.ai": `#a8508f`,
 		Xiaomi: `#dc7a30`,
 		Reflection: `#7f9a3c`,
-	} as const,
-	LOGOS = {
+	},
+	LOGOS: Record<string, string[]> = {
 		Anthropic: [
 			`M13.827 3.52h3.603L24 20h-3.603l-6.57-16.48zm-7.258 0h3.767L16.906 20h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z`,
 		],
@@ -72,832 +59,232 @@ const __filename = fileURLToPath(import.meta.url),
 		Reflection: [
 			`M24 12a5.718 5.718 0 1 1-11.437 0A5.718 5.718 0 0 1 24 12M5.718 6.282a5.718 5.718 0 1 0 0 11.436 5.718 5.718 0 0 0 0-11.436M10.31 12a4.591 4.591 0 1 1-9.182 0 4.591 4.591 0 0 1 9.182 0`,
 		],
-	} as const,
-	SHORT_NAMES: Record<string, string> = {
+	},
+	SHORT: Record<string, string> = {
 		"Claude Opus 5.5": `Opus 5.5`,
 		"Claude Fable 5.1": `Fable 5.1`,
 		"Claude Sonnet 5.5": `Sonnet 5.5`,
 		"Claude Haiku 5.5": `Haiku 5.5`,
-		"Gemini Carbon 4": `Carbon 4`,
-		"Gemini Argon 4": `Argon 4`,
+		"Gemini Carbon 4": `4 Carbon`,
+		"Gemini Argon 4": `4 Argon`,
 		"Flash V4.1 1017": `V4.1 Flash`,
-		"GPT Astra 6": `Astra 6`,
-		"GPT Sol 6.1": `Sol 6.1`,
-		"GPT Luna 6": `Luna 6`,
+		"GPT Astra 6": `6 Astra`,
+		"GPT Sol 6.1": `6.1 Sol`,
+		"GPT Luna 6": `6 Luna`,
 		"GLM Flash 5.3": `5.3 Flash`,
 		"Kimi Pro K3.1": `K3.1 Pro`,
 		"MiMo Flash V2.6": `V2.6-Flash`,
 		"MiMo Pro V2.6": `V2.6-Pro`,
-	} as const,
-	CHART = {
-		width: 1100,
-		height: 743,
-		plot: { left: 90, right: 1050, top: 50, bottom: 600 },
-		markerRadius: 5,
-		labelSize: 18,
-		xTicks: [4, 2, 1, .5, .25, .1],
-	} as const;
-type Benchmark = typeof FILE_TO_BENCH[keyof typeof FILE_TO_BENCH];
-type Family = typeof BENCH_TO_FAMILY[Benchmark];
-type Organization = keyof typeof ORG_COLORS;
-type AggregationMethod = `z` | `rank`;
-type TextAnchor = `start` | `end` | `middle`;
-interface RawBenchmarkRecord {
-	label?: unknown;
-	author?: unknown;
-	model?: unknown;
-	family?: unknown;
-	series?: string;
-	cost?: unknown;
-	pass?: unknown;
-}
-interface BenchmarkRow {
-	bench: Benchmark;
-	fam: Family;
-	model: string;
-	author: Organization;
-	cost: number;
-	score: number;
-	logCost: number;
-	c: number;
-	perf?: number;
-}
-interface ModelStats {
-	perf: number;
-	cost: number;
-	nP: number;
-}
-interface BuildResult {
-	stats: Record<string, ModelStats>;
-	families: Family[];
-	models: string[];
-}
-interface ModelPoint {
-	n: string;
-	author: Organization;
-	x: number;
-	y: number;
-	k: number;
-	lo: number;
-	hi: number;
-}
-interface ComputedResult {
-	rows: BenchmarkRow[];
-	families: Family[];
-	models: ModelPoint[];
-	rankSpearman: number;
-}
-interface PointXY {
+	},
+	W = 1100,
+	H = 743,
+	P = { left: 90, right: 1050, top: 50, bottom: 600 },
+	R = 5,
+	FONT = 18;
+type Metric = `cost` | `tokens`;
+interface Point {
+	name: string;
+	author: string;
 	x: number;
 	y: number;
 }
-interface Box {
-	x0: number;
-	x1: number;
-	y0: number;
-	y1: number;
-}
-interface Obstacle extends Box {
-	weight: number;
-}
-interface ChartItem {
-	px: number;
-	py: number;
-	r: number;
-	weight: number;
-	text: string;
-	color: string;
-}
-interface LabelPlacement {
-	it: ChartItem;
-	x: number;
-	y: number;
-	anchor: TextAnchor;
-	box: Box;
-	penalty: number;
-}
-interface LabelOptions {
-	bounds: { left: number; right: number; top: number; bottom: number };
-	obstacles: Obstacle[];
-	size: number;
-}
-interface SummaryModel {
-	model: string;
-	organization: Organization;
-	performanceIndex: number;
-	lower: number;
-	upper: number;
-	relativeCost: number;
-	familiesCovered: number;
-}
-interface Summary {
-	source: string;
-	includedBenchmarkRows: number;
-	modelCount: number;
-	benchmarkFamilies: Family[];
-	aggregation: string;
-	uncertainty: string;
-	rankSpearman: number;
-	models: SummaryModel[];
-	frontier: string[];
-}
-function isRecord(value: unknown): value is Record<string, unknown> {
-	return typeof value == `object` && !!value && !Array.isArray(value);
-}
-function isOrganization(value: unknown): value is Organization {
-	return typeof value == `string` && Object.hasOwn(ORG_COLORS, value);
-}
-function stripJsonc(source: string): string {
-	let out = ``, i = 0;
-	for (; i < source.length;) {
-		let ch = source[i], next = source[i + 1];
-		if (ch === `"`) {
-			let j = i + 1;
-			for (; j < source.length && source[j] !== `"`;) {
-				j += source[j] === `\\` ? 2 : 1;
-			}
-			if (j >= source.length) {
-				throw SyntaxError(`Unterminated string in JSONC input`);
-			}
-			out += source.slice(i, j + 1), i = j + 1;
-		} else if (ch === `/` && next === `/`) {
-			for (
-				;
-				i < source.length && source[i] !== `
-`;
-			) i++;
-		} else if (ch === `/` && next === `*`) {
-			let end = source.indexOf(`*/`, i + 2);
-			if (end < 0) {
-				throw SyntaxError(`Unterminated block comment in JSONC input`);
-			}
-			out += ` `, i = end + 2;
-		} else {
-			ch === `}` || ch === `]`
-				? (out = out.replace(/,\s*$/, ``) + ch, i++)
-				: (out += ch, i++);
-		}
-	}
-	return out;
-}
-function parseJsonc<T = unknown>(source: string): T {
-	return JSON.parse(stripJsonc(source));
-}
-const isFiniteNumber = Number.isFinite;
-function mean(values: readonly number[]): number {
-	let sum = 0, count = 0;
-	for (let value of values) {
-		isFiniteNumber(value) && (sum += value, count++);
-	}
-	return count ? sum / count : NaN;
-}
-function stdPop(values: readonly number[]): number {
-	let m = mean(values);
-	return Math.sqrt(
-		mean(values.filter(isFiniteNumber).map(v => (v - m) ** 2)),
-	);
-}
-function median(values: readonly number[]): number {
-	if (!values.length) return NaN;
-	let xs = [...values].sort((a, b) => a - b), mid = xs.length >> 1;
-	return xs.length % 2 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2;
-}
-function averageRanks(values: readonly number[]): number[] {
-	let sorted = values.map((v, i) => ({ v, i })).sort((a, b) =>
-			a.v - b.v
-		),
-		ranks = Array(values.length);
-	for (let i = 0; i < sorted.length;) {
-		let j = i + 1;
-		for (; j < sorted.length && sorted[j].v === sorted[i].v;) j++;
-		for (let k = i; k < j; k++) ranks[sorted[k].i] = (i + 1 + j) / 2;
-		i = j;
-	}
-	return ranks.map(r => r / values.length);
-}
-function pearson(a: readonly number[], b: readonly number[]): number {
-	let ma = mean(a), mb = mean(b);
-	return mean(a.map((v, i) => (v - ma) * (b[i] - mb)))
-		/ (stdPop(a) * stdPop(b));
-}
-function spearman(a: readonly number[], b: readonly number[]): number {
-	return pearson(averageRanks(a), averageRanks(b));
-}
-function groupBy<T, K>(
-	items: readonly T[],
-	keyFn: (item: T) => K,
-): Map<K, T[]> {
-	let groups = new Map();
-	for (let item of items) {
-		let key = keyFn(item);
-		groups.has(key) || groups.set(key, []), groups.get(key).push(item);
-	}
-	return groups;
-}
-function additiveColumnEffects(matrix: readonly number[][]): number[] {
-	let a = Array(matrix.length).fill(0),
-		s = Array(matrix[0].length).fill(0);
-	for (let iter = 0; iter < 1e3; iter++) {
-		let prev = s;
-		s = prev.map((_, j) => mean(matrix.map((row, i) => row[j] - a[i])));
-		for (let i = 0; i < a.length; i++) {
-			a[i] = mean(matrix[i].map((v, j) => v - s[j]));
-		}
-		let delta = Math.max(
-			0,
-			...s.map((v, j) => Math.abs(v - prev[j])).filter(isFiniteNumber),
-		);
-		if (iter && delta < 1e-12) break;
-	}
-	let shift = mean(s);
-	return s.map(v => v - shift);
-}
-function modelName(row: RawBenchmarkRecord): string {
-	if (row.label) return String(row.label);
-	if (row.author === `Meta`) return `${row.model} ${row.family}`.trim();
-	let series = (row.series ?? ``).trim();
-	return `${row.model} ${row.family} ${series}`.replace(/\s+/g, ` `)
-		.trim();
-}
-function loadRows(dataDir: string = DATA_DIR): BenchmarkRow[] {
-	let rows: BenchmarkRow[] = [], seen = new Set<string>();
-	for (
-		let file of (Object.keys(FILE_TO_BENCH) as Array<
-			keyof typeof FILE_TO_BENCH
-		>).sort()
-	) {
-		let bench = FILE_TO_BENCH[file], fam = BENCH_TO_FAMILY[bench];
-		if (!fam) {
-			throw Error(
-				`No benchmark family configured for ${bench} (${file})`,
-			);
-		}
-		let filePath = path.join(dataDir, file), records: unknown;
-		try {
-			records = parseJsonc<unknown>(fs.readFileSync(filePath, `utf8`));
-		} catch (err) {
-			throw Error(
-				`Could not read ${filePath}: ${
-					err instanceof Error ? err.message : String(err)
-				}`,
-			);
-		}
-		if (!Array.isArray(records)) {
-			throw Error(`${file}: expected a top-level array`);
-		}
-		for (let value of records as unknown[]) {
-			if (!isRecord(value)) {
-				throw Error(
-					`Invalid record in ${file}: ${JSON.stringify(value)}`,
-				);
-			}
-			let raw = value as RawBenchmarkRecord,
-				cost = Number(raw.cost),
-				score = Number(raw.pass);
-			if (!(cost > 0) || !isFiniteNumber(score)) {
-				throw Error(
-					`Invalid record in ${file}: ${JSON.stringify(raw)}`,
-				);
-			}
-			if (!isOrganization(raw.author)) {
-				throw Error(`Unknown organization in ${file}: ${raw.author}`);
-			}
-			let model = modelName(raw), key = `${bench}\u0000${model}`;
-			if (seen.has(key)) {
-				throw Error(`Duplicate record for ${model} in ${file}`);
-			}
-			seen.add(key),
-				rows.push({
-					bench,
-					fam,
-					model,
-					author: raw.author,
-					cost,
-					score,
-					logCost: Math.log10(cost),
-					c: 0,
-				});
-		}
-	}
-	for (let group of groupBy(rows, r => r.bench).values()) {
-		let med = median(group.map(r => r.logCost));
-		for (let row of group) row.c = row.logCost - med;
-	}
-	return rows;
-}
-function build(
-	rows: readonly BenchmarkRow[],
-	method: AggregationMethod = `z`,
-): BuildResult {
-	let transformed: Array<BenchmarkRow & { perf: number }> = [];
-	for (let group of groupBy(rows, r => r.bench).values()) {
-		let scores = group.map(r => r.score),
-			average = mean(scores),
-			deviation = stdPop(scores) || 1,
-			perf = method === `z`
-				? scores.map(score => (score - average) / deviation)
-				: averageRanks(scores).map(rank => rank * 2 - 1);
-		group.forEach((row, i) =>
-			transformed.push({ ...row, perf: perf[i] })
-		);
-	}
-	let groups = groupBy(transformed, r => `${r.fam}\u0000${r.model}`),
-		families = [
-			...new Set([...groups.values()].map(([row]) => row.fam)),
-		].sort(),
-		models = [
-			...new Set([...groups.values()].map(([row]) => row.model)),
-		].sort(),
-		aggregates = new Map<string, { perf: number; cost: number }>(
-			[...groups].map((
-				[key, group],
-			) => [key, {
-				perf: mean(group.map(r => r.perf)),
-				cost: mean(group.map(r => r.c)),
-			}]),
-		),
-		table = (field: `perf` | `cost`): number[][] =>
-			families.map(family =>
-				models.map(model =>
-					aggregates.get(`${family}\u0000${model}`)?.[field] ?? NaN
-				)
-			),
-		P = table(`perf`),
-		C = table(`cost`),
-		pValues = additiveColumnEffects(P),
-		cValues = additiveColumnEffects(C);
-	return {
-		stats: Object.fromEntries(
-			models.map((
-				model,
-				i,
-			) => [model, {
-				perf: pValues[i],
-				cost: cValues[i],
-				nP: P.filter(row => isFiniteNumber(row[i])).length,
-			}]),
-		),
-		families,
-		models,
-	};
-}
-function toIndex(
-	perfByModel: Record<string, number>,
-	models: readonly string[],
-): Record<string, number> {
-	let sd = stdPop(models.map(m => perfByModel[m])) || 1;
-	return Object.fromEntries(
-		models.map(m => [m, 50 + 10 * perfByModel[m] / sd]),
-	);
-}
-function compute(rows: BenchmarkRow[] = loadRows()): ComputedResult {
-	let built = build(rows, `z`),
-		{ models, families } = built,
-		authors = new Map<string, Organization>(
-			rows.map(r => [r.model, r.author]),
-		),
-		index = toIndex(
-			Object.fromEntries(models.map(m => [m, built.stats[m].perf])),
-			models,
-		),
-		loo = families.map(fam => {
-			let reduced = build(rows.filter(r => r.fam !== fam), `z`);
-			return toIndex(
-				Object.fromEntries(
-					reduced.models.map(m => [m, reduced.stats[m].perf]),
-				),
-				reduced.models,
-			);
-		}),
-		points: ModelPoint[] = models.map(model => {
-			let values = loo.map(v => v[model]).filter(isFiniteNumber),
-				author = authors.get(model);
-			if (!author) {
-				throw Error(`Missing organization for model ${model}`);
-			}
-			return {
-				n: model,
-				author,
-				x: 10 ** built.stats[model].cost,
-				y: index[model],
-				k: built.stats[model].nP,
-				lo: Math.min(...values),
-				hi: Math.max(...values),
-			};
-		}).sort((a, b) => b.y - a.y),
-		rankBuilt = build(rows, `rank`);
-	return {
-		rows,
-		families,
-		models: points,
-		rankSpearman: spearman(
-			models.map(m => built.stats[m].perf),
-			models.map(m => rankBuilt.stats[m].perf),
-		),
-	};
-}
-function paretoFrontier(points: readonly ModelPoint[]): ModelPoint[] {
-	return points.filter(p =>
-		!points.some(q =>
-			q.n !== p.n && q.x <= p.x && q.y >= p.y
-			&& (q.x < p.x || q.y > p.y)
-		)
-	).sort((a, b) => b.x - a.x);
-}
-const esc = (s: string): string =>
-		String(s).replace(/&/g, `&amp;`).replace(/</g, `&lt;`).replace(
-			/>/g,
-			`&gt;`,
-		).replace(/"/g, `&quot;`),
-	num = (v: number): number => Number(v.toFixed(2));
-function shade(hex: string, amount: number): string {
-	let n = parseInt(hex.slice(1), 16);
-	return `#`
-		+ [n >> 16, n >> 8 & 255, n & 255].map(c =>
-			Math.round(amount < 0 ? c * (1 + amount) : c + (255 - c) * amount)
-				.toString(16).padStart(2, `0`)
+const mean = (v: number[]): number => {
+		let f = v.filter(Number.isFinite);
+		return f.reduce((a, b) => a + b, 0) / f.length;
+	},
+	std = (v: number[]): number => Math.sqrt(mean(v.map(x => (x - mean(v)) ** 2))),
+	median = (v: number[]): number => {
+		let s = [...v].sort((a, b) => a - b), m = s.length >> 1;
+		return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+	},
+	num = (v: number): number => Number(v.toFixed(2)),
+	esc = (s: string): string =>
+		s.replace(/&/g, `&amp;`).replace(/</g, `&lt;`).replace(/>/g, `&gt;`),
+	shade = (hex: string, k: number): string => {
+		let n = parseInt(hex.slice(1), 16);
+		return `#` + [n >> 16, n >> 8 & 255, n & 255].map(c =>
+			Math.round(c * (1 + k)).toString(16).padStart(2, `0`)
 		).join(``);
-}
-function displayName(point: ModelPoint): string {
-	return (SHORT_NAMES[point.n] ?? point.n).replace(
-		RegExp(`^${point.author}\\s+`, `i`),
-		``,
-	).replace(/\b(?:Muse|1017)\b/gi, ``).replace(/\s+/g, ` `).trim();
-}
-const textWidth = (s: string, size: number): number =>
-	s.length * size * .68;
-function stairVertices(
-	frontierPx: readonly PointXY[],
-): Array<[number, number]> {
-	return frontierPx.length
-		? [
-			[frontierPx[0].x, frontierPx[0].y],
-			...frontierPx.slice(1).flatMap((
-				p,
-				i,
-			) => [
-				[frontierPx[i].x, p.y] as [number, number],
-				[p.x, p.y] as [number, number],
-			]),
-		]
-		: [];
-}
-function placeLabels(
-	items: readonly ChartItem[],
-	{ bounds, obstacles, size }: LabelOptions,
-): LabelPlacement[] {
-	let h = size,
-		boxFor = (
-			x: number,
-			y: number,
-			anchor: TextAnchor,
-			w: number,
-		): Box => {
-			let x0 = anchor === `start`
-				? x
-				: anchor === `end`
-				? x - w
-				: x - w / 2;
-			return { x0, x1: x0 + w, y0: y - h * .78, y1: y + h * .24 };
-		},
-		hit = (a: Box, b: Box, pad: number): boolean =>
-			a.x0 < b.x1 + pad && a.x1 + pad > b.x0 && a.y0 < b.y1 + pad
-			&& a.y1 + pad > b.y0,
-		crowd = (it: ChartItem): number =>
-			items.filter(o =>
-				o !== it && Math.hypot(o.px - it.px, o.py - it.py) < 160
-			).length,
-		placed: LabelPlacement[] = [];
-	for (let it of items.slice().sort((a, b) => crowd(b) - crowd(a))) {
-		let w = textWidth(it.text, size),
-			candidates: Array<[number, number, TextAnchor]> = [];
-		for (let k of [1, 1.7, 2.5, 3.5, 4.7, 6]) {
-			let g = (it.r + 8) * k, d = g * .78;
-			candidates.push(
-				[it.px + g, it.py + h * .34, `start`],
-				[it.px - g, it.py + h * .34, `end`],
-				[it.px, it.py - g - 3, `middle`],
-				[it.px, it.py + g + h * .78, `middle`],
-				[it.px + d, it.py - d, `start`],
-				[it.px + d, it.py + d + h * .6, `start`],
-				[it.px - d, it.py - d, `end`],
-				[it.px - d, it.py + d + h * .6, `end`],
-			);
-		}
-		if (it.text === `Luna 6`) {
-			candidates.unshift([it.px - 18, it.py + 25, `end`]);
-		}
-		if (it.text === `V2.6-Flash`) {
-			candidates.unshift([it.px - 12, it.py + 35, `end`]);
-			let rightEdgeCandidates = candidates.map(([, y]) =>
-				[bounds.right, y, `end`] as [number, number, TextAnchor]
-			);
-			candidates.push(...rightEdgeCandidates);
-		}
-		let best: Omit<LabelPlacement, `it`> | null = null;
-		for (let [i, [x, y, anchor]] of candidates.entries()) {
-			let box = boxFor(x, y, anchor, w), shift = 0;
-			box.x0 < bounds.left
-				? shift = bounds.left - box.x0
-				: box.x1 > bounds.right && (shift = bounds.right - box.x1),
-				shift
-				&& (box = { ...box, x0: box.x0 + shift, x1: box.x1 + shift });
-			let penalty = i * .35 + Math.abs(shift) * .35;
-			(box.y0 < bounds.top || box.y1 > bounds.bottom)
-				&& (penalty += 4e3);
-			for (let o of obstacles) hit(box, o, 2) && (penalty += o.weight);
-			for (let p of placed) hit(box, p.box, 5) && (penalty += 1600);
-			(!best || penalty < best.penalty)
-				&& (best = { penalty, x: x + shift, y, anchor, box });
-		}
-		best && placed.push({ it, ...best });
-	}
-	return placed;
-}
-function renderSvg(
-	computed: ComputedResult,
-	frontier: readonly ModelPoint[],
-): string {
-	let { width: W, height: H, plot, markerRadius: R, labelSize } = CHART,
-		pts = computed.models,
-		xMin = Math.min(...pts.map(p => p.x)) * .9,
-		xMax = Math.max(...pts.map(p => p.x)) * 1.1,
-		yMin = Math.floor(Math.min(...pts.map(p => p.y)) / 10) * 10,
-		yMax = Math.ceil(Math.max(...pts.map(p => p.y)) / 10) * 10,
-		costT = (v: number): number => Math.log10(v),
-		tMin = costT(xMin),
-		tMax = costT(xMax),
-		xScale = (v: number): number =>
-			num(
-				plot.left
-					+ (tMax - costT(v)) / (tMax - tMin)
-						* (plot.right - plot.left),
-			),
-		yScale = (v: number): number =>
-			num(
-				plot.bottom
-					- (v - yMin) / (yMax - yMin) * (plot.bottom - plot.top),
-			),
-		tickXs = CHART.xTicks.filter(v => v <= xMax && v >= xMin),
-		tickYs = Array.from(
-			{ length: Math.floor((yMax - yMin) / 10) + 1 },
-			(_, i) => yMin + i * 10,
-		),
-		items: ChartItem[] = pts.map(p => ({
-			px: xScale(p.x),
-			py: yScale(p.y),
-			r: R,
-			weight: 500,
-			text: displayName(p),
-			color: ORG_COLORS[p.author],
-		})),
-		stairs = stairVertices(
-			frontier.map(p => ({ x: xScale(p.x), y: yScale(p.y) })),
-		),
-		obstacles: Obstacle[] = [];
-	for (let it of items) {
-		obstacles.push({
-			x0: it.px - R - 3,
-			x1: it.px + R + 3,
-			y0: it.py - R - 3,
-			y1: it.py + R + 3,
-			weight: 1800,
-		});
-	}
-	for (let i = 1; i < stairs.length; i++) {
-		let [x1, y1] = stairs[i - 1], [x2, y2] = stairs[i];
-		obstacles.push({
-			x0: Math.min(x1, x2) - 2,
-			x1: Math.max(x1, x2) + 2,
-			y0: Math.min(y1, y2) - 2,
-			y1: Math.max(y1, y2) + 2,
-			weight: 120,
-		});
-	}
-	let labels = placeLabels(items, {
-			bounds: {
-				left: plot.left + 6,
-				right: plot.right - 6,
-				top: plot.top - 20,
-				bottom: plot.bottom - 4,
-			},
-			obstacles,
-			size: labelSize,
-		}),
-		xEdges = [...pts.map(p => xScale(p.x)), ...tickXs.map(xScale)],
-		yEdges = [
-			...pts.map(p => yScale(p.y)),
-			...tickYs.map(yScale),
-		],
-		axisX = plot.left - 14,
-		axisY = plot.bottom + 14,
-		orgs = (Object.keys(ORG_COLORS) as Organization[]).filter(o =>
-			pts.some(p => p.author === o)
-		),
-		svg = [
-			`<?xml version="1.0" encoding="UTF-8"?>`,
-			`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="title desc">`,
-			`<title id="title">Model performance versus relative benchmark cost</title>`,
-			`<desc id="desc">${pts.length} models, colored by lab. Higher is better performing; further right is cheaper. The stepped line joins models that no other model beats on both cost and performance.</desc>`,
-			`<rect width="${W}" height="${H}" fill="#ffffff"/>`,
-			`<g transform="translate(0 35)">`,
-			`<style>
-  text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; fill: #222; }
-  .tick { font-size: 15px; fill: #777; }
-  .axis-label { font-size: 15px; fill: #555; }
-  .label { font-size: ${labelSize}px; }
-  .halo { font-size: ${labelSize}px; fill: #ffffff; stroke: #ffffff; stroke-width: 6px; stroke-linejoin: round; }
-  .grid { stroke: #e7e4d8; stroke-width: 1; }
-</style>`,
-		];
-	for (let tick of tickYs) {
-		let y = yScale(tick);
-		svg.push(
-			`<line class="grid" x1="${axisX}" y1="${y}" x2="${plot.right}" y2="${y}"/>`,
-		);
-	}
-	for (let tick of tickXs) {
-		let x = xScale(tick);
-		svg.push(
-			`<line class="grid" x1="${x}" y1="${plot.top}" x2="${x}" y2="${axisY}"/>`,
-		);
-	}
-	svg.push(
-		`<line x1="${axisX}" y1="${
-			Math.min(...yEdges)
-		}" x2="${axisX}" y2="${
-			Math.max(...yEdges)
-		}" stroke="#777" stroke-width="1"/>`,
-		`<line x1="${Math.min(...xEdges)}" y1="${axisY}" x2="${
-			Math.max(...xEdges)
-		}" y2="${axisY}" stroke="#777" stroke-width="1"/>`,
-	);
-	for (let tick of tickYs) {
-		svg.push(
-			`<text class="tick" x="${axisX - 8}" y="${
-				num(yScale(tick) + 5)
-			}" text-anchor="end">${tick}</text>`,
-		);
-	}
-	for (let tick of tickXs) {
-		svg.push(
-			`<text class="tick" x="${xScale(tick)}" y="${
-				axisY + 24
-			}" text-anchor="middle">${tick}×</text>`,
-		);
-	}
-	svg.push(
-		`<text class="axis-label" x="${axisX}" y="${
-			plot.top - 28
-		}">Performance</text>`,
-		`<text class="axis-label" x="${plot.right}" y="${
-			axisY + 54
-		}" text-anchor="end">Cost <tspan font-size="1.35em" dy="0.03em">\u2198</tspan></text>`,
-	);
-	let kx = plot.right;
-	for (let o of orgs.slice().reverse()) {
-		kx -= 22,
-			svg.push(
-				`<g transform="translate(${num(kx)} ${plot.top - 46}) scale(${
-					num(22 / 24)
-				})" fill="${
-					shade(ORG_COLORS[o], -.2)
-				}" fill-rule="evenodd"><title>${esc(o)}</title>${
-					LOGOS[o].map(d => `<path d="${d}"/>`).join(``)
-				}</g>`,
-			),
-			kx -= 22;
-	}
-	stairs.length > 1
-		&& svg.push(
-			`<polyline points="${
-				stairs.map(v => v.join(`,`)).join(` `)
-			}" fill="none" stroke="#a3a398" stroke-width="1.25" stroke-linejoin="round"/>`,
-		);
-	for (let it of items) {
-		svg.push(
-			`<circle cx="${it.px}" cy="${it.py}" r="${R}" fill="${it.color}"/>`,
-		);
-	}
-	for (let l of labels) {
-		let at = `x="${num(l.x)}" y="${
-			num(l.y)
-		}" text-anchor="${l.anchor}"`;
-		svg.push(
-			`<text class="halo" ${at}>${esc(l.it.text)}</text>`,
-			`<text class="label" ${at} style="fill:${
-				shade(l.it.color, -.3)
-			}">${esc(l.it.text)}</text>`,
-		);
-	}
-	return svg.push(`</g>`, `</svg>`),
-		svg.join(`
-`) + `
-`;
-}
-const round = (v: number, d = 2): number => Number(v.toFixed(d));
-function buildSummary(
-	computed: ComputedResult,
-	frontier: readonly ModelPoint[],
-): Summary {
-	return {
-		source: `JSONC benchmark records in the ./json directory.`,
-		includedBenchmarkRows: computed.rows.length,
-		modelCount: computed.models.length,
-		benchmarkFamilies: computed.families,
-		aggregation:
-			`Within-benchmark z-scores; log10 cost centered on benchmark median; additive family/model effects; index = 50 + 10 per performance SD.`,
-		uncertainty:
-			`Minimum and maximum index over leave-one-benchmark-family-out recalculations.`,
-		rankSpearman: round(computed.rankSpearman, 3),
-		models: computed.models.map(p => ({
-			model: p.n,
-			organization: p.author,
-			performanceIndex: round(p.y),
-			lower: round(p.lo),
-			upper: round(p.hi),
-			relativeCost: round(p.x, 3),
-			familiesCovered: p.k,
-		})),
-		frontier: frontier.map(p => p.n),
 	};
-}
-function main(argv: string[] = process.argv.slice(2)): void {
-	if (argv.includes(`-h`) || argv.includes(`--help`)) {
-		console.log(`Usage: node index.ts [output.svg]`);
-		return;
+// Fits score = row effect + model effect on a matrix with gaps (NaN).
+function modelEffects(m: number[][]): number[] {
+	let a = m.map(() => 0), s: number[] = m[0].map(() => 0);
+	for (let i = 0; i < 500; i++) {
+		s = s.map((_, j) => mean(m.map((r, k) => r[j] - a[k])));
+		a = m.map(r => mean(r.map((v, j) => v - s[j])));
 	}
-	let output = path.resolve(argv[0] || DEFAULT_OUTPUT);
-	fs.mkdirSync(path.dirname(output), { recursive: !0 });
-	let computed = compute(),
-		frontier = paretoFrontier(computed.models),
-		summary = buildSummary(computed, frontier);
-	fs.writeFileSync(output, renderSvg(computed, frontier), `utf8`),
-		fs.writeFileSync(
-			path.join(
-				path.dirname(output),
-				`model-performance-cost-summary.json`,
-			),
-			JSON.stringify(summary, null, 2) + `
-`,
-			`utf8`,
-		),
-		console.log(JSON.stringify(
-			{
-				svg: output,
-				benchmarkRows: summary.includedBenchmarkRows,
-				modelCount: summary.modelCount,
-				families: summary.benchmarkFamilies,
-				models: summary.models.map(m => ({
-					model: m.model,
-					index: m.performanceIndex,
-					lo: m.lower,
-					hi: m.upper,
-					relativeCost: m.relativeCost,
-					familiesCovered: m.familiesCovered,
-				})),
-				frontier: summary.frontier,
-				rankSpearman: summary.rankSpearman,
-			},
-			null,
-			2,
-		));
+	return s.map(v => v - mean(s));
 }
-export {
-	additiveColumnEffects,
-	averageRanks,
-	build,
-	compute,
-	loadRows,
-	mean,
-	median,
-	paretoFrontier,
-	parseJsonc,
-	placeLabels,
-	renderSvg,
-	spearman,
-	stairVertices,
-	stdPop,
-	stripJsonc,
-};
-export type {
-	BenchmarkRow,
-	BuildResult,
-	ComputedResult,
-	Family,
-	ModelPoint,
-	Organization,
-	Summary,
-};
-if (
-	process.argv[1] !== void 0
-	&& path.resolve(process.argv[1]) === __filename
+// One point per model: x is relative `metric` (1 = typical), y is a 0-100ish index.
+function points(metric: Metric): Point[] {
+	let cells = new Map<string, { perf: number[]; use: number[] }>(),
+		author = new Map<string, string>();
+	for (let [file, fam] of Object.entries(FILES)) {
+		let rows: Array<Record<string, any>> = JSON.parse(
+				fs.readFileSync(path.join(DIR, `json`, file), `utf8`)
+					.replace(/\/\*[\s\S]*?\*\//g, ``).replace(/,(\s*[}\]])/g, `$1`),
+			),
+			score = rows.map(r => r.pass),
+			use = rows.map(r => Math.log10(r[metric])),
+			mid = median(use);
+		rows.forEach((r, i) => {
+			let model = r.label
+					?? `${r.model} ${r.family} ${r.author === `Meta` ? `` : r.series}`
+						.replace(/\s+/g, ` `).trim(),
+				cell = cells.get(`${fam}\0${model}`)
+					?? cells.set(`${fam}\0${model}`, { perf: [], use: [] }).get(
+						`${fam}\0${model}`,
+					)!;
+			author.set(model, r.author),
+				cell.perf.push((score[i] - mean(score)) / std(score)),
+				cell.use.push(use[i] - mid);
+		});
+	}
+	let fams = [...new Set(Object.values(FILES))],
+		models = [...author.keys()].sort(),
+		table = (f: `perf` | `use`) =>
+			modelEffects(
+				fams.map(fam =>
+					models.map(m => {
+						let c = cells.get(`${fam}\0${m}`);
+						return c ? mean(c[f]) : NaN;
+					})
+				),
+			),
+		perf = table(`perf`),
+		use = table(`use`),
+		sd = std(perf);
+	return models.map((name, i) => ({
+		name,
+		author: author.get(name)!,
+		x: 10 ** use[i],
+		y: 50 + 10 * perf[i] / sd,
+	}));
+}
+const label = (p: Point): string =>
+	(SHORT[p.name] ?? p.name).replace(RegExp(`^${p.author}\\s+`, `i`), ``)
+		.replace(/\b(?:Muse|1017)\b/gi, ``).replace(/\s+/g, ` `).trim();
+// Greedy label placement: try spots around each dot, keep the least overlapping.
+type Box = [number, number, number, number];
+function placeLabels(
+	items: Array<{ px: number; py: number; text: string }>,
+	obstacles: Array<[Box, number]>,
 ) {
-	try {
-		main();
-	} catch (err: unknown) {
-		console.error(
-			`Error: ${err instanceof Error ? err.message : String(err)}`,
-		), process.exitCode = 1;
+	let taken: Box[] = [],
+		hit = (a: Box, b: Box, pad: number) =>
+			a[0] < b[2] + pad && a[2] + pad > b[0] && a[1] < b[3] + pad
+			&& a[3] + pad > b[1];
+	return items.map(it => {
+		let w = it.text.length * FONT * .68,
+			best = { score: Infinity, x: 0, y: 0, a: `start`, box: [0, 0, 0, 0] as Box },
+			tries = 0;
+		for (let k of [1, 1.7, 2.5, 3.5, 4.7]) {
+			let g = (R + 8) * k, d = g * .78, h = FONT * .34, v = FONT * .6;
+			for (
+				let [dx, dy, a] of [
+					[g, h, `start`],
+					[-g, h, `end`],
+					[0, -g - 3, `middle`],
+					[0, g + FONT * .78, `middle`],
+					[d, -d, `start`],
+					[d, d + v, `start`],
+					[-d, -d, `end`],
+					[-d, d + v, `end`],
+				] as Array<[number, number, string]>
+			) {
+				let x = it.px + dx, y = it.py + dy,
+					x0 = a === `start` ? x : a === `end` ? x - w : x - w / 2,
+					s = Math.max(P.left + 6 - x0, Math.min(0, P.right - 6 - x0 - w)),
+					box: Box = [x0 + s, y - FONT * .78, x0 + s + w, y + FONT * .24],
+					score = tries++ * .35 + Math.abs(s) * .35
+						+ (box[1] < P.top - 20 || box[3] > P.bottom - 4 ? 4e3 : 0);
+				for (let [o, weight] of obstacles) hit(box, o, 2) && (score += weight);
+				for (let t of taken) hit(box, t, 5) && (score += 1600);
+				score < best.score && (best = { score, x: x + s, y, a, box });
+			}
+		}
+		return taken.push(best.box), { ...it, ...best };
+	});
+}
+const TITLES = { cost: `Cost`, tokens: `Tokens` } as const;
+/** SVG scatter of performance (up) against relative `metric` (cheaper/leaner to the right). */
+export function chart(metric: Metric): string {
+	let pts = points(metric),
+		xs = pts.map(p => p.x),
+		ys = pts.map(p => p.y),
+		t0 = Math.log10(Math.min(...xs) * .9),
+		t1 = Math.log10(Math.max(...xs) * 1.1),
+		y0 = Math.floor(Math.min(...ys) / 10) * 10,
+		y1 = Math.ceil(Math.max(...ys) / 10) * 10,
+		X = (v: number) =>
+			num(P.left + (t1 - Math.log10(v)) / (t1 - t0) * (P.right - P.left)),
+		Y = (v: number) => num(P.bottom - (v - y0) / (y1 - y0) * (P.bottom - P.top)),
+		xt = [...Array(9)].map((_, i) => 2 ** (4 - i)).filter(v =>
+			v >= Math.max(.1, 10 ** t0) && v <= 10 ** t1
+		),
+		yt = [...Array((y1 - y0) / 10 + 1)].map((_, i) => y0 + i * 10),
+		ax = P.left - 14,
+		ay = P.bottom + 14,
+		front = pts.filter(p =>
+			!pts.some(q => q.x <= p.x && q.y >= p.y && (q.x < p.x || q.y > p.y))
+		).sort((a, b) => b.x - a.x).map(p => [X(p.x), Y(p.y)]),
+		stairs = front.flatMap(([x, y], i) => i ? [[front[i - 1][0], y], [x, y]] : [[x, y]]),
+		obstacles: Array<[Box, number]> = [
+			...pts.map(p => [
+				[X(p.x) - R - 3, Y(p.y) - R - 3, X(p.x) + R + 3, Y(p.y) + R + 3],
+				1800,
+			] as [Box, number]),
+			...stairs.slice(1).map((s, i) => {
+				let [a, b] = [stairs[i], s];
+				return [[
+					Math.min(a[0], b[0]) - 2,
+					Math.min(a[1], b[1]) - 2,
+					Math.max(a[0], b[0]) + 2,
+					Math.max(a[1], b[1]) + 2,
+				], 120] as [Box, number];
+			}),
+		],
+		labels = placeLabels(
+			pts.map(p => ({ px: X(p.x), py: Y(p.y), text: label(p) })),
+			obstacles,
+		),
+		orgs = Object.keys(COLORS).filter(o => pts.some(p => p.author === o)),
+		out = [
+			`<?xml version="1.0" encoding="UTF-8"?>`,
+			`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img">`,
+			`<title>Model performance versus relative benchmark ${metric}</title>`,
+			`<rect width="${W}" height="${H}" fill="#fff"/>`,
+			`<g transform="translate(0 35)">`,
+			`<style>text{font-family:Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#222}.t{font-size:15px;fill:#777}.k{font-size:15px;fill:#555}.l{font-size:${FONT}px}.h{font-size:${FONT}px;fill:#fff;stroke:#fff;stroke-width:6px;stroke-linejoin:round}.g{stroke:#e7e4d8}</style>`,
+			...yt.map(v => `<line class="g" x1="${ax}" y1="${Y(v)}" x2="${P.right}" y2="${Y(v)}"/>`),
+			...xt.map(v => `<line class="g" x1="${X(v)}" y1="${P.top}" x2="${X(v)}" y2="${ay}"/>`),
+			`<path d="M${ax} ${Y(y1)}V${Y(y0)}M${ax} ${ay}H${P.right}" stroke="#777" fill="none"/>`,
+			...yt.map(v => `<text class="t" x="${ax - 8}" y="${Y(v) + 5}" text-anchor="end">${v}</text>`),
+			...xt.map(v => `<text class="t" x="${X(v)}" y="${ay + 24}" text-anchor="middle">${v}×</text>`),
+			`<text class="k" x="${ax}" y="${P.top - 28}">Performance</text>`,
+			`<text class="k" x="${P.right}" y="${ay + 54}" text-anchor="end">${TITLES[metric]} \u2198</text>`,
+			...orgs.map((o, i) =>
+				`<g transform="translate(${P.right - 44 * (orgs.length - i) + 22} ${P.top - 46}) scale(.917)" fill="${shade(COLORS[o], -.2)}" fill-rule="evenodd"><title>${esc(o)}</title>${LOGOS[o].map(d => `<path d="${d}"/>`).join(``)}</g>`
+			),
+			`<polyline points="${stairs.join(` `)}" fill="none" stroke="#a3a398" stroke-width="1.25" stroke-linejoin="round"/>`,
+			...pts.map(p => `<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${R}" fill="${COLORS[p.author]}"/>`),
+			...labels.flatMap((l, i) => {
+				let at = `x="${num(l.x)}" y="${num(l.y)}" text-anchor="${l.a}"`;
+				return [
+					`<text class="h" ${at}>${esc(l.text)}</text>`,
+					`<text class="l" ${at} style="fill:${shade(COLORS[pts[i].author], -.3)}">${esc(l.text)}</text>`,
+				];
+			}),
+			`</g></svg>`,
+		];
+	return out.join(`\n`) + `\n`;
+}
+export const costChart = (): string => chart(`cost`),
+	tokensChart = (): string => chart(`tokens`);
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+	let dir = path.resolve(process.argv[2] ?? DIR);
+	fs.mkdirSync(dir, { recursive: true });
+	for (let m of [`cost`, `tokens`] as const) {
+		fs.writeFileSync(path.join(dir, `model-performance-${m}.svg`), chart(m));
 	}
 }

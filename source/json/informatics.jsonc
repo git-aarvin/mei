@@ -73,7 +73,7 @@
 		"cost": 6.5,
 		"family": "Astra",
 		"model": "GPT",
-		"pass": 1.0,
+		"pass": 1,
 		"series": "6"
 	},
 	{
@@ -93,14 +93,6 @@
 		"series": "6.1"
 	},
 	{
-		"author": "Reflection",
-		"cost": 0.27,
-		"family": "",
-		"model": "Beam",
-		"pass": 0.2283,
-		"series": "1.0"
-	},
-	{
 		"author": "xAI",
 		"cost": 12.71,
 		"family": "",
@@ -112,7 +104,7 @@
 		"author": "Xiaomi",
 		"cost": 0.22,
 		"family": "Flash",
-		"model": "Mimo",
+		"model": "MiMo",
 		"pass": 0.4767,
 		"series": "V2.6"
 	},
@@ -120,7 +112,7 @@
 		"author": "Xiaomi",
 		"cost": 0.84,
 		"family": "Pro",
-		"model": "Mimo",
+		"model": "MiMo",
 		"pass": 0.3933,
 		"series": "V2.6"
 	},

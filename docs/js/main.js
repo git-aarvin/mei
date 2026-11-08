@@ -60,7 +60,6 @@ const median = values => {
 	const mid = sorted.length >> 1;
 	return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 };
-// Fits score = benchmark effect + model effect on a matrix with gaps (NaN).
 function modelEffects(matrix) {
 	let model = matrix.map(() => 0);
 	let benchmark = matrix[0].map(() => 0);
@@ -84,7 +83,6 @@ async function get(file) {
 			if (!response.ok) continue;
 			return JSON.parse(strip(await response.text()));
 		} catch {
-			// Try the next source.
 		}
 	}
 	throw new Error(`Could not load ${file}`);
@@ -139,8 +137,6 @@ const frontier = (points, key) =>
 	points.filter(p => !points.some(q =>
 		q[key] <= p[key] && q.y >= p.y && (q[key] < p[key] || q.y > p.y)
 	));
-// Greedy label placement. Dots of one author that nearly coincide are labelled
-// as a group, with the higher score on top and leader lines back to each dot.
 function placeLabels(items, obstacles, plot, radius, fontSize) {
 	const merge = fontSize * 1.35;
 	const line = fontSize * 1.35;

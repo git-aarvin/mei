@@ -42,7 +42,7 @@
 		"family": "Flash",
 		"model": "",
 		"pass": 0.8773,
-		"series": "4.1 1017"
+		"series": "V4.1 1017"
 	},
 	{
 		"author": "Google",
@@ -107,14 +107,6 @@
 		"model": "GPT",
 		"pass": 0.889,
 		"series": "6.1"
-	},
-	{
-		"author": "Reflection",
-		"cost": 0.47,
-		"family": "",
-		"model": "Beam",
-		"pass": 0.6644,
-		"series": "1.0"
 	},
 	{
 		"author": "xAI",

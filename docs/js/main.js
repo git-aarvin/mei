@@ -26,7 +26,7 @@ const COLORS = {
 };
 const SHORT = {
 	"Claude Opus 5.5": "Opus 5.5",
-	"Claude Fable 5.1": "Fable 5.1",
+	"Claude Fable 5.2": "Fable 5.2",
 	"Claude Sonnet 5.5": "Sonnet 5.5",
 	"Claude Haiku 5.5": "Haiku 5.5",
 	"Gemini Carbon 4": "4 Carbon",
@@ -278,15 +278,13 @@ function svgChart(models, metric) {
 	const X = value => plot.left + (t1 - Math.log10(value)) / (t1 - t0) * (plot.right - plot.left);
 	const Y = value => plot.bottom - (value - y0) / (y1 - y0) * (plot.bottom - plot.top);
 	const round = value => +value.toFixed(1);
-	const preferredTicks = metric === "cost"
-		? [4, 2, 1, 0.5, 0.25, 0.1]
-		: [2, 1, 0.5, 0.25];
-	let xTicks = preferredTicks.filter(value => value >= 10 ** t0 && value <= 10 ** t1);
-	if (xTicks.length < 2) {
-		xTicks = [10 ** t1, 1, 10 ** t0]
-			.filter(value => value >= 10 ** t0 && value <= 10 ** t1)
-			.sort((a, b) => b - a);
-	}
+	const xHi = Math.floor(Math.log2(10 ** t1));
+	const xLo = Math.ceil(Math.log2(10 ** t0));
+	const allXTicks = [...Array(Math.max(0, xHi - xLo + 1))]
+		.map((_, i) => 2 ** (xHi - i));
+	const xTicks = allXTicks.length % 2
+		? allXTicks.filter((_, i) => i % 2 === 0)
+		: allXTicks;
 	const yTicks = [];
 	for (let value = y0; value <= y1; value += 10) yTicks.push(value);
 	const front = frontier(points, "x")

@@ -47,6 +47,12 @@ const esc = value =>
 	String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const times = value => `${+value.toPrecision(2)}×`;
 const colorOf = author => COLORS[author] ?? "#999";
+const shade = (hex, factor) => {
+	const value = parseInt(hex.slice(1), 16);
+	return `#${[value >> 16, (value >> 8) & 255, value & 255]
+		.map(channel => Math.round(channel * (1 + factor)).toString(16).padStart(2, "0"))
+		.join("")}`;
+};
 const mean = values => {
 	const finite = values.filter(Number.isFinite);
 	return finite.reduce((a, b) => a + b, 0) / finite.length;
@@ -332,8 +338,10 @@ function svgChart(models, metric) {
 		xTicks.map(value =>
 			`<text class="tick" x="${round(X(value))}" y="${plot.bottom + 16}" text-anchor="middle">${value}×</text>`
 		).join(""),
-		`<line class="crosshair crosshair-x" x1="${plot.left}" y1="${plot.top}" x2="${plot.left}" y2="${plot.bottom}"/>`,
-		`<line class="crosshair crosshair-y" x1="${plot.left}" y1="${plot.top}" x2="${plot.right}" y2="${plot.top}"/>`,
+		`<g class="crosshairs" aria-hidden="true">
+			<line class="crosshair crosshair-x" x1="0" y1="${plot.top}" x2="0" y2="${plot.bottom}" style="transform:translate(${plot.left}px,0)"/>
+			<line class="crosshair crosshair-y" x1="${plot.left}" y1="0" x2="${plot.right}" y2="0" style="transform:translate(0,${plot.top}px)"/>
+		</g>`,
 		stairs.length > 1
 			? `<polyline class="front" points="${stairs.map(([x, y]) => `${round(x)},${round(y)}`).join(" ")}"/>`
 			: "",
@@ -344,7 +352,7 @@ function svgChart(models, metric) {
 			`<circle class="dot" cx="${round(X(point.x))}" cy="${round(Y(point.y))}" r="${radius}" fill="${colorOf(point.author)}" aria-label="${esc(point.short)}: index ${point.y.toFixed(1)}, ${times(point[metric])} ${metric}"><title>Index ${point.y.toFixed(1)} · ${times(point[metric])} ${metric}</title></circle>`
 		).join(""),
 		labels.map(label =>
-			`<text class="label" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}">${esc(label.text)}</text>`
+			`<text class="label" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}" fill="${shade(colorOf(label.author), -0.3)}">${esc(label.text)}</text>`
 		).join(""),
 		`</svg>`,
 	];
@@ -359,6 +367,7 @@ function tableView(models, sort) {
 		<tr>
 			<td class="rank">${model.rank}</td>
 			<td class="model"><i class="swatch" style="background:${colorOf(model.author)}"></i>${esc(model.short)} <span class="author">${esc(model.author)}</span></td>
+			<td class="bar"><span class="meter" aria-hidden="true"><span class="meter-fill" style="width:${Math.max(0, Math.min(100, model.y)).toFixed(1)}%"></span></span></td>
 			<td class="num">${model.y.toFixed(1)}</td>
 			<td class="num">${times(model.cost)}</td>
 			<td class="num">${times(model.tokens)}</td>
@@ -370,6 +379,7 @@ function tableView(models, sort) {
 		<thead><tr>
 			<th class="rank" scope="col" aria-sort="${ariaSort("rank")}"><button data-sort="rank">#</button></th>
 			<th scope="col" aria-sort="${ariaSort("model")}"><button data-sort="model">Model</button></th>
+			<th class="bar" scope="col"><span class="visually-hidden">Index bar</span></th>
 			<th class="num" scope="col" aria-sort="${ariaSort("y")}"><button data-sort="y">Index</button></th>
 			<th class="num" scope="col" aria-sort="${ariaSort("cost")}"><button data-sort="cost">Cost</button></th>
 			<th class="num" scope="col" aria-sort="${ariaSort("tokens")}"><button data-sort="tokens">Tokens</button></th>
@@ -384,24 +394,26 @@ chartEl.addEventListener("pointermove", event => {
 	const svg = chartEl.querySelector("svg");
 	const vertical = svg?.querySelector(".crosshair-x");
 	const horizontal = svg?.querySelector(".crosshair-y");
-	if (!vertical) return;
+	const dots = svg?.querySelectorAll(".dot");
+	if (!vertical || !horizontal || !dots?.length) return;
 	const point = svg.createSVGPoint();
 	point.x = event.clientX;
 	point.y = event.clientY;
 	const { x, y } = point.matrixTransform(svg.getScreenCTM().inverse());
-	const cx = Math.max(+horizontal.getAttribute("x1"), Math.min(+horizontal.getAttribute("x2"), x));
-	const cy = Math.max(+vertical.getAttribute("y1"), Math.min(+vertical.getAttribute("y2"), y));
-	const gap = 14;
-	const top = +vertical.getAttribute("y1");
-	const bottom = +vertical.getAttribute("y2");
-	const left = +horizontal.getAttribute("x1");
-	const right = +horizontal.getAttribute("x2");
-	vertical.setAttribute("x1", cx);
-	vertical.setAttribute("x2", cx);
-	horizontal.setAttribute("y1", cy);
-	horizontal.setAttribute("y2", cy);
-	vertical.setAttribute("stroke-dasharray", `${Math.max(0, cy - gap - top)} ${gap * 2} ${Math.max(0, bottom - cy - gap)}`);
-	horizontal.setAttribute("stroke-dasharray", `${Math.max(0, cx - gap - left)} ${gap * 2} ${Math.max(0, right - cx - gap)}`);
+	let nearest = null;
+	let distance = Infinity;
+	for (const dot of dots) {
+		const dx = +dot.getAttribute("cx") - x;
+		const dy = +dot.getAttribute("cy") - y;
+		const squared = dx * dx + dy * dy;
+		if (squared < distance) {
+			distance = squared;
+			nearest = dot;
+		}
+	}
+	if (!nearest) return;
+	vertical.style.transform = `translate(${nearest.getAttribute("cx")}px,0)`;
+	horizontal.style.transform = `translate(0,${nearest.getAttribute("cy")}px)`;
 });
 let models = [];
 let metric = "cost";

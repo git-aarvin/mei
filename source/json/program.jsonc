@@ -1,18 +1,10 @@
+/* Claude Fable 5.2: ProgramBench, high effort; Vals AI leaderboard updated 2026-11-09. */
 /*
 	Data sourced from Vals AI's run of ProgramBench. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data and
 	methodology are attributed to the ProgramBench team and Vals AI.
 */
 [
-	{
-		"author": "Anthropic",
-		"cost": 58.52,
-		"family": "Fable",
-		"model": "Claude",
-		"pass": 0.07,
-		"series": "5.1",
-		"tokens": null
-	},
 	{
 		"author": "Anthropic",
 		"cost": 6.83,
@@ -120,5 +112,14 @@
 		"pass": 0,
 		"series": "5.3",
 		"tokens": 44940000
+	},
+	{
+		"author": "Anthropic",
+		"cost": 46.82,
+		"family": "Fable",
+		"model": "Claude",
+		"pass": 0.19,
+		"series": "5.2",
+		"tokens": 86780000
 	}
 ]

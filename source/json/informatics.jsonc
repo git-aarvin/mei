@@ -6,15 +6,6 @@
 [
 	{
 		"author": "Anthropic",
-		"cost": 11.2,
-		"family": "Fable",
-		"model": "Claude",
-		"pass": 0.9078,
-		"series": "5.1",
-		"tokens": 6280000
-	},
-	{
-		"author": "Anthropic",
 		"cost": 0.83,
 		"family": "Haiku",
 		"model": "Claude",

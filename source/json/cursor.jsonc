@@ -3,16 +3,9 @@
 	reproduced for aggregation and comparison purposes. All benchmark data
 	and methodology are attributed to Cursor.
 */
+
+/* CursorBench 4.0: Fable 5.2 Extra High (xhigh), Cursor leaderboard, retrieved 2026-11-09. */
 [
-	{
-		"author": "Anthropic",
-		"cost": 13.01,
-		"family": "Fable",
-		"model": "Claude",
-		"pass": 0.516,
-		"series": "5.1",
-		"tokens": 87294
-	},
 	{
 		"author": "Anthropic",
 		"cost": 0.56,
@@ -84,5 +77,14 @@
 		"pass": 0.311,
 		"series": "5.3",
 		"tokens": 35104
+	},
+	{
+		"author": "Anthropic",
+		"cost": 15.48,
+		"family": "Fable",
+		"model": "Claude",
+		"pass": 0.563,
+		"series": "5.2",
+		"tokens": 161251
 	}
 ]

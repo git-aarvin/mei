@@ -1,18 +1,11 @@
+/* Claude Fable 5.2: Vibe Code Bench v1.1, OpenHands harness, high effort; Vals AI leaderboard updated 2026-11-09. */
+/* Muse Ember: Vibe Code Bench v1.1, OpenHands; Vals AI leaderboard updated 2026-11-09. */
 /*
 	Data sourced from Vals AI's Vibe Code Bench v1.1. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data and
 	methodology are attributed to Vals AI.
 */
 [
-	{
-		"author": "Anthropic",
-		"cost": 33.37,
-		"family": "Fable",
-		"model": "Claude",
-		"pass": 0.9026,
-		"series": "5.1",
-		"tokens": 57390000
-	},
 	{
 		"author": "Anthropic",
 		"cost": 6.07,
@@ -84,6 +77,15 @@
 		"pass": 0.68,
 		"series": "1",
 		"tokens": 4500000
+	},
+	{
+		"author": "Meta",
+		"cost": 0.05,
+		"family": "Ember",
+		"model": "Muse",
+		"pass": 0.837,
+		"series": "",
+		"tokens": 5400000
 	},
 	{
 		"author": "Moonshot",
@@ -165,5 +167,14 @@
 		"pass": 0.3076,
 		"series": "5.3",
 		"tokens": 146420000
+	},
+	{
+		"author": "Anthropic",
+		"cost": 22.13,
+		"family": "Fable",
+		"model": "Claude",
+		"pass": 0.9377,
+		"series": "5.2",
+		"tokens": 34710000
 	}
 ]

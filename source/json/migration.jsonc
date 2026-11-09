@@ -1,3 +1,4 @@
+/* Claude Fable 5.2: Code Migration v1.1, Pi harness, high effort; Vals AI leaderboard updated 2026-11-09. */
 /*
 	Data sourced from Vals AI's Code Migration v1.1. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data and
@@ -138,5 +139,14 @@
 		"pass": 0.5507,
 		"series": "5.3",
 		"tokens": 142250000
+	},
+	{
+		"author": "Anthropic",
+		"cost": 69.19,
+		"family": "Fable",
+		"model": "Claude",
+		"pass": 0.8327,
+		"series": "5.2",
+		"tokens": 188470000
 	}
 ]

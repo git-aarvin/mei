@@ -62,7 +62,7 @@ const DIR = path.dirname(fileURLToPath(import.meta.url)),
 	},
 	SHORT: Record<string, string> = {
 		"Claude Opus 5.5": `Opus 5.5`,
-		"Claude Fable 5.1": `Fable 5.1`,
+		"Claude Fable 5.2": `Fable 5.2`,
 		"Claude Sonnet 5.5": `Sonnet 5.5`,
 		"Claude Haiku 5.5": `Haiku 5.5`,
 		"Gemini Carbon 4": `4 Carbon`,
@@ -282,9 +282,11 @@ export function chart(metric: Metric): string {
 		X = (v: number) =>
 			num(P.left + (t1 - Math.log10(v)) / (t1 - t0) * (P.right - P.left)),
 		Y = (v: number) => num(P.bottom - (v - y0) / (y1 - y0) * (P.bottom - P.top)),
-		xt = [...Array(9)].map((_, i) => 2 ** (4 - i)).filter(v =>
-			v >= Math.max(.1, 10 ** t0) && v <= 10 ** t1
-		),
+		// Use adaptive powers-of-two ticks; thin odd-length x axes by keeping every other tick.
+		xHi = Math.floor(Math.log2(10 ** t1)),
+		xLo = Math.ceil(Math.log2(10 ** t0)),
+		allXTicks = [...Array(Math.max(0, xHi - xLo + 1))].map((_, i) => 2 ** (xHi - i)),
+		xt = allXTicks.length % 2 ? allXTicks.filter((_, i) => i % 2 === 0) : allXTicks,
 		yt = [...Array((y1 - y0) / 10 + 1)].map((_, i) => y0 + i * 10),
 		ax = P.left - 14,
 		ay = P.bottom + 14,

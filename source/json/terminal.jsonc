@@ -3,9 +3,6 @@
 	and underlying tasks are attributed to the Laude Institute; run results and
 	token metrics are attributed to Vals AI.
 */
-
-/* Terminal-Bench 4.0: Vals AI run, Mini-SWE-agent, retrieved 2026-11-09. */
-/* Muse Ember: Vals AI leaderboard entry, Mini-SWE-agent, reasoning effort max; updated 2026-11-09. */
 [
 	{
 		"author": "Anthropic",

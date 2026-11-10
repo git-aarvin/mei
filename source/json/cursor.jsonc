@@ -3,8 +3,6 @@
 	reproduced for aggregation and comparison purposes. All benchmark data
 	and methodology are attributed to Cursor.
 */
-
-/* CursorBench 4.0: Fable 5.2 Extra High (xhigh), Cursor leaderboard, retrieved 2026-11-09. */
 [
 	{
 		"author": "Anthropic",

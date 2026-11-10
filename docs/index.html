@@ -31,6 +31,12 @@
 				<button class="metric on" data-metric="cost" aria-pressed="true">cost</button><span aria-hidden="true"> or </span><button class="metric" data-metric="tokens" aria-pressed="false">tokens</button>.
 			</p>
 			<div id="chart" class="chart"></div>
+			<section class="bars" aria-labelledby="bars-title">
+				<h2 id="bars-title" class="chart-title">Ranked by
+					<button class="bar-metric on" data-bar-metric="y" aria-pressed="true">index</button><span aria-hidden="true">, </span><button class="bar-metric" data-bar-metric="cost" aria-pressed="false">cost</button><span aria-hidden="true"> or </span><button class="bar-metric" data-bar-metric="tokens" aria-pressed="false">tokens</button>.
+				</h2>
+				<div id="bars" class="bars-chart"></div>
+			</section>
 		</section>
 		<section class="rankings" aria-labelledby="rankings-title">
 			<h2 id="rankings-title" class="visually-hidden">Rankings</h2>

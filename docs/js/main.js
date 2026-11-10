@@ -50,7 +50,10 @@ const colorOf = author => COLORS[author] ?? "#999";
 const shade = (hex, factor) => {
 	const value = parseInt(hex.slice(1), 16);
 	return `#${[value >> 16, (value >> 8) & 255, value & 255]
-		.map(channel => Math.round(channel * (1 + factor)).toString(16).padStart(2, "0"))
+		.map(channel =>
+			Math.max(0, Math.min(255, Math.round(channel * (1 + factor))))
+				.toString(16).padStart(2, "0")
+		)
 		.join("")}`;
 };
 const mean = values => {
@@ -353,7 +356,7 @@ function svgChart(models, metric) {
 			`<circle class="dot" data-key="${i}" cx="${round(X(point.x))}" cy="${round(Y(point.y))}" r="${radius}" fill="${colorOf(point.author)}" data-index="${point.y.toFixed(1)}" data-cost="${times(point.cost)}" data-tokens="${times(point.tokens)}" aria-label="${esc(point.short)}: index ${point.y.toFixed(1)}, ${times(point[metric])} ${metric}"></circle>`
 		).join(""),
 		labels.map((label, i) =>
-			`<text class="label" data-key="${i}" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}" fill="${shade(colorOf(label.author), -0.3)}">${esc(label.text)}</text>`
+			`<text class="label" data-key="${i}" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}" fill="${shade(colorOf(label.author), darkScheme.matches ? 0.35 : -0.3)}">${esc(label.text)}</text>`
 		).join(""),
 		`</svg>`,
 	];
@@ -395,6 +398,7 @@ const chartEl = document.getElementById("chart");
 const tableEl = document.getElementById("table");
 const metricButtons = [...document.querySelectorAll(".metric")];
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+const darkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 const boxOf = (element, dx, dy) => {
 	const box = element.getBBox();
 	return {
@@ -530,6 +534,9 @@ tableEl.addEventListener("pointermove", event => {
 	}
 });
 tableEl.addEventListener("pointerleave", clearMeterGhosts);
+darkScheme.addEventListener("change", () => {
+	if (models.length) renderChart();
+});
 chartEl.innerHTML = `<p class="note">Loading…</p>`;
 load()
 	.then(data => {

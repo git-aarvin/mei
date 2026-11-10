@@ -347,7 +347,7 @@ function svgChart(models, metric) {
 			`<line x1="${round(label.px)}" y1="${round(label.py)}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}" stroke="${colorOf(label.author)}" stroke-width="1.25"/>`
 		).join(""),
 		points.map(point =>
-			`<circle class="dot" cx="${round(X(point.x))}" cy="${round(Y(point.y))}" r="${radius}" fill="${colorOf(point.author)}" aria-label="${esc(point.short)}: index ${point.y.toFixed(1)}, ${times(point[metric])} ${metric}"><title>Index ${point.y.toFixed(1)} · ${times(point[metric])} ${metric}</title></circle>`
+			`<circle class="dot" cx="${round(X(point.x))}" cy="${round(Y(point.y))}" r="${radius}" fill="${colorOf(point.author)}" data-index="${point.y.toFixed(1)}" data-cost="${times(point.cost)}" data-tokens="${times(point.tokens)}" aria-label="${esc(point.short)}: index ${point.y.toFixed(1)}, ${times(point[metric])} ${metric}"></circle>`
 		).join(""),
 		labels.map(label =>
 			`<text class="label" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}" fill="${shade(colorOf(label.author), -0.3)}">${esc(label.text)}</text>`
@@ -364,7 +364,7 @@ function tableView(models, sort) {
 	}).map(model => `
 		<tr>
 			<td class="rank">${model.rank}</td>
-			<td class="model"><i class="swatch" style="background:${colorOf(model.author)}"></i>${esc(model.short)} <span class="author">${esc(model.author)}</span></td>
+			<td class="model">${esc(model.short)} <span class="author">${esc(model.author)}</span></td>
 			<td class="bar"><span class="meter" aria-hidden="true"><span class="meter-fill" style="width:${Math.max(0, Math.min(100, model.y)).toFixed(1)}%"></span></span></td>
 			<td class="num">${model.y.toFixed(1)}</td>
 			<td class="num">${times(model.cost)}</td>
@@ -385,10 +385,46 @@ function tableView(models, sort) {
 		<tbody>${rows}</tbody>
 	</table>`;
 }
+function barView(models, metric) {
+	const order = [...models].sort((a, b) =>
+		metric === "y" ? b.y - a.y : a[metric] - b[metric]
+	);
+	const values = order.map(model => model[metric]);
+	const log = metric !== "y";
+	const lo = log ? Math.log10(Math.min(...values) * 0.9) : 0;
+	const hi = log ? Math.log10(Math.max(...values) * 1.1) : Math.max(...values) * 1.05;
+	const widthOf = model => log
+		? Math.max(2, (Math.log10(model[metric]) - lo) / (hi - lo) * 100)
+		: model[metric] / hi * 100;
+	const valueOf = model => metric === "y" ? model.y.toFixed(1) : times(model[metric]);
+	return `<div class="bar-list" role="list" aria-label="Ranked by ${metric === "y" ? "index" : metric}">${order.map(model => {
+		const width = widthOf(model);
+		return `<div class="bar-row" role="listitem">
+			<span class="bar-model"><span>${esc(model.short)}</span></span>
+			<span class="bar-track" data-pct="${width.toFixed(1)}" aria-hidden="true"><span class="bar-fill" style="width:${width.toFixed(1)}%;background:${colorOf(model.author)}"></span><span class="bar-ghost"></span></span>
+			<span class="bar-value">${valueOf(model)}</span>
+		</div>`;
+	}).join("")}</div>`;
+}
 const chartEl = document.getElementById("chart");
 const tableEl = document.getElementById("table");
+const barsEl = document.getElementById("bars");
 const metricButtons = [...document.querySelectorAll(".metric")];
+const barMetricButtons = [...document.querySelectorAll(".bar-metric")];
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+const tooltip = document.createElement("div");
+tooltip.className = "tooltip";
+tooltip.setAttribute("aria-hidden", "true");
+tooltip.hidden = true;
+function hideTooltip() {
+	tooltip.hidden = true;
+}
+chartEl.addEventListener("pointerleave", hideTooltip);
 chartEl.addEventListener("pointermove", event => {
+	if (!finePointer.matches || event.pointerType === "touch") {
+		hideTooltip();
+		return;
+	}
 	const svg = chartEl.querySelector("svg");
 	const vertical = svg?.querySelector(".crosshair-x");
 	const horizontal = svg?.querySelector(".crosshair-y");
@@ -410,15 +446,37 @@ chartEl.addEventListener("pointermove", event => {
 		}
 	}
 	if (!nearest) return;
-	vertical.style.transform = `translate(${nearest.getAttribute("cx")}px,0)`;
-	horizontal.style.transform = `translate(0,${nearest.getAttribute("cy")}px)`;
+	const cx = +nearest.getAttribute("cx");
+	const cy = +nearest.getAttribute("cy");
+	vertical.style.transform = `translate(${cx}px,0)`;
+	horizontal.style.transform = `translate(0,${cy}px)`;
+	const snapped = svg.createSVGPoint();
+	snapped.x = cx;
+	snapped.y = cy;
+	const at = snapped.matrixTransform(svg.getScreenCTM());
+	const rect = chartEl.getBoundingClientRect();
+	tooltip.innerHTML = `<span class="tooltip-label">Index</span><span class="tooltip-value">${nearest.dataset.index}</span><span class="tooltip-label">${metric === "cost" ? "Cost" : "Tokens"}</span><span class="tooltip-value">${nearest.dataset[metric]}</span>`;
+	tooltip.hidden = false;
+	const left = at.x - rect.left;
+	const top = at.y - rect.top;
+	const half = tooltip.offsetWidth / 2;
+	tooltip.style.left = `${Math.max(half + 6, Math.min(rect.width - half - 6, left))}px`;
+	tooltip.style.top = `${top}px`;
+	tooltip.classList.toggle("below", top - tooltip.offsetHeight - 12 < 0);
 });
 let models = [];
 let metric = "cost";
+let barMetric = "y";
 let sort = { key: "y", dir: -1 };
 function renderChart() {
 	if (!models.length) return;
 	chartEl.innerHTML = svgChart(models, metric);
+	chartEl.appendChild(tooltip);
+	hideTooltip();
+}
+function renderBars() {
+	if (!models.length) return;
+	barsEl.innerHTML = barView(models, barMetric);
 }
 function setMetric(next) {
 	if (next === metric) return;
@@ -429,6 +487,16 @@ function setMetric(next) {
 		button.setAttribute("aria-pressed", String(on));
 	}
 	renderChart();
+}
+function setBarMetric(next) {
+	if (next === barMetric) return;
+	barMetric = next;
+	for (const button of barMetricButtons) {
+		const on = button.dataset.barMetric === barMetric;
+		button.classList.toggle("on", on);
+		button.setAttribute("aria-pressed", String(on));
+	}
+	renderBars();
 }
 function setSort(key) {
 	sort = {
@@ -441,17 +509,45 @@ function setSort(key) {
 for (const button of metricButtons) {
 	button.addEventListener("click", () => setMetric(button.dataset.metric));
 }
+for (const button of barMetricButtons) {
+	button.addEventListener("click", () => setBarMetric(button.dataset.barMetric));
+}
 tableEl.addEventListener("click", event => {
 	const button = event.target.closest("[data-sort]");
 	if (button) setSort(button.dataset.sort);
 });
+barsEl.addEventListener("pointermove", event => {
+	if (!finePointer.matches || event.pointerType === "touch") return;
+	const list = barsEl.querySelector(".bar-list");
+	if (!list) return;
+	const track = event.target.closest(".bar-track");
+	if (!track) return;
+	const width = +track.dataset.pct;
+	list.classList.add("has-ghost");
+	for (const item of list.querySelectorAll(".bar-track")) {
+		const ghost = item.querySelector(".bar-ghost");
+		if (!ghost) continue;
+		const self = item === track;
+		ghost.style.width = self ? "0" : `${width}%`;
+		ghost.classList.toggle("is-under", !self && width > +item.dataset.pct);
+	}
+});
+barsEl.addEventListener("pointerleave", () => {
+	const list = barsEl.querySelector(".bar-list");
+	if (!list) return;
+	list.classList.remove("has-ghost");
+	for (const ghost of list.querySelectorAll(".bar-ghost")) ghost.style.width = "0";
+});
 chartEl.innerHTML = `<p class="note">Loading…</p>`;
+barsEl.innerHTML = `<p class="note">Loading…</p>`;
 load()
 	.then(data => {
 		models = computeModels(data);
 		tableEl.innerHTML = tableView(models, sort);
 		renderChart();
+		renderBars();
 	})
 	.catch(() => {
 		chartEl.innerHTML = `<p class="note">Could not load the data. <a href="https://github.com/git-aarvin/mei">View the source on GitHub</a>.</p>`;
+		barsEl.innerHTML = "";
 	});

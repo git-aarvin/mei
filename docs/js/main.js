@@ -336,21 +336,24 @@ function svgChart(models, metric) {
 		xTicks.map(value =>
 			`<text class="tick" x="${round(X(value))}" y="${plot.bottom + 16}" text-anchor="middle">${value}×</text>`
 		).join(""),
-		`<g class="crosshairs" aria-hidden="true">
-			<line class="crosshair crosshair-x" x1="0" y1="${plot.top}" x2="0" y2="${plot.bottom}" style="transform:translate(${plot.left}px,0)"/>
-			<line class="crosshair crosshair-y" x1="${plot.left}" y1="0" x2="${plot.right}" y2="0" style="transform:translate(0,${plot.top}px)"/>
-		</g>`,
 		stairs.length > 1
 			? `<polyline class="front" points="${stairs.map(([x, y]) => `${round(x)},${round(y)}`).join(" ")}"/>`
 			: "",
-		labels.filter(label => label.leader).map(label =>
-			`<line x1="${round(label.px)}" y1="${round(label.py)}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}" stroke="${colorOf(label.author)}" stroke-width="1.25"/>`
+		`<g class="crosshairs" aria-hidden="true">
+			<line class="crosshair crosshair-x" x1="0" y1="${plot.top}" x2="0" y2="${plot.bottom}" style="transform:translate(${plot.left}px,0)"/>
+			<line class="crosshair crosshair-y" x1="${plot.left}" y1="0" x2="${plot.right}" y2="0" style="transform:translate(0,${plot.top}px)"/>
+			<text class="edge edge-x" x="0" y="${plot.bottom + 16}" text-anchor="middle" style="transform:translate(${plot.left}px,0)"></text>
+			<text class="edge edge-y" x="${plot.left - 7}" y="0" text-anchor="end" style="transform:translate(0,${plot.top}px)"></text>
+		</g>`,
+		labels.map((label, i) => label.leader
+			? `<line class="leader" data-key="${i}" x1="${round(label.px)}" y1="${round(label.py)}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}" stroke="${colorOf(label.author)}" stroke-width="1.25"/>`
+			: ""
 		).join(""),
-		points.map(point =>
-			`<circle class="dot" cx="${round(X(point.x))}" cy="${round(Y(point.y))}" r="${radius}" fill="${colorOf(point.author)}" data-index="${point.y.toFixed(1)}" data-cost="${times(point.cost)}" data-tokens="${times(point.tokens)}" aria-label="${esc(point.short)}: index ${point.y.toFixed(1)}, ${times(point[metric])} ${metric}"></circle>`
+		points.map((point, i) =>
+			`<circle class="dot" data-key="${i}" cx="${round(X(point.x))}" cy="${round(Y(point.y))}" r="${radius}" fill="${colorOf(point.author)}" data-index="${point.y.toFixed(1)}" data-cost="${times(point.cost)}" data-tokens="${times(point.tokens)}" aria-label="${esc(point.short)}: index ${point.y.toFixed(1)}, ${times(point[metric])} ${metric}"></circle>`
 		).join(""),
-		labels.map(label =>
-			`<text class="label" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}" fill="${shade(colorOf(label.author), -0.3)}">${esc(label.text)}</text>`
+		labels.map((label, i) =>
+			`<text class="label" data-key="${i}" x="${round(label.x)}" y="${round(label.y)}" text-anchor="${label.a}" fill="${shade(colorOf(label.author), -0.3)}">${esc(label.text)}</text>`
 		).join(""),
 		`</svg>`,
 	];
@@ -361,15 +364,18 @@ function tableView(models, sort) {
 		const av = sort.key === "model" ? a.short : a[sort.key];
 		const bv = sort.key === "model" ? b.short : b[sort.key];
 		return sort.dir * (typeof av === "string" ? av.localeCompare(bv) : av - bv);
-	}).map(model => `
+	}).map(model => {
+		const pct = Math.max(0, Math.min(100, model.y)).toFixed(1);
+		return `
 		<tr>
 			<td class="rank">${model.rank}</td>
 			<td class="model">${esc(model.short)} <span class="author">${esc(model.author)}</span></td>
-			<td class="bar"><span class="meter" aria-hidden="true"><span class="meter-fill" style="width:${Math.max(0, Math.min(100, model.y)).toFixed(1)}%"></span></span></td>
+			<td class="bar"><span class="meter" data-pct="${pct}" aria-hidden="true"><span class="meter-fill" style="width:${pct}%;background:${colorOf(model.author)}"></span><span class="meter-ghost"></span></span></td>
 			<td class="num">${model.y.toFixed(1)}</td>
 			<td class="num">${times(model.cost)}</td>
 			<td class="num">${times(model.tokens)}</td>
-		</tr>`).join("");
+		</tr>`;
+	}).join("");
 	const ariaSort = key => sort.key === key
 		? (sort.dir > 0 ? "ascending" : "descending")
 		: "none";
@@ -385,51 +391,32 @@ function tableView(models, sort) {
 		<tbody>${rows}</tbody>
 	</table>`;
 }
-function barView(models, metric) {
-	const order = [...models].sort((a, b) =>
-		metric === "y" ? b.y - a.y : a[metric] - b[metric]
-	);
-	const values = order.map(model => model[metric]);
-	const log = metric !== "y";
-	const lo = log ? Math.log10(Math.min(...values) * 0.9) : 0;
-	const hi = log ? Math.log10(Math.max(...values) * 1.1) : Math.max(...values) * 1.05;
-	const widthOf = model => log
-		? Math.max(2, (Math.log10(model[metric]) - lo) / (hi - lo) * 100)
-		: model[metric] / hi * 100;
-	const valueOf = model => metric === "y" ? model.y.toFixed(1) : times(model[metric]);
-	return `<div class="bar-list" role="list" aria-label="Ranked by ${metric === "y" ? "index" : metric}">${order.map(model => {
-		const width = widthOf(model);
-		return `<div class="bar-row" role="listitem">
-			<span class="bar-model"><span>${esc(model.short)}</span></span>
-			<span class="bar-track" data-pct="${width.toFixed(1)}" aria-hidden="true"><span class="bar-fill" style="width:${width.toFixed(1)}%;background:${colorOf(model.author)}"></span><span class="bar-ghost"></span></span>
-			<span class="bar-value">${valueOf(model)}</span>
-		</div>`;
-	}).join("")}</div>`;
-}
 const chartEl = document.getElementById("chart");
 const tableEl = document.getElementById("table");
-const barsEl = document.getElementById("bars");
 const metricButtons = [...document.querySelectorAll(".metric")];
-const barMetricButtons = [...document.querySelectorAll(".bar-metric")];
 const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-const tooltip = document.createElement("div");
-tooltip.className = "tooltip";
-tooltip.setAttribute("aria-hidden", "true");
-tooltip.hidden = true;
-function hideTooltip() {
-	tooltip.hidden = true;
-}
-chartEl.addEventListener("pointerleave", hideTooltip);
+const boxOf = (element, dx, dy) => {
+	const box = element.getBBox();
+	return {
+		left: box.x + dx,
+		right: box.x + box.width + dx,
+		top: box.y + dy,
+		bottom: box.y + box.height + dy,
+	};
+};
+const overlaps = (a, b) =>
+	a.left < b.right + 4 && a.right > b.left - 4 &&
+	a.top < b.bottom + 2 && a.bottom > b.top - 2;
+let tickFrame = 0;
 chartEl.addEventListener("pointermove", event => {
-	if (!finePointer.matches || event.pointerType === "touch") {
-		hideTooltip();
-		return;
-	}
+	if (!finePointer.matches || event.pointerType === "touch") return;
 	const svg = chartEl.querySelector("svg");
 	const vertical = svg?.querySelector(".crosshair-x");
 	const horizontal = svg?.querySelector(".crosshair-y");
+	const edgeX = svg?.querySelector(".edge-x");
+	const edgeY = svg?.querySelector(".edge-y");
 	const dots = svg?.querySelectorAll(".dot");
-	if (!vertical || !horizontal || !dots?.length) return;
+	if (!vertical || !horizontal || !edgeX || !edgeY || !dots?.length) return;
 	const point = svg.createSVGPoint();
 	point.x = event.clientX;
 	point.y = event.clientY;
@@ -450,33 +437,49 @@ chartEl.addEventListener("pointermove", event => {
 	const cy = +nearest.getAttribute("cy");
 	vertical.style.transform = `translate(${cx}px,0)`;
 	horizontal.style.transform = `translate(0,${cy}px)`;
-	const snapped = svg.createSVGPoint();
-	snapped.x = cx;
-	snapped.y = cy;
-	const at = snapped.matrixTransform(svg.getScreenCTM());
-	const rect = chartEl.getBoundingClientRect();
-	tooltip.innerHTML = `<span class="tooltip-label">Index</span><span class="tooltip-value">${nearest.dataset.index}</span><span class="tooltip-label">${metric === "cost" ? "Cost" : "Tokens"}</span><span class="tooltip-value">${nearest.dataset[metric]}</span>`;
-	tooltip.hidden = false;
-	const left = at.x - rect.left;
-	const top = at.y - rect.top;
-	const half = tooltip.offsetWidth / 2;
-	tooltip.style.left = `${Math.max(half + 6, Math.min(rect.width - half - 6, left))}px`;
-	tooltip.style.top = `${top}px`;
-	tooltip.classList.toggle("below", top - tooltip.offsetHeight - 12 < 0);
+	edgeX.style.transform = `translate(${cx}px,0)`;
+	edgeX.textContent = nearest.dataset[metric];
+	edgeY.style.transform = `translate(0,${cy + 4}px)`;
+	edgeY.textContent = nearest.dataset.index;
+	const color = nearest.getAttribute("fill");
+	edgeX.style.fill = color;
+	edgeY.style.fill = color;
+	chartEl.classList.add("snapping");
+	const snapped = svg.querySelector(".dot.snapped");
+	if (snapped !== nearest) {
+		snapped?.classList.remove("snapped");
+		nearest.classList.add("snapped");
+		for (const element of svg.querySelectorAll(".label.snapped, .leader.snapped")) {
+			element.classList.remove("snapped");
+		}
+		const key = nearest.dataset.key;
+		for (const element of svg.querySelectorAll(`.label[data-key="${key}"], .leader[data-key="${key}"]`)) {
+			element.classList.add("snapped");
+		}
+	}
+	cancelAnimationFrame(tickFrame);
+	tickFrame = requestAnimationFrame(() => {
+		const edges = [boxOf(edgeX, cx, 0), boxOf(edgeY, 0, cy + 4)];
+		for (const tick of svg.querySelectorAll(".tick")) {
+			const box = boxOf(tick, 0, 0);
+			const covered = edges.some(edge => overlaps(box, edge));
+			tick.style.visibility = covered ? "hidden" : "";
+		}
+	});
+});
+chartEl.addEventListener("pointerleave", () => {
+	cancelAnimationFrame(tickFrame);
+	chartEl.classList.remove("snapping");
+	for (const tick of chartEl.querySelectorAll(".tick")) tick.style.visibility = "";
+	for (const element of chartEl.querySelectorAll(".snapped")) element.classList.remove("snapped");
 });
 let models = [];
 let metric = "cost";
-let barMetric = "y";
 let sort = { key: "y", dir: -1 };
 function renderChart() {
 	if (!models.length) return;
+	chartEl.classList.remove("snapping");
 	chartEl.innerHTML = svgChart(models, metric);
-	chartEl.appendChild(tooltip);
-	hideTooltip();
-}
-function renderBars() {
-	if (!models.length) return;
-	barsEl.innerHTML = barView(models, barMetric);
 }
 function setMetric(next) {
 	if (next === metric) return;
@@ -488,66 +491,52 @@ function setMetric(next) {
 	}
 	renderChart();
 }
-function setBarMetric(next) {
-	if (next === barMetric) return;
-	barMetric = next;
-	for (const button of barMetricButtons) {
-		const on = button.dataset.barMetric === barMetric;
-		button.classList.toggle("on", on);
-		button.setAttribute("aria-pressed", String(on));
-	}
-	renderBars();
-}
 function setSort(key) {
 	sort = {
 		key,
 		dir: sort.key === key ? -sort.dir : (DEFAULT_DIR[key] ?? 1),
 	};
+	tableEl.classList.remove("has-ghost");
 	tableEl.innerHTML = tableView(models, sort);
 	tableEl.querySelector(`[data-sort="${key}"]`)?.focus();
 }
 for (const button of metricButtons) {
 	button.addEventListener("click", () => setMetric(button.dataset.metric));
 }
-for (const button of barMetricButtons) {
-	button.addEventListener("click", () => setBarMetric(button.dataset.barMetric));
-}
 tableEl.addEventListener("click", event => {
 	const button = event.target.closest("[data-sort]");
 	if (button) setSort(button.dataset.sort);
 });
-barsEl.addEventListener("pointermove", event => {
+function clearMeterGhosts() {
+	tableEl.classList.remove("has-ghost");
+	for (const ghost of tableEl.querySelectorAll(".meter-ghost")) ghost.style.width = "0";
+}
+tableEl.addEventListener("pointermove", event => {
 	if (!finePointer.matches || event.pointerType === "touch") return;
-	const list = barsEl.querySelector(".bar-list");
-	if (!list) return;
-	const track = event.target.closest(".bar-track");
-	if (!track) return;
-	const width = +track.dataset.pct;
-	list.classList.add("has-ghost");
-	for (const item of list.querySelectorAll(".bar-track")) {
-		const ghost = item.querySelector(".bar-ghost");
+	if (!event.target.closest("td.bar")) {
+		clearMeterGhosts();
+		return;
+	}
+	const meter = event.target.closest(".meter");
+	if (!meter) return;
+	const width = +meter.dataset.pct;
+	tableEl.classList.add("has-ghost");
+	for (const item of tableEl.querySelectorAll(".meter")) {
+		const ghost = item.querySelector(".meter-ghost");
 		if (!ghost) continue;
-		const self = item === track;
+		const self = item === meter;
 		ghost.style.width = self ? "0" : `${width}%`;
 		ghost.classList.toggle("is-under", !self && width > +item.dataset.pct);
 	}
 });
-barsEl.addEventListener("pointerleave", () => {
-	const list = barsEl.querySelector(".bar-list");
-	if (!list) return;
-	list.classList.remove("has-ghost");
-	for (const ghost of list.querySelectorAll(".bar-ghost")) ghost.style.width = "0";
-});
+tableEl.addEventListener("pointerleave", clearMeterGhosts);
 chartEl.innerHTML = `<p class="note">Loading…</p>`;
-barsEl.innerHTML = `<p class="note">Loading…</p>`;
 load()
 	.then(data => {
 		models = computeModels(data);
 		tableEl.innerHTML = tableView(models, sort);
 		renderChart();
-		renderBars();
 	})
 	.catch(() => {
 		chartEl.innerHTML = `<p class="note">Could not load the data. <a href="https://github.com/git-aarvin/mei">View the source on GitHub</a>.</p>`;
-		barsEl.innerHTML = "";
 	});

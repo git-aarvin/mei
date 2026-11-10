@@ -3,8 +3,6 @@
 	reproduced for aggregation and comparison purposes. All benchmark data
 	and methodology are attributed to Cognition.
 */
-
-/* FrontierCode 2.0: Claude Fable 5.2 xhigh. Score from the benchmark result; cost ($17.73) and tokens (156.0k) supplied by the user for this run. */
 [
 	{
 		"author": "Anthropic",

@@ -1,3 +1,4 @@
+/* Claude Fable 5.2: Vibe Code Bench v1.1, OpenHands harness, high effort; Vals AI leaderboard updated 2026-11-09. */
 /*
 	Data sourced from Vals AI's Vibe Code Bench v1.1. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data and
@@ -75,15 +76,6 @@
 		"pass": 0.68,
 		"series": "1",
 		"tokens": 4500000
-	},
-	{
-		"author": "Meta",
-		"cost": 0.05,
-		"family": "Ember",
-		"model": "Muse",
-		"pass": 0.837,
-		"series": "",
-		"tokens": 5400000
 	},
 	{
 		"author": "Moonshot",

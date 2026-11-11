@@ -3,6 +3,8 @@
 	and underlying tasks are attributed to the Laude Institute; run results and
 	token metrics are attributed to Vals AI.
 */
+
+/* Terminal-Bench 4.0: Vals AI run, Mini-SWE-agent, retrieved 2026-11-09. */
 [
 	{
 		"author": "Anthropic",
@@ -75,15 +77,6 @@
 		"pass": 0.5808,
 		"series": "1",
 		"tokens": 31820000
-	},
-	{
-		"author": "Meta",
-		"cost": 0.22,
-		"family": "Ember",
-		"model": "Muse",
-		"pass": 0.3939,
-		"series": "",
-		"tokens": 30930000
 	},
 	{
 		"author": "Moonshot",

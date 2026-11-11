@@ -1,0 +1,84 @@
+.viz { margin-bottom: 56px; }
+.chart-title {
+	margin: 0 0 20px;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--muted);
+}
+.chart {
+	position: relative;
+	min-height: 120px;
+	cursor: crosshair;
+}
+.chart .crosshair {
+	stroke: var(--line);
+	stroke-width: 1;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 120ms, transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.chart:hover .crosshair { opacity: 1; }
+.chart .edge {
+	fill: var(--muted);
+	font-size: 11px;
+	opacity: 0;
+	pointer-events: none;
+	transition:
+		opacity 120ms,
+		transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.chart:hover .edge { opacity: 1; }
+@media (hover: none), (pointer: coarse) {
+	.chart { cursor: default; }
+	.chart .crosshair,
+	.chart .edge { display: none; }
+}
+.chart svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
+}
+.chart text {
+	font-family: inherit;
+	font-variant-numeric: tabular-nums;
+}
+.chart .grid {
+	stroke: var(--line);
+	stroke-width: 1;
+	opacity: 0.3;
+}
+.chart .tick { fill: var(--muted); font-size: 11px; }
+.chart .dot {
+	transform-box: fill-box;
+	transform-origin: center;
+	transition:
+		transform 120ms cubic-bezier(0.22, 1, 0.36, 1),
+		opacity 120ms;
+}
+.chart .dot.snapped { transform: scale(1.4); }
+.chart .leader { transition: opacity 120ms; }
+.chart.snapping .dot:not(.snapped),
+.chart.snapping .label:not(.snapped),
+.chart.snapping .leader:not(.snapped),
+.chart.snapping .front { opacity: 0.2; }
+.chart .front {
+	fill: none;
+	stroke: var(--front);
+	stroke-width: 1.25px;
+	stroke-linejoin: round;
+	transition: opacity 120ms;
+}
+.chart .label {
+	font-size: 12px;
+	stroke: var(--halo);
+	stroke-width: 3px;
+	stroke-linejoin: round;
+	paint-order: stroke;
+	transition: opacity 120ms;
+}
+.note {
+	margin: 12px 0 0;
+	color: var(--muted);
+	font-size: 12px;
+}

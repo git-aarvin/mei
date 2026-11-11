@@ -17,7 +17,10 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="base.css">
+	<link rel="stylesheet" href="chart.css">
+	<link rel="stylesheet" href="table.css">
+	<link rel="stylesheet" href="compare.css">
 </head>
 <body>
 	<main>
@@ -38,10 +41,14 @@
 			<h2 id="rankings-title" class="visually-hidden">Rankings</h2>
 			<div id="table"></div>
 		</section>
+		<section class="compare" aria-label="Performance by benchmark">
+			<div id="compare-controls" class="compare-controls"></div>
+			<div id="compare-chart" class="compare-chart"></div>
+		</section>
 		<footer>
 			<p>Data from <a href="https://cognition.ai">Cognition</a>, <a href="https://cursor.com">Cursor</a>, the <a href="https://laude.org">Laude Institute</a> and <a href="https://vals.ai">Vals AI</a>. Source on <a href="https://github.com/git-aarvin/mei" target="_blank">GitHub</a>.</p>
 		</footer>
 	</main>
-	<script type="module" src="js/main.js"></script>
+	<script type="module" src="main.js"></script>
 </body>
 </html>

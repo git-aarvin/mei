@@ -1,0 +1,79 @@
+/*
+	Data sourced from Vals AI's Vibe Code Bench 1–100. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Vals AI.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.2041,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 55760000,
+		"usd": 8.3
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.3036,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 42030000,
+		"usd": 44.12
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.212,
+		"series": "4",
+		"tier": "Argon",
+		"tokens": 15200000,
+		"usd": 18.66
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.2655,
+		"series": "",
+		"tier": "Wonder",
+		"tokens": 20290000,
+		"usd": 13.72
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.3398,
+		"series": "",
+		"tier": "Wonder Full",
+		"tokens": 27660000,
+		"usd": 19.54
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.2764,
+		"series": "6",
+		"tier": "Astra",
+		"tokens": 24670000,
+		"usd": 84.72
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.1999,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 20210000,
+		"usd": 8.24
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.1603,
+		"series": "5.3",
+		"tier": "Flash",
+		"tokens": 18810000,
+		"usd": 0.93
+	},
+]

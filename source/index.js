@@ -9,7 +9,7 @@ export const files = {
 	greenfield: `Vibe Code`,
 };
 export const families = [...new Set(Object.values(files))];
-export const labs = [`Anthropic`, `OpenAI`, `Google`, `xAI`, `DeepSeek`, `Meta`, `Moonshot`, `Z.ai`, `Xiaomi`, `Reflection`];
+export const labs = [`Anthropic`, `DeepSeek`, `Google`, `Meta`, `Moonshot`, `OpenAI`, `Reflection`, `xAI`, `Xiaomi`, `Z.ai`];
 const short = {
 	"Claude Opus 5.5": `Opus 5.5`,
 	"Claude Fable 5.2": `Fable 5.2`,
@@ -193,7 +193,7 @@ export const scatter = (list, metric, geometry) => {
 			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${value}×</text>`),
 			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
 			...labels.map((label, index) => label.leader ? `<line class="leader" ${tag(index)} x1="${round(label.dot[0])}" y1="${round(label.dot[1])}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}"/>` : ``),
-			...list.map((model, index) => `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}" aria-label="${encode(model.short)}: index ${model.score.toFixed(1)}, ${times(model[metric])} ${metric}"/>`),
+			...list.map((model, index) => `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`),
 			...labels.map((label, index) => `<text class="label" ${tag(index)} x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`),
 		].join(``),
 	};

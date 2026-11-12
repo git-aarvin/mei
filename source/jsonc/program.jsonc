@@ -29,7 +29,7 @@
 		"series": "5.5",
 		"tier": "Opus",
 		"tokens": 128900000,
-		"usd": 68.05
+		"usd": 42.66
 	},
 	{
 		"lab": "Anthropic",
@@ -38,7 +38,7 @@
 		"series": "5.5",
 		"tier": "Sonnet",
 		"tokens": 134430000,
-		"usd": 35.86
+		"usd": 22.62
 	},
 	{
 		"lab": "Google",

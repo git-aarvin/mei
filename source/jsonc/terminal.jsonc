@@ -1,0 +1,169 @@
+/*
+	Data sourced from Vals AI's Terminal-Bench 4.0 run. The benchmark design
+	and underlying tasks are attributed to the Laude Institute; run results
+	and token metrics are attributed to Vals AI.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.6515,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": 20620000,
+		"usd": 14.56
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.3636,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 45500000,
+		"usd": 3.12
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.6515,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 28270000,
+		"usd": 12.04
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.6414,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 58530000,
+		"usd": 10.75
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.3182,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": 39650000,
+		"usd": 0.54
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.5758,
+		"series": "4",
+		"tier": "Argon",
+		"tokens": 16660000,
+		"usd": 17.64
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.6313,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": 12460000,
+		"usd": 7.45
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.4949,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": 34660000,
+		"usd": 14.66
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.5808,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": 31820000,
+		"usd": 10.53
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.6364,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": 16570000,
+		"usd": 4.57
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.596,
+		"series": "6",
+		"tier": "Astra",
+		"tokens": 3010000,
+		"usd": 9.58
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.1364,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 15380000,
+		"usd": 0.35
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.5505,
+		"series": "6.1",
+		"tier": "Sol",
+		"tokens": 2860000,
+		"usd": 1.72
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.2879,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 18230000,
+		"usd": 18.01
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.2424,
+		"series": "V2.6",
+		"tier": "Flash",
+		"tokens": 33200000,
+		"usd": 0.21
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.3131,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 26600000,
+		"usd": 0.46
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.3889,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 31540000,
+		"usd": 9.37
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.3737,
+		"series": "5.3",
+		"tier": "Flash",
+		"tokens": 35660000,
+		"usd": 1.22
+	},
+]

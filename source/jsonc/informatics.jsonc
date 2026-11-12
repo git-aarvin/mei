@@ -1,0 +1,142 @@
+/*
+	Data sourced from Vals AI's IOI v2. Benchmark results are reproduced for
+	aggregation and comparison purposes. All benchmark data and methodology
+	are attributed to Vals AI.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.473,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 5810000,
+		"usd": 0.83
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.951,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 4700000,
+		"usd": 5.26
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.831,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 18050000,
+		"usd": 7.52
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 1,
+		"series": "4",
+		"tier": "Argon",
+		"tokens": 8220000,
+		"usd": 5.31
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.6694,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": 7790000,
+		"usd": 4.54
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.7983,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": 7000000,
+		"usd": 7.08
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.8189,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": 9520000,
+		"usd": 5.02
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 1,
+		"series": "6",
+		"tier": "Astra",
+		"tokens": 963670,
+		"usd": 6.5
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.5556,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 4460000,
+		"usd": 0.2
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.969,
+		"series": "6.1",
+		"tier": "Sol",
+		"tokens": 967870,
+		"usd": 1.26
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.577,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 10870000,
+		"usd": 12.71
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.4767,
+		"series": "V2.6",
+		"tier": "Flash",
+		"tokens": 20850000,
+		"usd": 0.22
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.3933,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 7100000,
+		"usd": 0.84
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.6844,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 20340000,
+		"usd": 7.67
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.525,
+		"series": "5.3",
+		"tier": "Flash",
+		"tokens": 18180000,
+		"usd": 0.43
+	},
+]

@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="743" viewBox="0 0 1100 743" role="img">
 	<title>Model performance versus relative benchmark cost</title>
 	<style>
-		text{font-family:Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:#222}
+		text{font-family:system-ui,sans-serif;fill:#222}
 		.tick{font-size:15px;fill:#777}
 		.key{font-size:15px;fill:#555}
 		.label{font-size:18px;fill:rgb(from var(--color) calc(r * .7) calc(g * .7) calc(b * .7));stroke:#fff;stroke-width:6px;stroke-linejoin:round;paint-order:stroke}

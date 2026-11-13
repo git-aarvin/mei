@@ -187,6 +187,36 @@ footer p { margin: 0; }
 		scroll-behavior: auto !important;
 	}
 }
+.bars { margin-bottom: 56px; }
+.bars:has(#bar-performance:checked) .chart:not(.performance),
+.bars:has(#bar-cost:checked) .chart:not(.cost),
+.bars:has(#bar-tokens:checked) .chart:not(.tokens) { display: none; }
+.bars .chart { cursor: default; }
+.bars .chart .label {
+	fill: var(--muted);
+	stroke: none;
+}
+.bars .chart .bar { fill: var(--color, var(--muted)); }
+.bars .chart .value {
+	fill: var(--muted);
+	font-size: 11px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 120ms;
+}
+.bars .chart .value.snapped { opacity: 1; }
+.bars .chart .reference {
+	fill: var(--ghost);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 120ms;
+}
+.bars .chart.referencing .reference { opacity: 1; }
+.bars .chart .axis {
+	fill: none;
+	stroke: var(--line);
+	stroke-width: 1;
+}
 .scatter { margin-bottom: 56px; }
 .scatter:has(#cost:checked) .tokens,
 .scatter:has(#tokens:checked) .cost { display: none; }

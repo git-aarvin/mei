@@ -3,8 +3,14 @@ const box = (element, across, down) => {
 	return [rect.x + across, rect.y + down, rect.x + rect.width + across, rect.y + rect.height + down];
 };
 const touches = (first, second) => first[0] < second[2] + 4 && first[2] > second[0] - 4 && first[1] < second[3] + 2 && first[3] > second[1] - 2;
+const rounded = value => +value.toFixed(1);
+const barPath = (left, top, width, height, radius) => {
+	const r = Math.min(radius, width);
+	return `M${rounded(left)} ${rounded(top)}H${rounded(left + width - r)}Q${rounded(left + width)} ${rounded(top)} ${rounded(left + width)} ${rounded(top + r)}V${rounded(top + height - r)}Q${rounded(left + width)} ${rounded(top + height)} ${rounded(left + width - r)} ${rounded(top + height)}H${rounded(left)}Z`;
+};
 for (const chart of document.querySelectorAll(`.chart`)) {
 	const dots = [...chart.querySelectorAll(`.dot`)], ticks = [...chart.querySelectorAll(`.tick`)], across = chart.querySelector(`.across`), down = chart.querySelector(`.down`);
+	if (!dots.length) continue;
 	let frame;
 	chart.onpointermove = event => {
 		if (event.pointerType !== `mouse`) return;
@@ -38,6 +44,57 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 		for (const element of chart.querySelectorAll(`.snapped`)) element.classList.remove(`snapped`);
 		for (const tick of ticks) tick.style.visibility = ``;
 	};
+}
+for (const chart of document.querySelectorAll(`.bars .chart`)) {
+	const references = [...chart.querySelectorAll(`.reference`)], values = [...chart.querySelectorAll(`.value`)];
+	const ghosts = references.map(reference => ({
+		reference,
+		left: +reference.dataset.left,
+		top: +reference.dataset.top,
+		height: +reference.dataset.height,
+		radius: +reference.dataset.radius,
+		width: 0,
+		from: 0,
+		target: 0,
+	}));
+	let active, frame, start;
+	const draw = () => {
+		for (const ghost of ghosts) {
+			if (ghost.width < .05) ghost.reference.removeAttribute(`d`);
+			else ghost.reference.setAttribute(`d`, barPath(ghost.left, ghost.top, ghost.width, ghost.height, ghost.radius));
+		}
+	};
+	const step = now => {
+		const progress = Math.min(1, (now - start) / 160), eased = 1 - (1 - progress) ** 3;
+		for (const ghost of ghosts) ghost.width = ghost.from + (ghost.target - ghost.from) * eased;
+		draw();
+		frame = progress < 1 ? requestAnimationFrame(step) : 0;
+	};
+	const retarget = () => {
+		for (const ghost of ghosts) ghost.from = ghost.width;
+		start = performance.now();
+		cancelAnimationFrame(frame);
+		frame = requestAnimationFrame(step);
+	};
+	const clear = () => {
+		active = undefined;
+		chart.classList.remove(`referencing`);
+		for (const ghost of ghosts) ghost.target = 0;
+		for (const value of values) value.classList.remove(`snapped`);
+		retarget();
+	};
+	chart.onpointermove = event => {
+		if (event.pointerType !== `mouse`) return;
+		const bar = event.target.closest(`.bar`);
+		if (!bar || bar.dataset.key === active) return;
+		active = bar.dataset.key;
+		const width = +bar.dataset.width;
+		chart.classList.add(`referencing`);
+		for (const ghost of ghosts) ghost.target = ghost.reference.dataset.key === active ? 0 : width;
+		for (const value of values) value.classList.toggle(`snapped`, value.dataset.key === active);
+		retarget();
+	};
+	chart.onpointerleave = clear;
 }
 const table = document.querySelector(`table`), body = table.tBodies[0], meters = [...table.querySelectorAll(`.meter`)];
 table.onclick = event => {

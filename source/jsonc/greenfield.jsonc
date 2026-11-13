@@ -68,6 +68,15 @@
 		"usd": 8.25
 	},
 	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.8778,
+		"series": "4",
+		"tier": "Hydrogen",
+		"tokens": 17300000,
+		"usd": 4.55
+	},
+	{
 		"lab": "Meta",
 		"name": "Muse",
 		"score": 0.8309,

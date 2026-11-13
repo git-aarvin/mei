@@ -101,6 +101,12 @@ body::after {
 }
 body:has(.chart:hover)::before { opacity: 0; }
 body:has(.radar:hover)::after { opacity: 0; }
+@media (prefers-color-scheme: dark) {
+	body::before,
+	body::after {
+		display: none;
+	}
+}
 main {
 	position: relative;
 	z-index: 1;

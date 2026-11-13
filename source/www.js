@@ -1,6 +1,8 @@
-import { encode, families, fill, load, models, read, scatter, times, write } from "./index.js";
+import { bar, encode, families, fill, load, models, read, scatter, times, write } from "./index.js";
 const geometry = { left: 48, right: 664, top: 26, bottom: 384, radius: 4.5, font: 12, pad: 0, gap: 7, drop: 16 };
+const barGeometry = { left: 104, right: 640, top: 26, bottom: 384, radius: 2, font: 12, pad: 0, gap: 8, drop: 16, reference: true, tooltip: false };
 const list = models(await load()), chosen = list.slice(0, 2), spare = list.slice(2);
+const bars = Object.fromEntries([`index`, `cost`, `tokens`].map(metric => [metric, bar(list, metric, barGeometry)]));
 const middle = [340, 264], reach = 174, count = families.length;
 const percent = value => Math.max(0, Math.min(100, value));
 const round = value => +value.toFixed(1);
@@ -35,6 +37,9 @@ const frame = [
 await write(`../www/index.html`, fill(await read(`../www/index.html`), {
 	cost: scatter(list, `cost`, geometry).markup,
 	tokens: scatter(list, `tokens`, geometry).markup,
+	barIndex: `<path class="axis" d="${bars.index.axis}"/>${bars.index.markup}`,
+	barCost: `<path class="axis" d="${bars.cost.axis}"/>${bars.cost.markup}`,
+	barTokens: `<path class="axis" d="${bars.tokens.axis}"/>${bars.tokens.markup}`,
 	rows: list.map(row).join(``),
 	chosen: chosen.map(pick).join(``),
 	options: list.map(option).join(``),

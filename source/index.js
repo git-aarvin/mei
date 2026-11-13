@@ -198,4 +198,44 @@ export const scatter = (list, metric, geometry) => {
 		].join(``),
 	};
 };
+export const bar = (list, metric, geometry) => {
+	const { left, right, top, bottom, radius, gap, drop, reference, tooltip = true } = geometry,
+		log = metric !== `index`,
+		field = metric === `index` ? `score` : metric,
+		rows = log ? [...list].sort((first, second) => first[field] - second[field]) : list,
+		values = rows.map(model => model[field]),
+		floor = log ? Math.log10(Math.min(...values) * .9) : Math.floor(Math.min(...values) / 10) * 10,
+		ceiling = log ? Math.log10(Math.max(...values) * 1.1) : Math.ceil(Math.max(...values) / 10) * 10,
+		horizontal = value => left + (log ? (Math.log10(value) - floor) / (ceiling - floor) : (value - floor) / (ceiling - floor)) * (right - left),
+		step = (bottom - top) / rows.length,
+		height = Math.min(step * .62, 22),
+		center = index => top + step * (index + .5),
+		upper = Math.floor(Math.log2(10 ** ceiling)), lower = Math.ceil(Math.log2(10 ** floor)),
+		powers = Array.from({ length: Math.max(0, upper - lower + 1) }, (item, index) => 2 ** (upper - index)),
+		columns = log ? (powers.length % 2 ? powers.filter((power, index) => index % 2 === 0) : powers) : Array.from({ length: (ceiling - floor) / 10 + 1 }, (item, index) => floor + index * 10),
+		round = value => +value.toFixed(1),
+		shape = (x, y, width, size) => {
+			const r = Math.min(radius, width);
+			return `M${round(x)} ${round(y)}H${round(x + width - r)}Q${round(x + width)} ${round(y)} ${round(x + width)} ${round(y + r)}V${round(y + size - r)}Q${round(x + width)} ${round(y + size)} ${round(x + width - r)} ${round(y + size)}H${round(x)}Z`;
+		},
+		readout = value => log ? times(value) : value.toFixed(1),
+		tag = (index, extra = ``) => `data-key="${index}" data-lab="${rows[index].lab}"${extra}`;
+	return {
+		axis: `M${left} ${top}V${bottom}H${right}`,
+		labs: labs.filter(lab => rows.some(model => model.lab === lab)),
+		markup: [
+			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom}"/>`),
+			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${log ? `${value}×` : value}</text>`),
+			...rows.map((model, index) => {
+				const y = center(index), width = Math.max(2, horizontal(model[field]) - left), end = left + width;
+				const title = tooltip ? `<title>${encode(model.short)}: ${readout(model[field])}</title>` : ``;
+				return `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text><path class="bar" ${tag(index, ` data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path><text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
+			}),
+			...(reference ? rows.map((item, index) => {
+				const y = center(index);
+				return `<path class="reference" data-key="${index}" data-left="${left}" data-top="${round(y - height / 2)}" data-height="${round(height)}" data-radius="${radius}"/>`;
+			}) : []),
+		].join(``),
+	};
+};
 export const fill = (text, pieces) => text.replace(/<!--(\w+)-->[\s\S]*?<!--\/\1-->/g, (match, name) => name in pieces ? `<!--${name}-->${pieces[name]}<!--/${name}-->` : match);

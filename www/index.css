@@ -277,6 +277,8 @@ footer p { margin: 0; }
 	opacity: 0.3;
 }
 .chart .tick { fill: var(--muted); font-size: 11px; }
+.chart .tick,
+.chart .key { transition: opacity 120ms; }
 .chart .dot {
 	fill: var(--color, var(--muted));
 	transform-box: fill-box;
@@ -292,7 +294,9 @@ footer p { margin: 0; }
 .chart.snapping .dot:not(.snapped),
 .chart.snapping .label:not(.snapped),
 .chart.snapping .leader:not(.snapped),
-.chart.snapping .front { opacity: 0.2; }
+.chart.snapping .front,
+.chart.snapping .tick,
+.chart.snapping .key { opacity: 0.2; }
 .chart .front {
 	fill: none;
 	stroke: var(--front);

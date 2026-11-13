@@ -22,6 +22,19 @@
 				<span class="narrow"><span class="brand">Mei</span> calculates language models' engineering performance.</span>
 			</h1>
 		</header>
+		<section class="bars" aria-label="Model performance, cost, and tokens">
+			<p class="title"><input class="reader" type="radio" name="measure" id="bar-performance" checked><label for="bar-performance">Performance</label><span aria-hidden="true">, </span><input class="reader" type="radio" name="measure" id="bar-cost"><label for="bar-cost">cost</label><span aria-hidden="true"> or </span><input class="reader" type="radio" name="measure" id="bar-tokens"><label for="bar-tokens">tokens</label>.
+			</p>
+			<svg class="chart performance" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Model performance scores. Fable 5.2 leads at 66.8 and 5.3 Flash trails at 33.3.">
+				<!--barIndex--><!--/barIndex-->
+			</svg>
+			<svg class="chart cost" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Relative cost by model, from 0.068× for V2.6-Flash to 6.2× for Fable 5.2.">
+				<!--barCost--><!--/barCost-->
+			</svg>
+			<svg class="chart tokens" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Relative token usage by model, from 0.23× for 6 Astra to 2.5× for Sonnet 5.5.">
+				<!--barTokens--><!--/barTokens-->
+			</svg>
+		</section>
 		<section class="scatter" aria-labelledby="title">
 			<p class="title" id="title">Performance versus
 				<input class="reader" type="radio" name="metric" id="cost" checked><label for="cost">cost</label><span aria-hidden="true"> or </span><input class="reader" type="radio" name="metric" id="tokens"><label for="tokens">tokens</label>.

@@ -1,3 +1,5 @@
+import { deflate } from "node:zlib";
+import { promisify } from "node:util";
 const zip = promisify(deflate);
 const table = new Uint32Array(256);
 for (let index = 0; index < 256; index++) {

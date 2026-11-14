@@ -30,6 +30,11 @@ jobs:
       - run: mkdir -p www/bar www/scatter
       - run: cp source/scatter/cost.svg source/scatter/tokens.svg www/scatter
       - run: cp source/bar/cost.svg source/bar/index.svg source/bar/tokens.svg www/bar
+      - run: sudo apt-get update && sudo apt-get install -y librsvg2-bin
+      - run: |
+          for svg in www/bar/*.svg www/scatter/*.svg; do
+            rsvg-convert -f png -z 6.25 -d 600 -p 600 -o "${svg%.svg}.png" "$svg"
+          done
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:

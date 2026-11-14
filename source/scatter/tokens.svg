@@ -2,26 +2,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="743" viewBox="0 0 1100 743" role="img">
 	<title>Model performance versus relative benchmark tokens</title>
 	<style>
-		text{font-family:system-ui,sans-serif;fill:#222}
+		text{font-family:"DejaVu Sans","Liberation Sans",Arial,sans-serif;fill:#222}
 		.tick{font-size:15px;fill:#777}
 		.key{font-size:15px;fill:#555}
-		.label{font-size:18px;fill:rgb(from var(--color) calc(r * .7) calc(g * .7) calc(b * .7));stroke:#fff;stroke-width:6px;stroke-linejoin:round;paint-order:stroke}
+		.label{font-size:18px;stroke:#fff;stroke-width:6px;stroke-linejoin:round;paint-order:stroke}
 		.grid{stroke:#e7e4d8}
 		.axis{fill:none;stroke:#777}
 		.front{fill:none;stroke:#a3a398;stroke-width:1.25;stroke-linejoin:round}
-		.leader{stroke:var(--color);stroke-width:1.25}
-		.dot{fill:var(--color)}
-		use{fill:rgb(from var(--color) calc(r * .8) calc(g * .8) calc(b * .8))}
-		[data-lab="Anthropic"]{--color:#c66e53}
-		[data-lab="OpenAI"]{--color:#40947d}
-		[data-lab="Google"]{--color:#c28b3f}
-		[data-lab="xAI"]{--color:#6659b5}
-		[data-lab="DeepSeek"]{--color:#4e70a8}
-		[data-lab="Meta"]{--color:#35949c}
-		[data-lab="Moonshot"]{--color:#6b7785}
-		[data-lab="Z.ai"]{--color:#a8508f}
-		[data-lab="Xiaomi"]{--color:#dc7a30}
-		[data-lab="Reflection"]{--color:#7f9a3c}
+		
 	</style>
 	<defs>
 		<symbol id="Anthropic" viewBox="0 0 24 24" fill-rule="evenodd"><path d="M13.827 3.52h3.603L24 20h-3.603l-6.57-16.48zm-7.258 0h3.767L16.906 20h-3.674l-1.343-3.461H5.017l-1.344 3.46H0L6.57 3.522zm4.132 9.959L8.453 7.687 6.205 13.48H10.7z"/></symbol>

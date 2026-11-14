@@ -10,6 +10,22 @@ export const files = {
 };
 export const families = [...new Set(Object.values(files))];
 export const labs = [`Anthropic`, `DeepSeek`, `Google`, `Meta`, `Moonshot`, `OpenAI`, `Reflection`, `xAI`, `Xiaomi`, `Z.ai`];
+export const palette = {
+	Anthropic: `#c66e53`,
+	OpenAI: `#40947d`,
+	Google: `#c28b3f`,
+	xAI: `#6659b5`,
+	DeepSeek: `#4e70a8`,
+	Meta: `#35949c`,
+	Moonshot: `#6b7785`,
+	"Z.ai": `#a8508f`,
+	Xiaomi: `#dc7a30`,
+	Reflection: `#7f9a3c`,
+};
+const muted = `#6b6b6b`;
+export const color = lab => palette[lab] ?? muted;
+const channel = value => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, `0`);
+export const shade = (hex, factor) => `#${hex.slice(1).match(/../g).map(pair => channel(parseInt(pair, 16) * factor)).join(``)}`;
 const short = {
 	"Claude Opus 5.5": `Opus 5.5`,
 	"Claude Fable 5.2": `Fable 5.2`,
@@ -193,9 +209,9 @@ export const scatter = (list, metric, geometry) => {
 			...rows.map(value => `<text class="tick" x="${left - gap}" y="${round(vertical(value))}" text-anchor="end" dominant-baseline="central">${value}</text>`),
 			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${value}×</text>`),
 			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
-			...labels.map((label, index) => label.leader ? `<line class="leader" ${tag(index)} x1="${round(label.dot[0])}" y1="${round(label.dot[1])}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}"/>` : ``),
-			...list.map((model, index) => `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`),
-			...labels.map((label, index) => `<text class="label" ${tag(index)} x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`),
+			...labels.map((label, index) => label.leader ? `<line class="leader" ${tag(index)} stroke="${color(list[index].lab)}" x1="${round(label.dot[0])}" y1="${round(label.dot[1])}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}"/>` : ``),
+			...list.map((model, index) => `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`),
+			...labels.map((label, index) => `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`),
 		].join(``),
 	};
 };
@@ -230,7 +246,7 @@ export const bar = (list, metric, geometry) => {
 			...rows.map((model, index) => {
 				const y = center(index), width = Math.max(2, horizontal(model[field]) - left), end = left + width;
 				const title = tooltip ? `<title>${encode(model.short)}: ${readout(model[field])}</title>` : ``;
-				return `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text><path class="bar" ${tag(index, ` data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path><text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
+				return `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text><path class="bar" ${tag(index, ` fill="${color(model.lab)}" data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path><text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
 			}),
 			...(reference ? rows.map((item, index) => {
 				const y = center(index);

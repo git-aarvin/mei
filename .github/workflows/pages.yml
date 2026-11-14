@@ -5,6 +5,8 @@ on:
     paths:
       - source/**
       - www/**
+      - package.json
+      - package-lock.json
       - .github/workflows/pages.yml
   workflow_dispatch:
 permissions:
@@ -25,18 +27,9 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
         with:
           node-version: 24
-      - run: node source/svg.js
-      - run: node source/www.js
-      - run: mkdir -p www/bar www/scatter
-      - run: cp source/scatter/cost.svg source/scatter/tokens.svg www/scatter
-      - run: cp source/bar/cost.svg source/bar/index.svg source/bar/tokens.svg www/bar
-      - run: |
-          for svg in www/bar/*.svg www/scatter/*.svg; do
-            png="${svg%.svg}.png"
-            printf '<!doctype html><style>html,body{margin:0;padding:0;overflow:hidden;background:#fff}img{display:block;width:6875px;height:4644px}</style><img src="file://%s/%s">' "$PWD" "$svg" > chart.html
-            google-chrome --headless=new --disable-gpu --no-sandbox --hide-scrollbars --disable-dev-shm-usage --force-device-scale-factor=1 --default-background-color=ffffff --run-all-compositor-stages-before-draw --virtual-time-budget=1000 --window-size=6875,4644 --screenshot="$PWD/$png" "file://$PWD/chart.html"
-          done
-          rm chart.html
+          cache: npm
+      - run: npm ci
+      - run: node source/build.js
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:

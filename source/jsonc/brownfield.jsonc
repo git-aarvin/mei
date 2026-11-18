@@ -50,15 +50,6 @@
 		"usd": 19.54
 	},
 	{
-		"lab": "OpenAI",
-		"name": "GPT",
-		"score": 0.2764,
-		"series": "6",
-		"tier": "Astra",
-		"tokens": 24670000,
-		"usd": 84.72
-	},
-	{
 		"lab": "Z.ai",
 		"name": "GLM",
 		"score": 0.1999,

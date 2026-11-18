@@ -21,7 +21,12 @@ export const palette = {
 	Xiaomi: `#dc7a30`,
 	Reflection: `#7f9a3c`,
 };
-export const ranked = list => [...new Set([...list].sort((first, second) => first.rank - second.rank).map(model => model.lab))];
+const typical = (models, field) => field === `score` ? Math.max(...models.map(model => model.score)) : Math.min(...models.map(model => model[field]));
+export const ranked = (list, field = `score`) => {
+	const labs = [...new Set([...list].sort((first, second) => first.rank - second.rank).map(model => model.lab))],
+		value = new Map(labs.map(lab => [lab, typical(list.filter(model => model.lab === lab), field)]));
+	return labs.sort((first, second) => field === `score` ? value.get(second) - value.get(first) : value.get(first) - value.get(second));
+};
 const muted = `#6b6b6b`;
 export const color = lab => palette[lab] ?? muted;
 const channel = value => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, `0`);
@@ -201,7 +206,7 @@ export const scatter = (list, metric, geometry) => {
 		tag = (index, extra = ``) => `data-key="${index}" data-lab="${list[index].lab}"${extra}`;
 	return {
 		axis: `M${left - pad} ${round(vertical(ceiling))}V${round(vertical(floor))}M${round(Math.min(...columns.map(horizontal)))} ${bottom + pad}H${round(Math.max(...columns.map(horizontal)))}`,
-		labs: ranked(list),
+		labs: ranked(list, metric),
 		markup: [
 			...rows.map(value => `<line class="grid" x1="${left - pad}" y1="${round(vertical(value))}" x2="${right}" y2="${round(vertical(value))}"/>`),
 			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom + pad}"/>`),
@@ -238,7 +243,7 @@ export const bar = (list, metric, geometry) => {
 		tag = (index, extra = ``) => `data-key="${index}" data-lab="${rows[index].lab}"${extra}`;
 	return {
 		axis: `M${left} ${top}V${bottom}H${right}`,
-		labs: ranked(list),
+		labs: ranked(list, field),
 		markup: [
 			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom}"/>`),
 			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${log ? `${value}×` : value}</text>`),

@@ -24,4 +24,4 @@ Mei&mdash;or, the **M**odels **E**ngineering **I**ndex&mdash;calculates language
 
 ---
 
-_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org) and [Vals AI](https://vals.ai). GPT-6.1 Terra results were added from [Vals AI's Vibe Code Bench v1.1 results](https://vals-ai.com/benchmarks/vibe-code) and the [Terminal-Bench 4.1 leaderboard](https://www.tbench.ai)._
+_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org) and [Vals AI](https://vals.ai)._

@@ -7,7 +7,7 @@ on:
       - www/**
       - package.json
       - package-lock.json
-      - .github/workflows/pages.yml
+      - .github/workflows/push.yml
   workflow_dispatch:
 permissions:
   contents: read

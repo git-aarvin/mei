@@ -122,6 +122,15 @@
 		"usd": 349
 	},
 	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.533,
+		"series": "6.1",
+		"tier": "Terra",
+		"tokens": 8500000000,
+		"usd": 900
+	},
+	{
 		"lab": "xAI",
 		"name": "Grok",
 		"score": 0.388,

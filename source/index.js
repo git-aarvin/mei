@@ -39,9 +39,7 @@ const short = {
 	"GPT Sol 6.2": `6.2 Sol`,
 	"GPT Terra 6.1": `6.1 Terra`,
 	"GPT Luna 6": `6 Luna`,
-	"GLM Flash 5.3": `5.3 Flash`,
 	"Kimi Pro K3.1": `K3.1 Pro`,
-	"MiMo Flash V2.6": `V2.6-Flash`,
 	"MiMo Pro V2.6": `V2.6-Pro`,
 };
 const local = import.meta.url.startsWith(`file:`);

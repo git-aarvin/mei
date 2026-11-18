@@ -124,6 +124,15 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
+		"score": 0.84,
+		"series": "6.1",
+		"tier": "Terra",
+		"tokens": 49210000,
+		"usd": 6.00
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
 		"score": 0.8762,
 		"series": "6.2",
 		"tier": "Sol",

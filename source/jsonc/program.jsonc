@@ -94,13 +94,4 @@
 		"tokens": 75450000,
 		"usd": 21.96
 	},
-	{
-		"lab": "Z.ai",
-		"name": "GLM",
-		"score": 0,
-		"series": "5.3",
-		"tier": "Flash",
-		"tokens": 44940000,
-		"usd": 1.6
-	},
 ]

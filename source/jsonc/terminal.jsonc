@@ -1,7 +1,8 @@
 /*
-	Data sourced from Vals AI's Terminal-Bench 4.0 run. The benchmark design
-	and underlying tasks are attributed to the Laude Institute; run results
-	and token metrics are attributed to Vals AI.
+	Data sourced from Vals AI's run of Terminal-Bench 4.0. Benchmark results
+	are reproduced for aggregation and comparison purposes. All benchmark
+	data and methodology are attributed to the Terminal-Bench authors and
+	Vals AI.
 */
 [
 	{

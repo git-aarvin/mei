@@ -107,11 +107,11 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.596,
-		"series": "6",
+		"score": 0.6313,
+		"series": "6.2",
 		"tier": "Astra",
-		"tokens": 3010000,
-		"usd": 9.58
+		"tokens": 3100000,
+		"usd": 4.69
 	},
 	{
 		"lab": "OpenAI",
@@ -125,11 +125,11 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.5505,
-		"series": "6.1",
+		"score": 0.6061,
+		"series": "6.2",
 		"tier": "Sol",
-		"tokens": 2860000,
-		"usd": 1.72
+		"tokens": 3240000,
+		"usd": 1.13
 	},
 	{
 		"lab": "xAI",

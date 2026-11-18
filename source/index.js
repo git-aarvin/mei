@@ -206,7 +206,7 @@ export const scatter = (list, metric, geometry) => {
 		tag = (index, extra = ``) => `data-key="${index}" data-lab="${list[index].lab}"${extra}`;
 	return {
 		axis: `M${left - pad} ${round(vertical(ceiling))}V${round(vertical(floor))}M${round(Math.min(...columns.map(horizontal)))} ${bottom + pad}H${round(Math.max(...columns.map(horizontal)))}`,
-		labs: ranked(list, metric),
+		labs: ranked(list),
 		markup: [
 			...rows.map(value => `<line class="grid" x1="${left - pad}" y1="${round(vertical(value))}" x2="${right}" y2="${round(vertical(value))}"/>`),
 			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom + pad}"/>`),

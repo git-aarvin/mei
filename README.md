@@ -24,4 +24,4 @@ Mei&mdash;or, the **M**odels **E**ngineering **I**ndex&mdash;calculates language
 
 ---
 
-_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org) and [Vals AI](https://vals.ai)._
+_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com) and [Vals AI](https://vals.ai)._

@@ -4,6 +4,7 @@ import { renderAsync } from "@resvg/resvg-js";
 import { load, models } from "./index.js";
 import { encodePng } from "./png.js";
 import { charts } from "./svg.js";
+import { readme } from "./readme.js";
 import { page } from "./www.js";
 const root = new URL(`../www/`, import.meta.url);
 const scale = 6.25;
@@ -31,4 +32,5 @@ await Promise.all([
 	...svg.map(chart => write(chart.path, chart.text)),
 	...svg.map(rasterize),
 	write(`index.html`, html),
+	writeFile(new URL(`../README.md`, import.meta.url), readme(list)),
 ]);

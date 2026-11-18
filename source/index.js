@@ -37,6 +37,7 @@ const short = {
 	"Flash V4.1 1017": `V4.1 Flash`,
 	"GPT Astra 6.2": `6.2 Astra`,
 	"GPT Sol 6.2": `6.2 Sol`,
+	"GPT Terra 6.1": `6.1 Terra`,
 	"GPT Luna 6": `6 Luna`,
 	"GLM Flash 5.3": `5.3 Flash`,
 	"Kimi Pro K3.1": `K3.1 Pro`,

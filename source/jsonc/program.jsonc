@@ -52,29 +52,11 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.055,
-		"series": "6",
-		"tier": "Astra",
-		"tokens": 3870000,
-		"usd": 11.57
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
 		"score": 0.005,
 		"series": "6",
 		"tier": "Luna",
 		"tokens": 7000000,
 		"usd": 0.18
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
-		"score": 0.03,
-		"series": "6.1",
-		"tier": "Sol",
-		"tokens": 5170000,
-		"usd": 2.87
 	},
 	{
 		"lab": "xAI",

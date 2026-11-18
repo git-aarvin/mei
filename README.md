@@ -4,23 +4,23 @@ Mei&mdash;or, the **M**odels **E**ngineering **I**ndex&mdash;calculates language
 
 **Performance:**
 
-[![A horizontal bar chart ranking 20 AI models by performance score. Fable 5.2 ranks highest at 65.1, followed by 4 Carbon at 64.8 and Opus 5.5 at 62.7. GPT-6.1 Terra scores 52.6. The lowest-scoring models are 5.3 Flash at 31.4, V2.6-Flash at 34.6 and V2.6-Pro at 37.4. The horizontal axis ranges from 30 to 70.](https://git-aarvin.github.io/mei/bar/index.svg)](https://git-aarvin.github.io/mei/bar/index.svg)
+[![Horizontal bar chart of performance score for 18 models, from top to bottom highest to lowest: Fable 5.2 67.1; Opus 5.5 62.7; 4 Carbon 62.6; 6.2 Astra 60.9; Sonnet 5.5 58.5; 6.2 Sol 57.0; 4 Hydrogen 57.0; 4 Argon 54.6; Wonder Full 47.7; K3.1 Pro 47.6; 6.1 Terra 46.2; Wonder 45.3; V4.1 Flash 42.6; Grok 4.7 41.3; Haiku 5.5 41.2; GLM 5.3 39.7; V2.6-Pro 34.6; 6 Luna 33.3.](https://git-aarvin.github.io/mei/bar/index.svg)](https://git-aarvin.github.io/mei/bar/index.svg)
 
 **Cost:**
 
-[![A horizontal bar chart comparing the relative cost multipliers of 20 AI models, arranged from lowest to highest cost. V2.6-Flash and 6 Luna share the lowest cost at 0.08×. Fable 5.2 has the highest cost at 7.8×, followed by Grok 4.7 at 4.4× and Opus 5.5 at 4.3×. GPT-6.1 Terra appears at 1.0×. The horizontal axis uses a logarithmic scale.](https://git-aarvin.github.io/mei/bar/cost.svg)](https://git-aarvin.github.io/mei/bar/cost.svg)
+[![Horizontal bar chart of relative cost for 18 models, from top to bottom lowest to highest: 6 Luna 0.066×; V2.6-Pro 0.13×; V4.1 Flash 0.16×; Haiku 5.5 0.41×; 6.2 Sol 0.42×; 6.1 Terra 0.9×; Wonder Full 1.1×; K3.1 Pro 1.2×; 4 Hydrogen 1.3×; Wonder 1.4×; 6.2 Astra 1.5×; 4 Carbon 1.7×; 4 Argon 1.9×; GLM 5.3 2.1×; Sonnet 5.5 2.5×; Opus 5.5 3.4×; Grok 4.7 3.5×; Fable 5.2 6.4×. The horizontal axis is logarithmic.](https://git-aarvin.github.io/mei/bar/cost.svg)](https://git-aarvin.github.io/mei/bar/cost.svg)
 
 **Tokens:**
 
-[![A horizontal bar chart comparing token usage multipliers across 20 AI models. 6.2 Astra has the lowest token usage at 0.28×, followed by 6.2 Sol at 0.35×. Sonnet 5.5 has the highest token usage at 2.5×, followed by Fable 5.2 at 2.0×. GPT-6.1 Terra uses 1.7×. The horizontal axis uses a logarithmic scale.](https://git-aarvin.github.io/mei/bar/tokens.svg)](https://git-aarvin.github.io/mei/bar/tokens.svg)
+[![Horizontal bar chart of relative token usage for 18 models, from top to bottom lowest to highest: 6.2 Astra 0.3×; 6.2 Sol 0.37×; Wonder Full 0.51×; Wonder 0.62×; 6 Luna 0.63×; K3.1 Pro 0.77×; Grok 4.7 0.87×; 4 Argon 0.92×; V2.6-Pro 0.95×; 4 Carbon 1×; 4 Hydrogen 1.1×; GLM 5.3 1.5×; Haiku 5.5 1.6×; Opus 5.5 1.7×; V4.1 Flash 1.8×; 6.1 Terra 1.9×; Fable 5.2 2.1×; Sonnet 5.5 2.5×. The horizontal axis is logarithmic.](https://git-aarvin.github.io/mei/bar/tokens.svg)](https://git-aarvin.github.io/mei/bar/tokens.svg)
 
 **Performance versus cost:**
 
-[![A scatter plot showing performance scores versus cost multipliers for 20 AI models. Fable 5.2 combines the highest score with the highest cost; Opus 5.5 and 4 Carbon also score highly. GPT-6.1 Terra scores 52.6 at a cost multiplier of 1.0×. The chart compares performance on the vertical axis with relative cost on the horizontal axis.](https://git-aarvin.github.io/mei/scatter/cost.svg)](https://git-aarvin.github.io/mei/scatter/cost.svg)
+[![Scatter plot of performance score (vertical axis) against relative cost (horizontal axis, logarithmic, lower to the right) for 18 models, from highest to lowest performance, as name, score, cost: Fable 5.2, 67.1, 6.4×; Opus 5.5, 62.7, 3.4×; 4 Carbon, 62.6, 1.7×; 6.2 Astra, 60.9, 1.5×; Sonnet 5.5, 58.5, 2.5×; 6.2 Sol, 57.0, 0.42×; 4 Hydrogen, 57.0, 1.3×; 4 Argon, 54.6, 1.9×; Wonder Full, 47.7, 1.1×; K3.1 Pro, 47.6, 1.2×; 6.1 Terra, 46.2, 0.9×; Wonder, 45.3, 1.4×; V4.1 Flash, 42.6, 0.16×; Grok 4.7, 41.3, 3.5×; Haiku 5.5, 41.2, 0.41×; GLM 5.3, 39.7, 2.1×; V2.6-Pro, 34.6, 0.13×; 6 Luna, 33.3, 0.066×.](https://git-aarvin.github.io/mei/scatter/cost.svg)](https://git-aarvin.github.io/mei/scatter/cost.svg)
 
 **Performance versus tokens:**
 
-[![A scatter plot comparing performance scores and token usage multipliers for 20 AI models. Fable 5.2 and Opus 5.5 achieve high performance with relatively high token usage. 6.2 Astra and 6.2 Sol combine strong performance scores of 61.0 and 58.8 with low token usage of 0.28× and 0.35×. GPT-6.1 Terra scores 52.6 with token usage of 1.7×, while Sonnet 5.5 has the highest token usage at 2.5×.](https://git-aarvin.github.io/mei/scatter/tokens.svg)](https://git-aarvin.github.io/mei/scatter/tokens.svg)
+[![Scatter plot of performance score (vertical axis) against relative token usage (horizontal axis, logarithmic, lower to the right) for 18 models, from highest to lowest performance, as name, score, tokens: Fable 5.2, 67.1, 2.1×; Opus 5.5, 62.7, 1.7×; 4 Carbon, 62.6, 1×; 6.2 Astra, 60.9, 0.3×; Sonnet 5.5, 58.5, 2.5×; 6.2 Sol, 57.0, 0.37×; 4 Hydrogen, 57.0, 1.1×; 4 Argon, 54.6, 0.92×; Wonder Full, 47.7, 0.51×; K3.1 Pro, 47.6, 0.77×; 6.1 Terra, 46.2, 1.9×; Wonder, 45.3, 0.62×; V4.1 Flash, 42.6, 1.8×; Grok 4.7, 41.3, 0.87×; Haiku 5.5, 41.2, 1.6×; GLM 5.3, 39.7, 1.5×; V2.6-Pro, 34.6, 0.95×; 6 Luna, 33.3, 0.63×.](https://git-aarvin.github.io/mei/scatter/tokens.svg)](https://git-aarvin.github.io/mei/scatter/tokens.svg)
 
 ---
 

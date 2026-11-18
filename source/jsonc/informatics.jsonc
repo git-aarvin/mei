@@ -88,15 +88,6 @@
 	{
 		"lab": "Xiaomi",
 		"name": "MiMo",
-		"score": 0.4767,
-		"series": "V2.6",
-		"tier": "Flash",
-		"tokens": 20850000,
-		"usd": 0.22
-	},
-	{
-		"lab": "Xiaomi",
-		"name": "MiMo",
 		"score": 0.3933,
 		"series": "V2.6",
 		"tier": "Pro",

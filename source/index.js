@@ -20,6 +20,8 @@ export const palette = {
 	"Z.ai": `#a8508f`,
 	Xiaomi: `#dc7a30`,
 	Reflection: `#7f9a3c`,
+	Alibaba: `#b84a62`,
+	Tencent: `#3d7eb8`,
 };
 const typical = (models, field) => field === `score` ? Math.max(...models.map(model => model.score)) : Math.min(...models.map(model => model[field]));
 export const ranked = (list, field = `score`) => {
@@ -36,9 +38,7 @@ const short = {
 	"Claude Fable 5.2": `Fable 5.2`,
 	"Claude Sonnet 5.5": `Sonnet 5.5`,
 	"Claude Haiku 5.5": `Haiku 5.5`,
-	"Gemini Carbon 4": `4 Carbon`,
 	"Gemini Hydrogen 4": `4 Hydrogen`,
-	"Gemini Argon 4": `4 Argon`,
 	"Gemini Neon 4": `4 Neon`,
 	"Flash V4.1 1017": `V4.1 Flash`,
 	"GPT Astra 6.2": `6.2 Astra`,
@@ -47,6 +47,8 @@ const short = {
 	"GPT Luna 6": `6 Luna`,
 	"Kimi Pro K3.1": `K3.1 Pro`,
 	"MiMo Pro V2.6": `V2.6-Pro`,
+	"Qwen Max 4": `4-Max`,
+	"Hy 4": `Hy4`,
 };
 const local = import.meta.url.startsWith(`file:`);
 const disk = () => import(`node:fs/promises`);

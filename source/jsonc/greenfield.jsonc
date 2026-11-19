@@ -5,6 +5,15 @@
 */
 [
 	{
+		"lab": "Alibaba",
+		"name": "Qwen",
+		"score": 0.8666,
+		"series": "4",
+		"tier": "Max",
+		"tokens": 31210000,
+		"usd": 41.4
+	},
+	{
 		"lab": "Anthropic",
 		"name": "Claude",
 		"score": 0.9377,
@@ -97,7 +106,7 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.8990,
+		"score": 0.899,
 		"series": "6.2",
 		"tier": "Astra",
 		"tokens": 7110000,
@@ -119,7 +128,7 @@
 		"series": "6.1",
 		"tier": "Terra",
 		"tokens": 49210000,
-		"usd": 6.00
+		"usd": 6.0
 	},
 	{
 		"lab": "OpenAI",
@@ -129,6 +138,15 @@
 		"tier": "Sol",
 		"tokens": 13910000,
 		"usd": 3.23
+	},
+	{
+		"lab": "Tencent",
+		"name": "Hy",
+		"score": 0.8101,
+		"series": "4",
+		"tier": "",
+		"tokens": 34760000,
+		"usd": 2.39
 	},
 	{
 		"lab": "xAI",

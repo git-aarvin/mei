@@ -113,6 +113,15 @@
 		"usd": 900
 	},
 	{
+		"lab": "Tencent",
+		"name": "Hy",
+		"score": 0.379,
+		"series": "4",
+		"tier": "",
+		"tokens": 5300000000,
+		"usd": 347.6
+	},
+	{
 		"lab": "xAI",
 		"name": "Grok",
 		"score": 0.388,

@@ -39,6 +39,7 @@ const short = {
 	"Gemini Carbon 4": `4 Carbon`,
 	"Gemini Hydrogen 4": `4 Hydrogen`,
 	"Gemini Argon 4": `4 Argon`,
+	"Gemini Neon 4": `4 Neon`,
 	"Flash V4.1 1017": `V4.1 Flash`,
 	"GPT Astra 6.2": `6.2 Astra`,
 	"GPT Sol 6.2": `6.2 Sol`,

@@ -32,15 +32,6 @@
 		"usd": 5.81
 	},
 	{
-		"lab": "Google",
-		"name": "Gemini",
-		"score": 1,
-		"series": "4",
-		"tier": "Argon",
-		"tokens": 8220000,
-		"usd": 5.31
-	},
-	{
 		"lab": "Meta",
 		"name": "Muse",
 		"score": 0.6694,

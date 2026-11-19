@@ -1,5 +1,5 @@
 /*
-	Data sourced from Cursor's CursorBench 4.0. Benchmark results are
+	Data sourced from Cursor's CursorBench 4.1. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data
 	and methodology are attributed to Cursor.
 */
@@ -7,82 +7,91 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.563,
+		"score": 0.588,
 		"series": "5.2",
 		"tier": "Fable",
-		"tokens": 161251,
-		"usd": 15.48
+		"tokens": 194918,
+		"usd": 17.84
 	},
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.443,
+		"score": 0.452,
 		"series": "5.5",
 		"tier": "Haiku",
-		"tokens": 143813,
+		"tokens": 149314,
 		"usd": 0.56
 	},
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.56,
+		"score": 0.567,
 		"series": "5.5",
 		"tier": "Opus",
-		"tokens": 101083,
-		"usd": 6.98
+		"tokens": 104901,
+		"usd": 6.54
 	},
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.531,
+		"score": 0.499,
 		"series": "5.5",
 		"tier": "Sonnet",
-		"tokens": 100158,
-		"usd": 2.81
-	},
-	{
-		"lab": "DeepSeek",
-		"name": "",
-		"score": 0.456,
-		"series": "V4.1 1017",
-		"tier": "Flash",
-		"tokens": 385196,
-		"usd": 0.77
+		"tokens": 112299,
+		"usd": 3.13
 	},
 	{
 		"lab": "Google",
 		"name": "Gemini",
-		"score": 0.529,
+		"score": 0.615,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": 114518,
+		"usd": 8.52
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.637,
+		"series": "4",
+		"tier": "Neon",
+		"tokens": 88596,
+		"usd": 6.54
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.565,
 		"series": "4",
 		"tier": "Argon",
-		"tokens": 109500,
-		"usd": 4.57
+		"tokens": 135038,
+		"usd": 9.14
 	},
 	{
 		"lab": "Google",
 		"name": "Gemini",
-		"score": 0.543,
+		"score": 0.573,
 		"series": "4",
 		"tier": "Hydrogen",
-		"tokens": 88682,
-		"usd": 5.59
+		"tokens": 113807,
+		"usd": 4.57
 	},
 	{
 		"lab": "Meta",
 		"name": "Muse",
-		"score": 0.482,
-		"series": "",
-		"tier": "Wonder",
-		"tokens": 39564,
-		"usd": 4.24
+		"score": 0.346,
+		"series": "1.3",
+		"tier": "Spark",
+		"tokens": 47142,
+		"usd": 2.33
 	},
 	{
 		"lab": "xAI",
 		"name": "Grok",
-		"score": 0.463,
+		"score": 0.486,
 		"series": "4.7",
 		"tier": "",
-		"tokens": 70141,
-		"usd": 6.01
+		"tokens": 90268,
+		"usd": 10.19
 	},
 ]

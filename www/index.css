@@ -64,6 +64,8 @@
 [data-lab="Z.ai"] { --color: #a8508f; }
 [data-lab="Xiaomi"] { --color: #dc7a30; }
 [data-lab="Reflection"] { --color: #7f9a3c; }
+[data-lab="Alibaba"] { --color: #b84a62; }
+[data-lab="Tencent"] { --color: #3d7eb8; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 ::selection { background: var(--selection); }

@@ -1,0 +1,79 @@
+/*
+	Data sourced from Scale Labs' HiL-Bench. Benchmark results are reproduced
+	for aggregation and comparison purposes. All benchmark data and
+	methodology are attributed to Scale Labs.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.7733,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.59,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.5033,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.5533,
+		"series": "4",
+		"tier": "Hydrogen",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.7967,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.6133,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.68,
+		"series": "6.1",
+		"tier": "Terra",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.5833,
+		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	}
+]

@@ -586,21 +586,10 @@ th.bar, td.bar {
 .radar .axis {
 	fill: var(--muted);
 	font-size: 12px;
-	transition: fill 120ms, opacity 120ms, text-decoration-color 120ms;
-}
-.radar a .axis {
-	text-decoration: underline;
-	text-decoration-color: var(--rule);
-	text-underline-offset: 2px;
+	transition: fill 120ms, opacity 120ms;
 }
 .radar a:is(:hover, :focus-visible) { outline: none; }
-.radar a:is(:hover, :focus-visible) .axis:not(.active) {
-	fill: var(--ink);
-	text-decoration-color: var(--ink);
-}
-.radar a:is(:hover, :focus-visible) .axis.active {
-	text-decoration-color: var(--color);
-}
+.radar a:is(:hover, :focus-visible) .axis:not(.active) { fill: var(--ink); }
 .radar .axis.active {
 	fill: var(--color);
 	font-weight: 500;

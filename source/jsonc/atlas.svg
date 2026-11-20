@@ -1,0 +1,115 @@
+/*
+	Data sourced from Scale Labs' SWE-Atlas. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Scale Labs.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.805,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.594,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.774,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.683,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.621,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.714,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.648,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.611,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.508,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.577,
+		"series": "6.1",
+		"tier": "Terra",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.621,
+		"series": "4.7",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.581,
+		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	},
+]

@@ -11,8 +11,8 @@ export const files = {
 	greenfield: `Vibe Code`,
 	science: `Terminal-Bench-Science`,
 	multimodal: `SWE-bench Multimodal`,
-	owe: `OpenWorldEngineer`,
-	hil: `HiL-Bench`,
+	world: `OpenWorldEngineer`,
+	human: `HiL-Bench`,
 };
 export const sites = {
 	CursorBench: `https://cursor.com/cursorbench`,

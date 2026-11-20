@@ -9,6 +9,10 @@ export const files = {
 	terminal: `Terminal-Bench`,
 	brownfield: `Vibe Code 1–100`,
 	greenfield: `Vibe Code`,
+	science: `Terminal-Bench-Science`,
+	multimodal: `SWE-bench Multimodal`,
+	owe: `OpenWorldEngineer`,
+	hil: `HiL-Bench`,
 };
 export const sites = {
 	CursorBench: `https://cursor.com/cursorbench`,
@@ -21,6 +25,10 @@ export const sites = {
 	"Terminal-Bench": `https://www.tbench.ai/`,
 	"Vibe Code 1–100": `https://www.vals.ai/benchmarks/vcb-1-100-v1-1`,
 	"Vibe Code": `https://www.vals.ai/benchmarks/vibe-code`,
+	"Terminal-Bench-Science": `https://www.vals.ai/benchmarks/terminal-bench-science`,
+	"SWE-bench Multimodal": `https://www.vals.ai/benchmarks/swebench-multimodal`,
+	OpenWorldEngineer: `https://openworldengineer.mercor.com/`,
+	"HiL-Bench": `https://labs.scale.com/leaderboard/hil`,
 };
 export const families = [...new Set(Object.values(files))];
 export const palette = {

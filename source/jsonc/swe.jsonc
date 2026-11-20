@@ -59,13 +59,13 @@
 		"usd": 61.79
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.295,
-		"series": "4.7",
-		"tier": "",
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.251,
+		"series": "2",
+		"tier": "Small",
 		"tokens": null,
-		"usd": 318.77
+		"usd": 11.84
 	},
 	{
 		"lab": "Z.ai",
@@ -75,5 +75,14 @@
 		"tier": "",
 		"tokens": null,
 		"usd": 97.22
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.295,
+		"series": "4.7",
+		"tier": "",
+		"tokens": null,
+		"usd": 318.77
 	},
 ]

@@ -70,11 +70,29 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
+		"score": 0.306,
+		"series": "1",
+		"tier": "Ember",
+		"tokens": 8100000000,
+		"usd": 200
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
 		"score": 0.47,
 		"series": "1",
 		"tier": "Wonder",
 		"tokens": 5500000000,
 		"usd": 2500
+	},
+	{
+		"lab": "Mistral",
+		"name": "Mistral",
+		"score": 0.276,
+		"series": "4",
+		"tier": "Large",
+		"tokens": 5800000000,
+		"usd": 700
 	},
 	{
 		"lab": "Moonshot",
@@ -88,29 +106,11 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.621,
-		"series": "6.2",
-		"tier": "Astra",
-		"tokens": 1100000000,
-		"usd": 1400
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
 		"score": 0.152,
 		"series": "6",
 		"tier": "Luna",
 		"tokens": 3900000000,
 		"usd": 100
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
-		"score": 0.615,
-		"series": "6.2",
-		"tier": "Sol",
-		"tokens": 1100000000,
-		"usd": 349
 	},
 	{
 		"lab": "OpenAI",
@@ -122,6 +122,24 @@
 		"usd": 900
 	},
 	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.621,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": 1100000000,
+		"usd": 1400
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.615,
+		"series": "6.2",
+		"tier": "Sol",
+		"tokens": 1100000000,
+		"usd": 349
+	},
+	{
 		"lab": "Tencent",
 		"name": "Hy",
 		"score": 0.379,
@@ -131,13 +149,13 @@
 		"usd": 347.6
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.388,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 5500000000,
-		"usd": 3700
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.13,
+		"series": "2",
+		"tier": "Small",
+		"tokens": 27500000000,
+		"usd": 1000
 	},
 	{
 		"lab": "Xiaomi",
@@ -156,5 +174,14 @@
 		"tier": "",
 		"tokens": 8700000000,
 		"usd": 2700
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.388,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 5500000000,
+		"usd": 3700
 	},
 ]

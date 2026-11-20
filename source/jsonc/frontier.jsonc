@@ -86,6 +86,15 @@
 		"usd": 3.79
 	},
 	{
+		"lab": "Mistral",
+		"name": "Mistral",
+		"score": 0.197,
+		"series": "4",
+		"tier": "Large",
+		"tokens": 88100,
+		"usd": 1.55
+	},
+	{
 		"lab": "Moonshot",
 		"name": "Kimi",
 		"score": 0.199,
@@ -93,15 +102,6 @@
 		"tier": "Pro",
 		"tokens": 37200,
 		"usd": 3.03
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
-		"score": 0.441,
-		"series": "6.2",
-		"tier": "Astra",
-		"tokens": 28600,
-		"usd": 4.29
 	},
 	{
 		"lab": "OpenAI",
@@ -115,6 +115,15 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
+		"score": 0.441,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": 28600,
+		"usd": 4.29
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
 		"score": 0.398,
 		"series": "6.2",
 		"tier": "Sol",
@@ -122,13 +131,13 @@
 		"usd": 0.98
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.289,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 110790,
-		"usd": 14.36
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.226,
+		"series": "2",
+		"tier": "Small",
+		"tokens": 95400,
+		"usd": 0.58
 	},
 	{
 		"lab": "Z.ai",
@@ -138,5 +147,14 @@
 		"tier": "",
 		"tokens": 100700,
 		"usd": 7.52
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.289,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 110790,
+		"usd": 14.36
 	},
 ]

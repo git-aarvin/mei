@@ -89,20 +89,20 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.7143,
-		"series": "6.2",
-		"tier": "Astra",
-		"tokens": 9260000,
-		"usd": 11.08
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
 		"score": 0.0429,
 		"series": "6",
 		"tier": "Luna",
 		"tokens": 11160000,
 		"usd": 0.24
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.7143,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": 9260000,
+		"usd": 11.08
 	},
 	{
 		"lab": "OpenAI",
@@ -114,13 +114,13 @@
 		"usd": 2.53
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.1,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 16720000,
-		"usd": 17.04
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.0286,
+		"series": "2",
+		"tier": "Small",
+		"tokens": 204990000,
+		"usd": 5.55
 	},
 	{
 		"lab": "Xiaomi",
@@ -139,5 +139,14 @@
 		"tier": "",
 		"tokens": 53010000,
 		"usd": 15.63
-	}
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.1,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 16720000,
+		"usd": 17.04
+	},
 ]

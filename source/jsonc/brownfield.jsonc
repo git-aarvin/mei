@@ -32,6 +32,15 @@
 		"usd": 57.92
 	},
 	{
+		"lab": "MiniMax",
+		"name": "MiniMax",
+		"score": 0.1983,
+		"series": "M3.1",
+		"tier": "Flash",
+		"tokens": 100160000,
+		"usd": 3.72
+	},
+	{
 		"lab": "OpenAI",
 		"name": "GPT",
 		"score": 0.5516,
@@ -39,15 +48,6 @@
 		"tier": "Astra",
 		"tokens": 23060000,
 		"usd": 45.66
-	},
-	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.2635,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 47710000,
-		"usd": 41.71
 	},
 	{
 		"lab": "Xiaomi",
@@ -66,5 +66,14 @@
 		"tier": "",
 		"tokens": 32190000,
 		"usd": 13.44
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.2635,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 47710000,
+		"usd": 41.71
 	},
 ]

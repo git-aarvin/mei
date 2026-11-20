@@ -59,13 +59,13 @@
 		"usd": 0.18
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
+		"lab": "Thinking Machines",
+		"name": "Inkling",
 		"score": 0.005,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 20290000,
-		"usd": 46.49
+		"series": "2",
+		"tier": "Small",
+		"tokens": 254520000,
+		"usd": 8.46
 	},
 	{
 		"lab": "Xiaomi",
@@ -84,5 +84,14 @@
 		"tier": "",
 		"tokens": 75450000,
 		"usd": 21.96
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.005,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 20290000,
+		"usd": 46.49
 	},
 ]

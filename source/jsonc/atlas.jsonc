@@ -61,9 +61,27 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
+		"score": 0.5599,
+		"series": "1",
+		"tier": "Ember",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
 		"score": 0.648,
 		"series": "1",
 		"tier": "Wonder",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Mistral",
+		"name": "Mistral",
+		"score": 0.4519,
+		"series": "4",
+		"tier": "Large",
 		"tokens": null,
 		"usd": null
 	},
@@ -95,11 +113,11 @@
 		"usd": null
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.621,
-		"series": "4.7",
-		"tier": "",
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.6189,
+		"series": "2",
+		"tier": "Small",
 		"tokens": null,
 		"usd": null
 	},
@@ -108,6 +126,15 @@
 		"name": "GLM",
 		"score": 0.581,
 		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.621,
+		"series": "4.7",
 		"tier": "",
 		"tokens": null,
 		"usd": null

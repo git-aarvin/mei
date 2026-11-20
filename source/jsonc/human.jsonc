@@ -43,9 +43,27 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
+		"score": 0.74,
+		"series": "1",
+		"tier": "Ember",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
 		"score": 0.7967,
 		"series": "1",
 		"tier": "Wonder",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "MiniMax",
+		"name": "MiniMax",
+		"score": 0.6567,
+		"series": "M3.1",
+		"tier": "Flash",
 		"tokens": null,
 		"usd": null
 	},
@@ -75,5 +93,5 @@
 		"tier": "",
 		"tokens": null,
 		"usd": null
-	}
+	},
 ]

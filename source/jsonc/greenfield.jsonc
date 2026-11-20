@@ -88,6 +88,15 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
+		"score": 0.837,
+		"series": "1",
+		"tier": "Ember",
+		"tokens": 5400000,
+		"usd": 0.05
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
 		"score": 0.8309,
 		"series": "1",
 		"tier": "Wonder",
@@ -104,6 +113,24 @@
 		"usd": 2.29
 	},
 	{
+		"lab": "MiniMax",
+		"name": "MiniMax",
+		"score": 0.7394,
+		"series": "M3.1",
+		"tier": "Flash",
+		"tokens": 66860000,
+		"usd": 1.15
+	},
+	{
+		"lab": "Mistral",
+		"name": "Mistral",
+		"score": 0.8156,
+		"series": "4",
+		"tier": "Large",
+		"tokens": 24440000,
+		"usd": 11.72
+	},
+	{
 		"lab": "Moonshot",
 		"name": "Kimi",
 		"score": 0.8489,
@@ -111,15 +138,6 @@
 		"tier": "Pro",
 		"tokens": 28140000,
 		"usd": 7.49
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
-		"score": 0.899,
-		"series": "6.2",
-		"tier": "Astra",
-		"tokens": 7110000,
-		"usd": 7.92
 	},
 	{
 		"lab": "OpenAI",
@@ -133,20 +151,29 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.8762,
-		"series": "6.2",
-		"tier": "Sol",
-		"tokens": 13910000,
-		"usd": 3.23
-	},
-	{
-		"lab": "OpenAI",
-		"name": "GPT",
 		"score": 0.84,
 		"series": "6.1",
 		"tier": "Terra",
 		"tokens": 49210000,
 		"usd": 6.0
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.899,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": 7110000,
+		"usd": 7.92
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.8762,
+		"series": "6.2",
+		"tier": "Sol",
+		"tokens": 13910000,
+		"usd": 3.23
 	},
 	{
 		"lab": "Tencent",
@@ -158,13 +185,13 @@
 		"usd": 2.39
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.8617,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 15500000,
-		"usd": 15.83
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.8155,
+		"series": "2",
+		"tier": "Small",
+		"tokens": 51080000,
+		"usd": 1.9
 	},
 	{
 		"lab": "Xiaomi",
@@ -183,5 +210,14 @@
 		"tier": "",
 		"tokens": 39590000,
 		"usd": 12.45
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.8617,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 15500000,
+		"usd": 15.83
 	},
 ]

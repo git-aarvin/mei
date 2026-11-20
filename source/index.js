@@ -13,6 +13,8 @@ export const files = {
 	multimodal: `SWE-bench Multimodal`,
 	world: `OpenWorldEngineer`,
 	human: `HiL-Bench`,
+	ramp: `Ramp SWE-Bench v2`,
+	real: `Real-SWE 1.1`,
 };
 export const sites = {
 	CursorBench: `https://cursor.com/cursorbench`,
@@ -29,6 +31,8 @@ export const sites = {
 	"SWE-bench Multimodal": `https://www.vals.ai/benchmarks/swebench-multimodal`,
 	OpenWorldEngineer: `https://openworldengineer.mercor.com/`,
 	"HiL-Bench": `https://labs.scale.com/leaderboard/hil`,
+	"Ramp SWE-Bench v2": `https://labs.ramp.com/swebench`,
+	"Real-SWE 1.1": `https://withspecific.com/benchmarks/real-swe`,
 };
 export const families = [...new Set(Object.values(files))];
 export const palette = {

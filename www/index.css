@@ -166,7 +166,9 @@ footer {
 	color: var(--muted);
 	font-size: 12px;
 }
-footer p { margin: 0; }
+footer p { margin: 0 0 10px; line-height: 1.5; }
+footer p:last-child { margin-bottom: 0; }
+footer strong { font-weight: 500; color: inherit; }
 .reader {
 	position: absolute;
 	width: 1px;

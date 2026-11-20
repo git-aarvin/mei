@@ -1,0 +1,97 @@
+/*
+	Data sourced from Vals AI's SWE-bench Multimodal. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Vals AI and the SWE-bench team.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.6229,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": 1270000,
+		"usd": 1.84
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.4396,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 9800000,
+		"usd": 0.7
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.7021,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 6700000,
+		"usd": 3.63
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.5833,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 13080000,
+		"usd": 3.26
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.4646,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": 14950000,
+		"usd": 0.23
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.4563,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": 3720000,
+		"usd": 1.7
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.4729,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": 4200000,
+		"usd": 1.86
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.375,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 1120000,
+		"usd": 0.03
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.4292,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 6730000,
+		"usd": 4.66
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.4125,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 3840000,
+		"usd": 0.12
+	}
+]

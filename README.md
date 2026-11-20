@@ -2,12 +2,6 @@ Mei&mdash;or, the **M**odels **E**ngineering **I**ndex&mdash;calculates language
 
 ---
 
-Each benchmark's scores are standardised, then every model's index is estimated by fitting a model effect and a benchmark effect together, so a model isn't rewarded for sitting only on easier benchmarks or penalised for missing some. The result is rescaled so the models average 50 with a standard deviation of 10. Cost and token use are fitted the same way on a log scale and shown relative to the typical model (1×).
-
-**This index is far from perfect, and work is underway to improve it.** Models are tested on different subsets of benchmarks, so some scores rest on far less evidence than others, and there are no error bars, so small gaps are not meaningful. Scores are relative to the models listed, so adding or removing models shifts them. Benchmarks are weighted equally regardless of size or reliability. Cost is the reported cost of each benchmark run, so it reflects prices at the time and each benchmark's setup, not what a model costs on your workload. Results are reproduced as published, not independently verified, and may be affected by contamination or tuning to the benchmarks. Benchmarks are only a proxy for real engineering work.
-
----
-
 **Performance:**
 
 [![Horizontal bar chart of performance score for 19 models, from top to bottom highest to lowest: 4 Neon 69.5; Fable 5.2 65.8; Opus 5.5 63.1; 6.2 Astra 60.5; 4 Hydrogen 57.2; Sonnet 5.5 57.2; 6.2 Sol 56.9; Wonder Full 49.3; K3.1 Pro 49.0; 4-Max 49.0; 6.1 Terra 47.2; Wonder 46.4; V4.1 Flash 44.1; Grok 4.7 42.7; Haiku 5.5 42.5; GLM 5.3 42.0; Hy4 37.3; V2.6-Pro 35.4; 6 Luna 34.8.](https://git-aarvin.github.io/mei/bar/index.svg)](https://git-aarvin.github.io/mei/bar/index.svg)

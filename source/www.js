@@ -1,4 +1,4 @@
-import { bar, encode, families, fill, read, scatter, times } from "./index.js";
+import { bar, encode, families, fill, read, scatter, sites, times } from "./index.js";
 const geometry = { left: 48, right: 664, top: 26, bottom: 384, radius: 4.5, font: 12, pad: 0, gap: 7, drop: 16 };
 const barGeometry = { left: 104, right: 640, top: 26, bottom: 384, radius: 2, font: 12, pad: 0, gap: 8, drop: 16, reference: true, tooltip: false };
 export const page = async list => {
@@ -33,7 +33,7 @@ export const page = async list => {
 		...[20, 40, 60, 80, 100].map(value => `<polygon class="ring" points="${families.map((family, index) => at(index, value).map(round)).join(` `)}"/>`),
 		...families.map((family, index) => `<line class="spoke" x1="${middle[0]}" y1="${middle[1]}" x2="${at(index, 100).map(round)[0]}" y2="${at(index, 100).map(round)[1]}"/>`),
 		...[25, 50, 75, 100].map(value => `<text class="scale" x="${round(at(0, value)[0] + 5)}" y="${round(at(0, value)[1] + 3)}">${value}</text>`),
-		...families.map((family, index) => `<text class="axis" data-axis="${index}" x="${round(polar(index, reach + 24)[0])}" y="${round(polar(index, reach + 24)[1] + 4)}" text-anchor="${anchor(index, `start`, `end`)}">${family}</text>`),
+		...families.map((family, index) => `<a href="${sites[family]}" target="_blank" rel="noopener"><text class="axis" data-axis="${index}" x="${round(polar(index, reach + 24)[0])}" y="${round(polar(index, reach + 24)[1] + 4)}" text-anchor="${anchor(index, `start`, `end`)}">${family}</text></a>`),
 	].join(``);
 	return fill(await read(`../www/index.html`), {
 		cost: scatter(list, `cost`, geometry).markup,

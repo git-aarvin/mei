@@ -44,6 +44,9 @@ export const palette = {
 	Reflection: `#7f9a3c`,
 	Alibaba: `#b84a62`,
 	Tencent: `#3d7eb8`,
+	Mistral: `#d46b27`,
+	"Thinking Machines": `#4f8f58`,
+	MiniMax: `#9e58b5`,
 };
 const typical = (models, field) => field === `score` ? Math.max(...models.map(model => model.score)) : Math.min(...models.map(model => model[field]));
 export const ranked = (list, field = `score`) => {
@@ -72,6 +75,9 @@ const short = {
 	"MiMo Pro V2.6": `V2.6-Pro`,
 	"Qwen Max 4": `4-Max`,
 	"Hy 4": `Hy4`,
+	"Mistral Large 4": `Large 4`,
+	"Inkling Small 2": `Inkling 2 Small`,
+	"MiniMax Flash M3.1": `M3.1 Flash`,
 };
 const local = import.meta.url.startsWith(`file:`);
 const disk = () => import(`node:fs/promises`);

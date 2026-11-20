@@ -27,7 +27,10 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 		across.textContent = nearest.dataset.edge;
 		down.textContent = nearest.dataset.score;
 		chart.classList.add(`snapping`);
-		for (const element of chart.querySelectorAll(`[data-key]`)) element.classList.toggle(`snapped`, element.dataset.key === nearest.dataset.key);
+		for (const element of chart.querySelectorAll(`[data-key]`)) {
+			element.classList.toggle(`snapped`, element.dataset.key === nearest.dataset.key);
+			element.classList.toggle(`peer`, element.dataset.lab === nearest.dataset.lab);
+		}
 		cancelAnimationFrame(frame);
 		frame = requestAnimationFrame(() => {
 			const edges = [box(across, horizontal, 0), box(down, 0, vertical)];
@@ -41,7 +44,7 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 		chart.style.removeProperty(`--down`);
 		delete chart.dataset.lab;
 		across.textContent = down.textContent = ``;
-		for (const element of chart.querySelectorAll(`.snapped`)) element.classList.remove(`snapped`);
+		for (const element of chart.querySelectorAll(`.snapped, .peer`)) element.classList.remove(`snapped`, `peer`);
 		for (const tick of ticks) tick.style.visibility = ``;
 	};
 }

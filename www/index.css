@@ -637,7 +637,7 @@ th.bar, td.bar {
 .ribbon {
 	display: block;
 	margin: 0 0 56px;
-	padding: 10px 16px;
+	padding: 10px 8px;
 	border-top: 1px solid var(--gold-edge);
 	border-bottom: 1px solid var(--gold-edge);
 	border-radius: 4px;
@@ -656,5 +656,5 @@ th.bar, td.bar {
 }
 .ribbon:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
 @media (max-width: 480px) {
-	.ribbon { margin-bottom: 48px; padding: 9px 12px; font-size: 13px; }
+	.ribbon { margin-bottom: 48px; padding: 9px 6px; font-size: 13px; }
 }

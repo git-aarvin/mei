@@ -10,6 +10,18 @@ export const files = {
 	brownfield: `Vibe Code 1–100`,
 	greenfield: `Vibe Code`,
 };
+export const sites = {
+	CursorBench: `https://cursor.com/cursorbench`,
+	FrontierCode: `https://cognition.com/frontiercode`,
+	FrontierSWE: `https://www.frontierswe.com/`,
+	"SWE-Atlas": `https://labs.scale.com/leaderboard/swe-atlas`,
+	"Code Migration": `https://www.vals.ai/benchmarks/code-migration-v1-1`,
+	IOI: `https://www.vals.ai/benchmarks/ioi`,
+	ProgramBench: `https://programbench.com/`,
+	"Terminal-Bench": `https://www.tbench.ai/`,
+	"Vibe Code 1–100": `https://www.vals.ai/benchmarks/vcb-1-100-v1-1`,
+	"Vibe Code": `https://www.vals.ai/benchmarks/vibe-code`,
+};
 export const families = [...new Set(Object.values(files))];
 export const palette = {
 	Anthropic: `#c66e53`,

@@ -24,5 +24,5 @@ export const readme = list => [
 	figure(`Performance versus cost`, `scatter/cost.svg`, scatter(list, `cost`)),
 	figure(`Performance versus tokens`, `scatter/tokens.svg`, scatter(list, `tokens`)),
 	`---`,
-	`_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org), [Mercor](https://www.mercor.com), [Proximal](https://www.proximal.ai), [Scale Labs](https://labs.scale.com) and [Vals AI](https://vals.ai)._`,
+	`_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org), [Mercor](https://www.mercor.com), [Proximal](https://www.proximal.ai), [Ramp Labs](https://labs.ramp.com), [Scale Labs](https://labs.scale.com), [Specific Labs](https://withspecific.com) and [Vals AI](https://vals.ai)._`,
 ].join(`\n\n`) + `\n`;

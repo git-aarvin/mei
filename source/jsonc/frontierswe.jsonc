@@ -1,0 +1,79 @@
+/*
+	Data sourced from Proximal's FrontierSWE v2. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Proximal.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.699,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": 168.78
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.438,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": null,
+		"usd": 20.55
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.623,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": 98.87
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.619,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": null,
+		"usd": 110.45
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.612,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": null,
+		"usd": 61.93
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.531,
+		"series": "4",
+		"tier": "Hydrogen",
+		"tokens": null,
+		"usd": 61.79
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.295,
+		"series": "4.7",
+		"tier": "",
+		"tokens": null,
+		"usd": 318.77
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.302,
+		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": 97.22
+	},
+]

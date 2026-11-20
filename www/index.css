@@ -157,6 +157,12 @@ a:focus-visible, button:focus-visible, input:focus-visible + label {
 	text-decoration-color: currentColor;
 }
 header { margin-bottom: 48px; }
+header p {
+	margin: 14px 0 0;
+	color: var(--muted);
+	font-size: 14px;
+	line-height: 1.55;
+}
 .intro {
 	margin: 0;
 	max-width: 36em;
@@ -301,9 +307,9 @@ footer strong { font-weight: 500; color: inherit; }
 	stroke-width: 1.25;
 	transition: opacity 120ms;
 }
-.chart.snapping .dot:not(.snapped),
-.chart.snapping .label:not(.snapped),
-.chart.snapping .leader:not(.snapped),
+.chart.snapping .dot:not(.snapped):not(.peer),
+.chart.snapping .label:not(.snapped):not(.peer),
+.chart.snapping .leader:not(.snapped):not(.peer),
 .chart.snapping .front,
 .chart.snapping .tick,
 .chart.snapping .key { opacity: 0.2; }
@@ -573,10 +579,27 @@ th.bar, td.bar {
 	stroke: var(--line);
 	stroke-width: 1;
 }
+.radar a {
+	cursor: pointer;
+	text-decoration: none;
+}
 .radar .axis {
 	fill: var(--muted);
 	font-size: 12px;
-	transition: fill 120ms, opacity 120ms;
+	transition: fill 120ms, opacity 120ms, text-decoration-color 120ms;
+}
+.radar a .axis {
+	text-decoration: underline;
+	text-decoration-color: var(--rule);
+	text-underline-offset: 2px;
+}
+.radar a:is(:hover, :focus-visible) { outline: none; }
+.radar a:is(:hover, :focus-visible) .axis:not(.active) {
+	fill: var(--ink);
+	text-decoration-color: var(--ink);
+}
+.radar a:is(:hover, :focus-visible) .axis.active {
+	text-decoration-color: var(--color);
 }
 .radar .axis.active {
 	fill: var(--color);

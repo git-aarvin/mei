@@ -1,0 +1,143 @@
+/*
+	Data sourced from Vals AI's Terminal-Bench-Science v0.1.0. Benchmark
+	results are reproduced for aggregation and comparison purposes. All
+	benchmark data and methodology are attributed to Vals AI and the
+	Terminal-Bench-Science authors.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.5571,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": 44690000,
+		"usd": 23.14
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.1,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 71300000,
+		"usd": 4.52
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.4714,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 26380000,
+		"usd": 19.12
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.4714,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 130650000,
+		"usd": 19.57
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": 25460000,
+		"usd": 0.47
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.6286,
+		"series": "4",
+		"tier": "Neon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.2286,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": 63600000,
+		"usd": 19.61
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.3714,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": 53290000,
+		"usd": 22.81
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.3143,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": 33150000,
+		"usd": 8.58
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.7143,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": 9260000,
+		"usd": 11.08
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.0429,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 11160000,
+		"usd": 0.24
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.5857,
+		"series": "6.2",
+		"tier": "Sol",
+		"tokens": 8600000,
+		"usd": 2.53
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.1,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 16720000,
+		"usd": 17.04
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.0286,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 40530000,
+		"usd": 0.62
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.0571,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 53010000,
+		"usd": 15.63
+	}
+]

@@ -30,4 +30,4 @@ Each benchmark's scores are standardised, then every model's index is estimated 
 
 ---
 
-_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org) and [Vals AI](https://vals.ai)._
+_Calculated from data attributed to [Cognition](https://cognition.ai), [Cursor](https://cursor.com), the [Laude Institute](https://laude.org), [Proximal](https://www.proximal.ai), [Scale Labs](https://labs.scale.com) and [Vals AI](https://vals.ai)._

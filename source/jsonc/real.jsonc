@@ -1,0 +1,88 @@
+/*
+	Data sourced from Specific Labs' Real-SWE 1.1. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Specific Labs.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.568,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 292000,
+		"usd": 13.95
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.512,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 388000,
+		"usd": 10.09
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.384,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": 105000,
+		"usd": 0.19
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.424,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": 40000,
+		"usd": 3.76
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.392,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": 43000,
+		"usd": 2.03
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.104,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 46000,
+		"usd": 0.08
+	},
+	{
+		"lab": "Tencent",
+		"name": "Hy",
+		"score": 0.336,
+		"series": "4",
+		"tier": "",
+		"tokens": 92000,
+		"usd": 1.13
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.264,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 415000,
+		"usd": 3.35
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.28,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 40000,
+		"usd": 2.66
+	}
+]

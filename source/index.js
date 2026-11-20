@@ -38,6 +38,7 @@ const short = {
 	"Claude Fable 5.2": `Fable 5.2`,
 	"Claude Sonnet 5.5": `Sonnet 5.5`,
 	"Claude Haiku 5.5": `Haiku 5.5`,
+	"Gemini Carbon 4": `4 Carbon`,
 	"Gemini Hydrogen 4": `4 Hydrogen`,
 	"Gemini Neon 4": `4 Neon`,
 	"Flash V4.1 1017": `V4.1 Flash`,

@@ -7,7 +7,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.491,
+		"score": 0.502,
 		"series": "5.2",
 		"tier": "Fable",
 		"tokens": 156000,
@@ -16,38 +16,38 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.223,
+		"score": 0.289,
 		"series": "5.5",
 		"tier": "Haiku",
-		"tokens": 127735,
-		"usd": 0.23
+		"tokens": 205100,
+		"usd": 0.37
 	},
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.434,
+		"score": 0.473,
 		"series": "5.5",
 		"tier": "Opus",
-		"tokens": 88053,
-		"usd": 5.18
+		"tokens": 201900,
+		"usd": 12.82
 	},
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.348,
+		"score": 0.422,
 		"series": "5.5",
 		"tier": "Sonnet",
-		"tokens": 80433,
-		"usd": 3.31
+		"tokens": 514700,
+		"usd": 19.94
 	},
 	{
 		"lab": "DeepSeek",
 		"name": "",
-		"score": 0.182,
+		"score": 0.202,
 		"series": "V4.1 1017",
 		"tier": "Flash",
-		"tokens": 57169,
-		"usd": 0.27
+		"tokens": 82200,
+		"usd": 0.38
 	},
 	{
 		"lab": "Google",
@@ -70,20 +70,20 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
-		"score": 0.243,
-		"series": "",
+		"score": 0.253,
+		"series": "1",
 		"tier": "Wonder",
-		"tokens": 32832,
-		"usd": 3.14
+		"tokens": 38700,
+		"usd": 3.79
 	},
 	{
 		"lab": "Moonshot",
 		"name": "Kimi",
-		"score": 0.173,
+		"score": 0.199,
 		"series": "K3.1",
 		"tier": "Pro",
-		"tokens": 27628,
-		"usd": 2.36
+		"tokens": 37200,
+		"usd": 3.03
 	},
 	{
 		"lab": "OpenAI",
@@ -97,11 +97,11 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.184,
+		"score": 0.227,
 		"series": "6",
 		"tier": "Luna",
-		"tokens": 50565,
-		"usd": 0.13
+		"tokens": 79700,
+		"usd": 0.17
 	},
 	{
 		"lab": "OpenAI",
@@ -115,7 +115,7 @@
 	{
 		"lab": "xAI",
 		"name": "Grok",
-		"score": 0.286,
+		"score": 0.289,
 		"series": "4.7",
 		"tier": "",
 		"tokens": 110790,
@@ -124,10 +124,10 @@
 	{
 		"lab": "Z.ai",
 		"name": "GLM",
-		"score": 0.168,
+		"score": 0.202,
 		"series": "5.3",
 		"tier": "",
-		"tokens": 73247,
-		"usd": 5.18
+		"tokens": 100700,
+		"usd": 7.52
 	},
 ]

@@ -7,7 +7,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.473,
+		"score": 0.4728,
 		"series": "5.5",
 		"tier": "Haiku",
 		"tokens": 5810000,
@@ -16,7 +16,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.951,
+		"score": 0.9506,
 		"series": "5.5",
 		"tier": "Opus",
 		"tokens": 4700000,
@@ -25,7 +25,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.831,
+		"score": 0.8306,
 		"series": "5.5",
 		"tier": "Sonnet",
 		"tokens": 18050000,
@@ -70,7 +70,7 @@
 	{
 		"lab": "xAI",
 		"name": "Grok",
-		"score": 0.577,
+		"score": 0.5772,
 		"series": "4.7",
 		"tier": "",
 		"tokens": 10870000,

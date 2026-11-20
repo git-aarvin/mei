@@ -1,5 +1,5 @@
 /*
-	Data sourced from Vals AI's Vibe Code Bench 1–100. Benchmark results are
+	Data sourced from Vals AI's Vibe Code Bench 1–100 v1.1. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data
 	and methodology are attributed to Vals AI.
 */
@@ -21,6 +21,15 @@
 		"tier": "Flash",
 		"tokens": 64820000,
 		"usd": 2.68
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.5516,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": 23060000,
+		"usd": 45.66
 	},
 	{
 		"lab": "xAI",

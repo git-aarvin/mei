@@ -1,11 +1,13 @@
 export const files = {
 	cursor: `CursorBench`,
 	frontier: `FrontierCode`,
+	swe: `FrontierSWE`,
+	atlas: `SWE-Atlas`,
 	migration: `Code Migration`,
 	informatics: `IOI`,
 	program: `ProgramBench`,
 	terminal: `Terminal-Bench`,
-	brownfield: `Vibe Code`,
+	brownfield: `Vibe Code 1–100`,
 	greenfield: `Vibe Code`,
 };
 export const families = [...new Set(Object.values(files))];
@@ -87,7 +89,7 @@ export const models = data => {
 	for (const { family, rows } of data) {
 		const scaled = {
 			score: normal(rows.map(row => row.score)),
-			usd: center(rows.map(row => Math.log10(row.usd))),
+			usd: center(rows.map(row => row.usd == null ? NaN : Math.log10(row.usd))),
 			tokens: center(rows.map(row => row.tokens == null ? NaN : Math.log10(row.tokens))),
 		};
 		rows.forEach((row, index) => {
@@ -177,7 +179,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 					start = anchor === `start` ? column : anchor === `end` ? column - width : column - width / 2,
 					shift = slide(start, width),
 					box = boxed(start + shift, base, width),
-					score = tries++ * .35 + Math.abs(shift) * .35 + penalty(box);
+					score = factor * factor * 15 + tries++ * .5 + Math.abs(shift) * .35 + penalty(box);
 				if (score < best.score) best = { score, at: [column + shift, base], anchor, box };
 			}
 		}
@@ -204,7 +206,7 @@ export const scatter = (list, metric, geometry) => {
 		stairs = front.flatMap((dot, index) => index ? [[front[index - 1][0], dot[1]], dot] : [dot]),
 		obstacles = [
 			...dots.map(dot => [[dot[0] - radius - 3, dot[1] - radius - 3, dot[0] + radius + 3, dot[1] + radius + 3], 1800]),
-			...stairs.slice(1).map((step, index) => [[Math.min(stairs[index][0], step[0]) - 2, Math.min(stairs[index][1], step[1]) - 2, Math.max(stairs[index][0], step[0]) + 2, Math.max(stairs[index][1], step[1]) + 2], 120]),
+			...stairs.slice(1).map((step, index) => [[Math.min(stairs[index][0], step[0]) - 2, Math.min(stairs[index][1], step[1]) - 2, Math.max(stairs[index][0], step[0]) + 2, Math.max(stairs[index][1], step[1]) + 2], 20]),
 		],
 		labels = place(list.map((model, index) => ({ dot: dots[index], text: model.short, lab: model.lab, score: model.score })), obstacles, geometry),
 		tag = (index, extra = ``) => `data-key="${index}" data-lab="${list[index].lab}"${extra}`;

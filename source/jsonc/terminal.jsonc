@@ -140,6 +140,15 @@
 		"usd": 349
 	},
 	{
+		"lab": "Reflection",
+		"name": "Beam",
+		"score": 0.064,
+		"series": "1.0",
+		"tier": "",
+		"tokens": 4100000000,
+		"usd": 200
+	},
+	{
 		"lab": "Tencent",
 		"name": "Hy",
 		"score": 0.379,
@@ -167,6 +176,15 @@
 		"usd": 1000
 	},
 	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.388,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 5500000000,
+		"usd": 3700
+	},
+	{
 		"lab": "Xiaomi",
 		"name": "MiMo",
 		"score": 0.161,
@@ -192,14 +210,5 @@
 		"tier": "",
 		"tokens": 8700000000,
 		"usd": 2700
-	},
-	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.388,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 5500000000,
-		"usd": 3700
 	},
 ]

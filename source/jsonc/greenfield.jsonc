@@ -155,7 +155,7 @@
 		"series": "6.1",
 		"tier": "Terra",
 		"tokens": 49210000,
-		"usd": 6.0
+		"usd": 6
 	},
 	{
 		"lab": "OpenAI",
@@ -174,6 +174,24 @@
 		"tier": "Sol",
 		"tokens": 13910000,
 		"usd": 3.23
+	},
+	{
+		"lab": "Reflection",
+		"name": "Beam",
+		"score": 0.6644,
+		"series": "1.0",
+		"tier": "",
+		"tokens": 8650000,
+		"usd": null
+	},
+	{
+		"lab": "StepFun",
+		"name": "Step",
+		"score": 0.704,
+		"series": "5 Preview",
+		"tier": "",
+		"tokens": 50260000,
+		"usd": 5.86
 	},
 	{
 		"lab": "Tencent",
@@ -212,6 +230,15 @@
 		"usd": 1.9
 	},
 	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.8617,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 15500000,
+		"usd": 15.83
+	},
+	{
 		"lab": "Xiaomi",
 		"name": "MiMo",
 		"score": 0.7896,
@@ -237,14 +264,5 @@
 		"tier": "",
 		"tokens": 39590000,
 		"usd": 12.45
-	},
-	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.8617,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 15500000,
-		"usd": 15.83
 	},
 ]

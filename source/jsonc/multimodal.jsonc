@@ -68,6 +68,15 @@
 		"usd": 0.03
 	},
 	{
+		"lab": "StepFun",
+		"name": "Step",
+		"score": 0.4083,
+		"series": "5 Preview",
+		"tier": "",
+		"tokens": 6130000,
+		"usd": 0.61
+	},
+	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.3792,
@@ -86,15 +95,6 @@
 		"usd": 0.3
 	},
 	{
-		"lab": "Xiaomi",
-		"name": "MiMo",
-		"score": 0.4125,
-		"series": "V2.6",
-		"tier": "Pro",
-		"tokens": 3840000,
-		"usd": 0.12
-	},
-	{
 		"lab": "xAI",
 		"name": "Grok",
 		"score": 0.4292,
@@ -102,5 +102,14 @@
 		"tier": "",
 		"tokens": 6730000,
 		"usd": 4.66
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.4125,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 3840000,
+		"usd": 0.12
 	},
 ]

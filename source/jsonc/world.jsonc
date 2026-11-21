@@ -77,6 +77,15 @@
 		"usd": null
 	},
 	{
+		"lab": "Reflection",
+		"name": "Beam",
+		"score": 0.033,
+		"series": "1.0",
+		"tier": "",
+		"tokens": 15000000,
+		"usd": 1.47
+	},
+	{
 		"lab": "xAI",
 		"name": "Grok",
 		"score": 0.07,
@@ -93,5 +102,5 @@
 		"tier": "",
 		"tokens": 136000000,
 		"usd": 24.8
-	}
+	},
 ]

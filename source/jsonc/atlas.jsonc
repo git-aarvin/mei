@@ -113,6 +113,15 @@
 		"usd": null
 	},
 	{
+		"lab": "Reflection",
+		"name": "Beam",
+		"score": 0.3472,
+		"series": "1.0",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	},
+	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.6189,
@@ -122,19 +131,19 @@
 		"usd": null
 	},
 	{
-		"lab": "Z.ai",
-		"name": "GLM",
-		"score": 0.581,
-		"series": "5.3",
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.621,
+		"series": "4.7",
 		"tier": "",
 		"tokens": null,
 		"usd": null
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.621,
-		"series": "4.7",
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.581,
+		"series": "5.3",
 		"tier": "",
 		"tokens": null,
 		"usd": null

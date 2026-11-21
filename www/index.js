@@ -48,57 +48,21 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 		for (const tick of ticks) tick.style.visibility = ``;
 	};
 }
-for (const chart of document.querySelectorAll(`.bars .chart`)) {
-	const references = [...chart.querySelectorAll(`.reference`)], values = [...chart.querySelectorAll(`.value`)];
-	if (!references.length) continue;
-	const ghosts = references.map(reference => ({
-		reference,
-		left: +reference.dataset.left,
-		top: +reference.dataset.top,
-		height: +reference.dataset.height,
-		radius: +reference.dataset.radius,
-		width: 0,
-		from: 0,
-		target: 0,
-	}));
-	let active, frame, start;
-	const draw = () => {
-		for (const ghost of ghosts) {
-			if (ghost.width < .05) ghost.reference.removeAttribute(`d`);
-			else ghost.reference.setAttribute(`d`, barPath(ghost.left, ghost.top, ghost.width, ghost.height, ghost.radius));
-		}
-	};
-	const step = now => {
-		const progress = Math.min(1, (now - start) / 160), eased = 1 - (1 - progress) ** 3;
-		for (const ghost of ghosts) ghost.width = ghost.from + (ghost.target - ghost.from) * eased;
-		draw();
-		frame = progress < 1 ? requestAnimationFrame(step) : 0;
-	};
-	const retarget = () => {
-		for (const ghost of ghosts) ghost.from = ghost.width;
-		start = performance.now();
-		cancelAnimationFrame(frame);
-		frame = requestAnimationFrame(step);
-	};
-	const clear = () => {
-		active = undefined;
-		chart.classList.remove(`referencing`);
-		for (const ghost of ghosts) ghost.target = 0;
-		for (const value of values) value.classList.remove(`snapped`);
-		retarget();
-	};
+for (const chart of document.querySelectorAll(`.bars .chart:not(.static)`)) {
+	const values = [...chart.querySelectorAll(`.value`)];
+	if (!values.length) continue;
+	let active;
 	chart.onpointermove = event => {
 		if (event.pointerType !== `mouse`) return;
 		const bar = event.target.closest(`.bar`);
 		if (!bar || bar.dataset.key === active) return;
 		active = bar.dataset.key;
-		const width = +bar.dataset.width;
-		chart.classList.add(`referencing`);
-		for (const ghost of ghosts) ghost.target = ghost.reference.dataset.key === active ? 0 : width;
 		for (const value of values) value.classList.toggle(`snapped`, value.dataset.key === active);
-		retarget();
 	};
-	chart.onpointerleave = clear;
+	chart.onpointerleave = () => {
+		active = undefined;
+		for (const value of values) value.classList.remove(`snapped`);
+	};
 }
 for (const table of document.querySelectorAll(`table`)) {
 	const body = table.tBodies[0], meters = [...table.querySelectorAll(`.meter`)];
@@ -197,7 +161,9 @@ if (compare) {
 			svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
 			nearest.classList.add(`snapped`);
 			svg.classList.add(`snapping`);
-			svg.dataset.lab = nearest.parentNode.dataset.lab;
+			const shape = nearest.parentNode;
+			if (shape.dataset.slot !== undefined) svg.dataset.slot = shape.dataset.slot;
+			else svg.dataset.lab = shape.dataset.lab;
 			for (const label of svg.querySelectorAll(`.axis`)) label.classList.toggle(`active`, label.dataset.axis === nearest.dataset.axis);
 		};
 		svg.onpointerleave = () => {
@@ -205,6 +171,7 @@ if (compare) {
 			svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
 			svg.querySelector(`.axis.active`)?.classList.remove(`active`);
 			delete svg.dataset.lab;
+			delete svg.dataset.slot;
 		};
 	}
 }

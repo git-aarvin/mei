@@ -28,8 +28,7 @@ const [svg, html, pages, labs] = await Promise.all([charts(list), page(list), mo
 await Promise.all([
 	mkdir(new URL(`bar/`, root), { recursive: true }),
 	mkdir(new URL(`scatter/`, root), { recursive: true }),
-	mkdir(new URL(`models/`, root), { recursive: true }),
-	mkdir(new URL(`labs/`, root), { recursive: true }),
+	...[...pages, ...labs].map(item => mkdir(new URL(`.`, new URL(item.path, root)), { recursive: true })),
 ]);
 await Promise.all([
 	...svg.map(chart => write(chart.path, chart.text)),

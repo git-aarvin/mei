@@ -138,16 +138,23 @@ export const models = data => {
 	const names = [...owners.keys()].sort(),
 		fit = field => effects(families.map(family => names.map(name => cells.has(`${family}\0${name}`) ? mean(cells.get(`${family}\0${name}`)[field]) : NaN))),
 		score = fit(`score`), usd = fit(`usd`), tokens = fit(`tokens`), deviation = spread(score);
-	return names.map((name, index) => ({
+	return names.map((name, index) => {
+		const lab = owners.get(name);
+		const shortName = tidy((short[name] ?? name).replace(/\b(?:Muse|1017)\b/gi, ``));
+		const modelSlug = shortName.toLowerCase().replace(/[^a-z0-9.]+/g, `-`).replace(/^-|-$/g, ``);
+		return {
 		name,
 		slug: slug(name),
-		lab: owners.get(name),
-		short: tidy((short[name] ?? name).replace(/\b(?:Muse|1017)\b/gi, ``)),
+		modelSlug,
+		labSlug: slug(lab),
+		path: `${slug(lab)}/${modelSlug}`,
+		lab,
+		short: shortName,
 		score: 50 + 10 * score[index] / deviation,
 		cost: 10 ** usd[index],
 		tokens: 10 ** tokens[index],
 		grades: Object.fromEntries(families.filter(family => cells.has(`${family}\0${name}`)).map(family => [family, mean(cells.get(`${family}\0${name}`).score)])),
-	})).sort((first, second) => second.score - first.score).map((model, index) => ({ ...model, rank: index + 1 }));
+	}; }).sort((first, second) => second.score - first.score).map((model, index) => ({ ...model, rank: index + 1 }));
 };
 export const details = (data, list) => {
 	const byModel = new Map(list.map(model => [model.name, []]));
@@ -293,8 +300,8 @@ export const scatter = (list, metric, geometry) => {
 			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${value}×</text>`),
 			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
 			...labels.map((label, index) => label.leader ? `<line class="leader" ${tag(index)} stroke="${color(list[index].lab)}" x1="${round(label.dot[0])}" y1="${round(label.dot[1])}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}"/>` : ``),
-			...list.map((model, index) => { const el = `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`; return links ? `<a href="models/${model.slug}.html" data-model-link="${model.slug}" aria-label="${encode(model.short)}" tabindex="-1">${el}</a>` : el; }),
-			...labels.map((label, index) => { const el = `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`; return links ? `<a href="models/${list[index].slug}.html" data-model-link="${list[index].slug}" tabindex="-1">${el}</a>` : el; }),
+			...list.map((model, index) => { const el = `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`; return links ? `<a href="./${model.path}" data-model-link="${model.slug}" aria-label="${encode(model.short)}" tabindex="-1">${el}</a>` : el; }),
+			...labels.map((label, index) => { const el = `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`; return links ? `<a href="./${list[index].path}" data-model-link="${list[index].slug}" tabindex="-1">${el}</a>` : el; }),
 		].join(``),
 	};
 };
@@ -329,7 +336,7 @@ export const bar = (list, metric, geometry) => {
 			...rows.map((model, index) => {
 				const y = center(index), width = Math.max(2, horizontal(model[field]) - left), end = left + width;
 				const title = tooltip ? `<title>${encode(model.short)}: ${readout(model[field])}</title>` : ``;
-				const lbl = `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text>`, barEl = `<path class="bar" ${tag(index, ` fill="${color(model.lab)}" data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path>`; return (links ? `<a href="models/${model.slug}.html" data-model-link="${model.slug}" tabindex="-1">${lbl}${barEl}</a>` : `${lbl}${barEl}`) + `<text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
+				const lbl = `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text>`, barEl = `<path class="bar" ${tag(index, ` fill="${color(model.lab)}" data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path>`; return (links ? `<a href="./${model.path}" data-model-link="${model.slug}" tabindex="-1">${lbl}${barEl}</a>` : `${lbl}${barEl}`) + `<text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
 			}),
 			...(reference ? rows.map((item, index) => {
 				const y = center(index);

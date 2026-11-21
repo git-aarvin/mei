@@ -1,6 +1,6 @@
 import { bar, color, details, encode, families, fill, ranked, read, scatter, shade, sites, slug, times } from "./index.js";
 const geometry = { left: 48, right: 664, top: 26, bottom: 384, radius: 4.5, font: 12, pad: 0, gap: 7, drop: 16, links: true };
-const barGeometry = { left: 104, right: 640, top: 26, bottom: 384, radius: 2, font: 12, pad: 0, gap: 8, drop: 16, reference: true, tooltip: false, links: true };
+const barGeometry = { left: 104, right: 640, top: 26, bottom: 384, radius: 2, font: 12, pad: 0, gap: 8, drop: 16, reference: false, tooltip: false, links: true };
 const round = value => +value.toFixed(1);
 const percent = value => Math.max(0, Math.min(100, value));
 const formatUsd = value => value == null ? `—` : value < 10 ? `$${+value.toFixed(2)}` : `$${+value.toFixed(1)}`;
@@ -38,7 +38,7 @@ export const page = async list => {
 		const coverage = Object.values(model.grades).filter(Number.isFinite).length;
 		return coverage < 5 ? warn : coverage > 11 ? verified : ``;
 	};
-	const row = model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="models/${model.slug}.html" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)} <a class="lab lab-link" href="labs/${slug(model.lab)}.html" data-lab-link="${slug(model.lab)}">${encode(model.lab)}</a></td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${model.lab}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`;
+	const row = model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="./${model.path}" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)} <a class="lab lab-link" href="./${model.labSlug}" data-lab-link="${model.labSlug}">${encode(model.lab)}</a></td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${model.lab}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`;
 	const pick = (model, slot) => `<span class="pick" data-name="${encode(model.name)}"${slot === undefined ? `` : ` data-slot="${slot}"`}><span class="swatch"></span><button type="button" aria-label="Remove ${encode(model.short)}">${encode(model.short)}</button></span>`;
 	const option = model => `<option value="${encode(model.name)}" data-lab="${model.lab}"${chosen.includes(model) ? ` disabled` : ``}><span class="bullet"></span>${encode(model.short)}</option>`;
 	const shape = (model, slot) => {
@@ -126,7 +126,7 @@ export const modelPages = (list, data) => {
 			if (!rows.length) return `<p class="empty">No ${metric} data reported for this model.</p>`;
 			const vals = rows.map(r => r[field]),
 				minV = Math.min(...vals, 0.5), maxV = Math.max(...vals, 2),
-				floor = Math.log10(minV * .8), ceil = Math.log10(maxV * 1.25),
+				floor = Math.log10(minV * .65), ceil = Math.log10(maxV * 1.25),
 				eLeft = 176, eRight = 640, eTop = 20, eHeight = Math.max(120, rows.length * 24), eBottom = eTop + eHeight,
 				eStep = eHeight / rows.length,
 				ex = v => eLeft + (Math.log10(v) - floor) / (ceil - floor) * (eRight - eLeft),
@@ -135,8 +135,8 @@ export const modelPages = (list, data) => {
 				`<path class="axis" d="M${eLeft} ${eTop}V${eBottom}H${eRight}"/>`,
 				...ticks.map(t => `<line class="grid${t === 1 ? ` ref-line` : ``}" x1="${round(ex(t))}" y1="${eTop}" x2="${round(ex(t))}" y2="${eBottom}"/><text class="tick" x="${round(ex(t))}" y="${eBottom + 16}" text-anchor="middle">${t}×</text>`),
 				...rows.map((item, i) => {
-					const y = eTop + eStep * (i + .5), x1 = ex(1), x2 = ex(item[field]);
-					return `<text class="label" x="${eLeft - 8}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(item.family)}</text><line class="stem" data-lab="${model.lab}" x1="${round(x1)}" y1="${round(y)}" x2="${round(x2)}" y2="${round(y)}"/><circle class="dot" data-lab="${model.lab}" cx="${round(x2)}" cy="${round(y)}" r="4"/><text class="value visible" x="${round(Math.max(x1, x2) + 8)}" y="${round(y)}" dominant-baseline="central">${times(item[field])}</text>`;
+					const y = eTop + eStep * (i + .5), x1 = ex(1), x2 = ex(item[field]), leftSide = x2 < x1 && x2 - eLeft >= 48;
+					return `<text class="label" x="${eLeft - 8}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(item.family)}</text><line class="stem" data-lab="${model.lab}" x1="${round(x1)}" y1="${round(y)}" x2="${round(x2)}" y2="${round(y)}"/><circle class="dot" data-lab="${model.lab}" cx="${round(x2)}" cy="${round(y)}" r="4.5"/><text class="value visible" x="${round(leftSide ? x2 - 8 : x2 + 8)}" y="${round(y)}"${leftSide ? ` text-anchor="end"` : ``} dominant-baseline="central">${times(item[field])}</text>`;
 				}),
 			].join(``)}</svg>`;
 		};
@@ -152,15 +152,15 @@ export const modelPages = (list, data) => {
 	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 	<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
 	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23f0a9b8'/%3E%3Cstop offset='1' stop-color='%237d9fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
-	<link rel="stylesheet" href="../index.css">
-	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../index.html","../labs/*.html","*.html"]},"eagerness":"moderate"}]}</script>
+	<link rel="stylesheet" href="../../index.css">
+	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../../","../","../*"]},"eagerness":"moderate"}]}</script>
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="39ba71d6-92d6-4c6a-a7eb-06807a052eaa"></script>
 </head>
 <body>
 	<main>
 		<nav class="crumb" aria-label="Breadcrumb">
-			<a href="../index.html">&larr; Back</a>
-			<a href="../labs/${slug(model.lab)}.html" data-lab-link="${slug(model.lab)}">${encode(model.lab)} &rarr;</a>
+			<a href="../../">&larr; Back</a>
+			<a href="../" data-lab-link="${model.labSlug}">${encode(model.lab)} &rarr;</a>
 		</nav>
 		<header class="model-header">
 			<div class="title-row">
@@ -186,9 +186,7 @@ export const modelPages = (list, data) => {
 			</svg>
 		</section>
 		<section class="model-viz scatter" aria-label="Relative cost or tokens">
-			<p class="title">Relative
-				<input class="reader" type="radio" name="metric" id="cost" checked><label for="cost">cost</label><span aria-hidden="true"> or </span><input class="reader" type="radio" name="metric" id="tokens"><label for="tokens">tokens</label>:
-			</p>
+			<p class="title">Relative <input class="reader" type="radio" name="metric" id="cost" checked><label for="cost">cost</label><span aria-hidden="true"> or </span><input class="reader" type="radio" name="metric" id="tokens"><label for="tokens">tokens</label>:</p>
 			${efficiencyChart(`cost`)}
 			${efficiencyChart(`tokens`)}
 		</section>
@@ -211,11 +209,11 @@ export const modelPages = (list, data) => {
 			<p>Data from <a href="https://cognition.ai">Cognition</a>, <a href="https://cursor.com">Cursor</a>, the <a href="https://laude.org">Laude Institute</a>, <a href="https://www.mercor.com">Mercor</a>, <a href="https://www.proximal.ai">Proximal</a>, <a href="https://labs.ramp.com">Ramp Labs</a>, <a href="https://labs.scale.com">Scale Labs</a>, <a href="https://withspecific.com">Specific Labs</a> and <a href="https://vals.ai">Vals AI</a>. Source on <a href="https://github.com/git-aarvin/mei" target="_blank">GitHub</a>.</p>
 		</footer>
 	</main>
-	<script src="../index.js"></script>
+	<script src="../../index.js"></script>
 </body>
 </html>
 `;
-		return { path: `models/${model.slug}.html`, text: html };
+		return { path: `${model.path}/index.html`, text: html };
 	});
 };
 
@@ -286,8 +284,8 @@ export const labPages = (list, data) => {
 			const dot = locate(model);
 			return `<circle class="dot-bg" cx="${round(dot[0])}" cy="${round(dot[1])}" r="3.5"/>`;
 		});
-		const fgDots = placed.map(({ model, dot }, index) => `<a href="../models/${model.slug}.html" data-model-link="${model.slug}" aria-label="${encode(model.short)}" tabindex="-1"><circle class="dot" data-key="${index}" data-lab="${encode(lab)}" data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(lab)}" cx="${round(dot[0])}" cy="${round(dot[1])}" r="${radius}"/></a>`);
-		const fgLabels = placed.map(({ model, at: pos, anchor: anch }, index) => `<a href="../models/${model.slug}.html" data-model-link="${model.slug}" tabindex="-1"><text class="label" data-key="${index}" data-lab="${encode(lab)}" fill="${shade(color(lab), .7)}" x="${round(pos[0])}" y="${round(pos[1])}" text-anchor="${anch}">${encode(model.short)}</text></a>`);
+		const fgDots = placed.map(({ model, dot }, index) => `<a href="./${model.modelSlug}" data-model-link="${model.slug}" aria-label="${encode(model.short)}" tabindex="-1"><circle class="dot" data-key="${index}" data-lab="${encode(lab)}" data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(lab)}" cx="${round(dot[0])}" cy="${round(dot[1])}" r="${radius}"/></a>`);
+		const fgLabels = placed.map(({ model, at: pos, anchor: anch }, index) => `<a href="./${model.modelSlug}" data-model-link="${model.slug}" tabindex="-1"><text class="label" data-key="${index}" data-lab="${encode(lab)}" fill="${shade(color(lab), .7)}" x="${round(pos[0])}" y="${round(pos[1])}" text-anchor="${anch}">${encode(model.short)}</text></a>`);
 		return [
 			...rows.map(value => `<line class="grid" x1="${left - pad}" y1="${round(vertical(value))}" x2="${right}" y2="${round(vertical(value))}"/>`),
 			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom + pad}"/>`),
@@ -306,7 +304,7 @@ export const labPages = (list, data) => {
 		const best = labModels[0];
 		const cheapest = [...labModels].sort((a, b) => a.cost - b.cost)[0];
 		const covered = families.filter(family => labModels.some(model => Number.isFinite(model.grades[family]))).length;
-		const modelRows = labModels.map(model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="../models/${model.slug}.html" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)}</td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${encode(lab)}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`).join(``);
+		const modelRows = labModels.map(model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="./${model.modelSlug}" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)}</td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${encode(lab)}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`).join(``);
 		const radarShapes = labModels.map((model, index) => {
 			const marks = families.flatMap((family, axis) => Number.isFinite(model.grades[family]) ? [{ axis, value: percent(50 + 18 * model.grades[family]) }] : []);
 			const attr = labModels.length > 1 ? `data-slot="${index % 6}"` : `data-lab="${encode(lab)}"`;
@@ -323,7 +321,10 @@ export const labPages = (list, data) => {
 				}),
 			].join(``)}</g>`;
 		}).join(``);
-		const legend = labModels.length > 1 ? `<div class="lab-legend">${labModels.map((model, index) => `<a href="../models/${model.slug}.html" data-model-link="${model.slug}" data-slot="${index % 6}"><span class="swatch"></span>${encode(model.short)}</a>`).join(``)}</div>` : ``;
+		const renderPick = (model, index) => `<span class="pick"${labModels.length > 1 ? ` data-slot="${index % 6}"` : ` data-lab="${encode(lab)}"`}><span class="swatch"></span><a class="model-link" href="./${model.modelSlug}" data-model-link="${model.slug}">${encode(model.short)}</a></span>`;
+		const legend = labModels.length > 1
+			? `<p class="picks lab-picks"><span class="lead">Comparing</span> <span class="chosen">${labModels.slice(0, -1).map(renderPick).join(``)}</span> <span class="and">and</span> ${renderPick(labModels.at(-1), labModels.length - 1)}.</p>`
+			: `<p class="picks lab-picks"><span class="lead">Comparing</span> <span class="chosen">${renderPick(labModels[0], 0)}</span>.</p>`;
 		const benchRows = families.flatMap(family => {
 			const hits = labModels.flatMap(model => {
 				const entry = (byModel.get(model.name) ?? []).find(item => item.family === family);
@@ -332,7 +333,7 @@ export const labPages = (list, data) => {
 			if (!hits.length) return [];
 			hits.sort((a, b) => b.normScore - a.normScore);
 			return [hits[0]];
-		}).sort((a, b) => b.normScore - a.normScore).map(item => `<tr><td><a href="${item.site}" target="_blank" rel="noopener">${encode(item.family)}</a></td><td><a class="model-link" href="../models/${item.model.slug}.html" data-model-link="${item.model.slug}">${encode(item.model.short)}</a></td><td class="num" data-value="${item.normScore}">${item.normScore.toFixed(1)}</td><td class="num" data-value="${item.usd ?? 1e9}">${formatUsd(item.usd)}</td><td class="num" data-value="${item.tokens ?? 1e12}">${formatTokens(item.tokens)}</td></tr>`).join(``);
+		}).sort((a, b) => b.normScore - a.normScore).map(item => `<tr><td><a href="${item.site}" target="_blank" rel="noopener">${encode(item.family)}</a> <a class="lab lab-link" href="./${item.model.modelSlug}" data-model-link="${item.model.slug}">${encode(item.model.short)}</a></td><td class="num" data-value="${item.normScore}">${item.normScore.toFixed(1)}</td><td class="num" data-value="${item.usd ?? 1e9}">${formatUsd(item.usd)}</td><td class="num" data-value="${item.tokens ?? 1e12}">${formatTokens(item.tokens)}</td></tr>`).join(``);
 		const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -345,13 +346,13 @@ export const labPages = (list, data) => {
 	<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
 	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23f0a9b8'/%3E%3Cstop offset='1' stop-color='%237d9fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
 	<link rel="stylesheet" href="../index.css">
-	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../index.html","../models/*.html","*.html"]},"eagerness":"moderate"}]}</script>
+	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../","./*"]},"eagerness":"moderate"}]}</script>
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="39ba71d6-92d6-4c6a-a7eb-06807a052eaa"></script>
 </head>
 <body>
 	<main>
 		<nav class="crumb" aria-label="Breadcrumb">
-			<a href="../index.html">&larr; Back</a>
+			<a href="../">&larr; Back</a>
 		</nav>
 		<header class="model-header">
 			<div class="title-row">
@@ -360,8 +361,8 @@ export const labPages = (list, data) => {
 			</div>
 			<div class="kpis">
 				<div class="kpi"><span class="kpi-label">Best</span><span class="kpi-value">${best.score.toFixed(1)}</span></div>
-				<div class="kpi"><span class="kpi-label">Models</span><span class="kpi-value">${labModels.length}</span></div>
 				<div class="kpi"><span class="kpi-label">Cheapest</span><span class="kpi-value">${times(cheapest.cost)}</span></div>
+				<div class="kpi"><span class="kpi-label">Models</span><span class="kpi-value">${labModels.length}</span></div>
 				<div class="kpi"><span class="kpi-label">Coverage</span><span class="kpi-value">${covered}/${families.length}</span></div>
 			</div>
 		</header>
@@ -417,7 +418,6 @@ export const labPages = (list, data) => {
 				<thead>
 					<tr>
 						<th scope="col" aria-sort="none"><button type="button">Benchmark</button></th>
-						<th scope="col" aria-sort="none"><button type="button">Best Model</button></th>
 						<th class="num" scope="col" aria-sort="descending" data-first="descending"><button type="button">Index</button></th>
 						<th class="num" scope="col" aria-sort="none"><button type="button">Cost</button></th>
 						<th class="num" scope="col" aria-sort="none"><button type="button">Tokens</button></th>
@@ -435,6 +435,6 @@ export const labPages = (list, data) => {
 </body>
 </html>
 `;
-		return { path: `labs/${labSlug}.html`, text: html };
+		return { path: `${labSlug}/index.html`, text: html };
 	});
 };

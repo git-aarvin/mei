@@ -195,7 +195,7 @@ export const details = (data, list) => {
 const place = (items, obstacles, { left, right, top, bottom, radius, font }) => {
 	const taken = [], placed = [],
 		hit = (first, second, pad) => first[0] < second[2] + pad && first[2] + pad > second[0] && first[1] < second[3] + pad && first[3] + pad > second[1],
-		wide = text => text.length * font * .68,
+		wide = text => text.length * font * .62,
 		slide = (start, width) => Math.max(left + 6 - start, Math.min(0, right - 6 - start - width)),
 		boxed = (start, base, width) => [start, base - font * .78, start + width, base + font * .24],
 		penalty = box => {

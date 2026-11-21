@@ -51,6 +51,7 @@ export const palette = {
 	Mistral: `#d46b27`,
 	"Thinking Machines": `#4f8f58`,
 	MiniMax: `#9e58b5`,
+	StepFun: `#537d90`,
 };
 const typical = (models, field) => field === `score` ? Math.max(...models.map(model => model.score)) : Math.min(...models.map(model => model[field]));
 export const ranked = (list, field = `score`) => {

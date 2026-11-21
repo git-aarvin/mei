@@ -41,15 +41,6 @@
 		"usd": 22.62
 	},
 	{
-		"lab": "Meta",
-		"name": "Muse",
-		"score": 0.005,
-		"series": "1",
-		"tier": "Wonder Full",
-		"tokens": null,
-		"usd": 28.65
-	},
-	{
 		"lab": "OpenAI",
 		"name": "GPT",
 		"score": 0.005,

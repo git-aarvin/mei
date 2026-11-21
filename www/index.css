@@ -789,6 +789,10 @@ tr.pareto td { background: var(--pareto-row); }
 	opacity: 0.7;
 }
 .chart .value.visible { opacity: 1; }
+.chart .value {
+	fill: var(--muted);
+	font-size: 11px;
+}
 .chart .muted,
 .muted { fill: var(--muted); color: var(--muted); }
 .empty {
@@ -806,8 +810,6 @@ tr.pareto td { background: var(--pareto-row); }
 }
 .pager a { text-decoration: none; }
 .pager a:hover { color: var(--ink); }
-
-/* Variable rounding: sharp precision for tabular data, KPI values, and chart readouts */
 th,
 td.rank,
 td.num,

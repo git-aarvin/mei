@@ -1,4 +1,4 @@
-import { bar, details, encode, families, fill, read, scatter, sites, times } from "./index.js";
+import { bar, color, details, encode, families, fill, ranked, read, scatter, shade, sites, slug, times } from "./index.js";
 const geometry = { left: 48, right: 664, top: 26, bottom: 384, radius: 4.5, font: 12, pad: 0, gap: 7, drop: 16, links: true };
 const barGeometry = { left: 104, right: 640, top: 26, bottom: 384, radius: 2, font: 12, pad: 0, gap: 8, drop: 16, reference: true, tooltip: false, links: true };
 const round = value => +value.toFixed(1);
@@ -38,7 +38,7 @@ export const page = async list => {
 		const coverage = Object.values(model.grades).filter(Number.isFinite).length;
 		return coverage < 5 ? warn : coverage > 11 ? verified : ``;
 	};
-	const row = model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="models/${model.slug}.html" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)} <span class="lab">${model.lab}</span></td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${model.lab}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`;
+	const row = model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="models/${model.slug}.html" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)} <a class="lab lab-link" href="labs/${slug(model.lab)}.html" data-lab-link="${slug(model.lab)}">${encode(model.lab)}</a></td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${model.lab}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`;
 	const pick = (model, slot) => `<span class="pick" data-name="${encode(model.name)}"${slot === undefined ? `` : ` data-slot="${slot}"`}><span class="swatch"></span><button type="button" aria-label="Remove ${encode(model.short)}">${encode(model.short)}</button></span>`;
 	const option = model => `<option value="${encode(model.name)}" data-lab="${model.lab}"${chosen.includes(model) ? ` disabled` : ``}><span class="bullet"></span>${encode(model.short)}</option>`;
 	const shape = (model, slot) => {
@@ -153,13 +153,14 @@ export const modelPages = (list, data) => {
 	<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
 	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23f0a9b8'/%3E%3Cstop offset='1' stop-color='%237d9fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
 	<link rel="stylesheet" href="../index.css">
-	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../index.html","*.html"]},"eagerness":"moderate"}]}</script>
+	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../index.html","../labs/*.html","*.html"]},"eagerness":"moderate"}]}</script>
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="39ba71d6-92d6-4c6a-a7eb-06807a052eaa"></script>
 </head>
 <body>
 	<main>
 		<nav class="crumb" aria-label="Breadcrumb">
 			<a href="../index.html">&larr; Back</a>
+			<a href="../labs/${slug(model.lab)}.html" data-lab-link="${slug(model.lab)}">${encode(model.lab)} &rarr;</a>
 		</nav>
 		<header class="model-header">
 			<div class="title-row">
@@ -215,5 +216,225 @@ export const modelPages = (list, data) => {
 </html>
 `;
 		return { path: `models/${model.slug}.html`, text: html };
+	});
+};
+
+export const labPages = (list, data) => {
+	const labs = ranked(list);
+	const byModel = details(data, list);
+	const middle = [340, 264], reach = 174, count = families.length;
+	const angle = index => -Math.PI / 2 + index * 2 * Math.PI / count;
+	const polar = (index, radius) => [middle[0] + Math.cos(angle(index)) * radius, middle[1] + Math.sin(angle(index)) * radius];
+	const at = (index, value) => polar(index, reach * value / 100);
+	const anchor = (index, near, far) => Math.cos(angle(index)) > .25 ? near : Math.cos(angle(index)) < -.25 ? far : `middle`;
+	const radarFrame = [
+		...[20, 40, 60, 80, 100].map(value => `<polygon class="ring" points="${families.map((family, index) => at(index, value).map(round)).join(` `)}"/>`),
+		...families.map((family, index) => `<line class="spoke" x1="${middle[0]}" y1="${middle[1]}" x2="${at(index, 100).map(round)[0]}" y2="${at(index, 100).map(round)[1]}"/>`),
+		...[25, 50, 75, 100].map(value => `<text class="scale" x="${round(at(0, value)[0] + 5)}" y="${round(at(0, value)[1] + 3)}">${value}</text>`),
+		...families.map((family, index) => `<a href="${sites[family]}" target="_blank" rel="noopener"><text class="axis" data-axis="${index}" x="${round(polar(index, reach + 24)[0])}" y="${round(polar(index, reach + 24)[1] + 4)}" text-anchor="${anchor(index, `start`, `end`)}">${family}</text></a>`),
+	].join(``);
+	const pareto = new Set(list.filter(model => !list.some(other => other.cost <= model.cost && other.score >= model.score && (other.cost < model.cost || other.score > model.score))).map(model => model.name));
+	const warn = `<span class="warn" tabindex="0" aria-label="Rough estimate"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><span class="tip" role="tooltip">Rough estimate</span></span>`;
+	const verified = `<span class="badge" tabindex="0" aria-label="Confident score"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg><span class="tip" role="tooltip">Confident score</span></span>`;
+	const icons = model => {
+		const coverage = Object.values(model.grades).filter(Number.isFinite).length;
+		return coverage < 5 ? warn : coverage > 11 ? verified : ``;
+	};
+	const labScatter = (lab, metric) => {
+		const { left, right, top, bottom, radius, pad, gap, drop, font } = geometry;
+		const values = list.map(model => model[metric]), scores = list.map(model => model.score);
+		const least = Math.log10(Math.min(...values) * .9), most = Math.log10(Math.max(...values) * 1.1);
+		const floor = Math.floor(Math.min(...scores) / 10) * 10, ceiling = Math.ceil(Math.max(...scores) / 10) * 10;
+		const horizontal = value => left + (most - Math.log10(value)) / (most - least) * (right - left);
+		const vertical = value => bottom - (value - floor) / (ceiling - floor) * (bottom - top);
+		const locate = model => [horizontal(model[metric]), vertical(model.score)];
+		const upper = Math.floor(Math.log2(10 ** most)), lower = Math.ceil(Math.log2(10 ** least));
+		const powers = Array.from({ length: Math.max(0, upper - lower + 1) }, (item, index) => 2 ** (upper - index));
+		const columns = powers.length % 2 ? powers.filter((power, index) => index % 2 === 0) : powers;
+		const rows = Array.from({ length: (ceiling - floor) / 10 + 1 }, (item, index) => floor + index * 10);
+		const dots = list.map(locate);
+		const front = list.filter(model => !list.some(other => other[metric] <= model[metric] && other.score >= model.score && (other[metric] < model[metric] || other.score > model.score))).sort((first, second) => second[metric] - first[metric]).map(locate);
+		const stairs = front.flatMap((dot, index) => index ? [[front[index - 1][0], dot[1]], dot] : [dot]);
+		const hit = (a, b, p) => a[0] < b[2] + p && a[2] + p > b[0] && a[1] < b[3] + p && a[3] + p > b[1];
+		const taken = [];
+		const dotBoxes = dots.map(dot => [dot[0] - radius - 3, dot[1] - radius - 3, dot[0] + radius + 3, dot[1] + radius + 3]);
+		const labModels = list.filter(model => model.lab === lab);
+		const placed = labModels.map(model => {
+			const dot = locate(model), width = model.short.length * font * .68;
+			let best = { score: Infinity, at: [dot[0] + radius + 8, dot[1] + font * .34], anchor: `start`, box: [0, 0, 0, 0] };
+			for (const factor of [1, 1.7, 2.5, 3.5]) {
+				const d = (radius + 8) * factor, diag = d * .78, level = font * .34, below = font * .6;
+				for (const [dx, dy, anch] of [
+					[d, level, `start`], [-d, level, `end`], [0, -d - 3, `middle`], [0, d + font * .78, `middle`],
+					[diag, -diag, `start`], [diag, diag + below, `start`], [-diag, -diag, `end`], [-diag, diag + below, `end`],
+				]) {
+					const col = dot[0] + dx, base = dot[1] + dy;
+					const start = anch === `start` ? col : anch === `end` ? col - width : col - width / 2;
+					const shift = Math.max(left + 6 - start, Math.min(0, right - 6 - start - width));
+					const box = [start + shift, base - font * .78, start + shift + width, base + font * .24];
+					let score = factor * factor * 15 + Math.abs(shift) * .35;
+					if (box[1] < top - 20 || box[3] > bottom - 4) score += 4000;
+					for (const ob of dotBoxes) if (hit(box, ob, 2)) score += 1800;
+					for (const prev of taken) if (hit(box, prev, 5)) score += 1600;
+					if (score < best.score) best = { score, at: [col + shift, base], anchor: anch, box };
+				}
+			}
+			taken.push(best.box);
+			return { model, dot, ...best };
+		});
+		const bgDots = list.filter(model => model.lab !== lab).map(model => {
+			const dot = locate(model);
+			return `<circle class="dot-bg" cx="${round(dot[0])}" cy="${round(dot[1])}" r="3.5"/>`;
+		});
+		const fgDots = placed.map(({ model, dot }, index) => `<a href="../models/${model.slug}.html" data-model-link="${model.slug}" aria-label="${encode(model.short)}" tabindex="-1"><circle class="dot" data-key="${index}" data-lab="${encode(lab)}" data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(lab)}" cx="${round(dot[0])}" cy="${round(dot[1])}" r="${radius}"/></a>`);
+		const fgLabels = placed.map(({ model, at: pos, anchor: anch }, index) => `<a href="../models/${model.slug}.html" data-model-link="${model.slug}" tabindex="-1"><text class="label" data-key="${index}" data-lab="${encode(lab)}" fill="${shade(color(lab), .7)}" x="${round(pos[0])}" y="${round(pos[1])}" text-anchor="${anch}">${encode(model.short)}</text></a>`);
+		return [
+			...rows.map(value => `<line class="grid" x1="${left - pad}" y1="${round(vertical(value))}" x2="${right}" y2="${round(vertical(value))}"/>`),
+			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom + pad}"/>`),
+			...rows.map(value => `<text class="tick" x="${left - gap}" y="${round(vertical(value))}" text-anchor="end" dominant-baseline="central">${value}</text>`),
+			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${value}×</text>`),
+			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
+			...bgDots,
+			...fgDots,
+			...fgLabels,
+		].join(``);
+	};
+	return labs.map((lab, labIndex) => {
+		const labSlug = slug(lab);
+		const labRank = labIndex + 1;
+		const labModels = list.filter(model => model.lab === lab);
+		const best = labModels[0];
+		const cheapest = [...labModels].sort((a, b) => a.cost - b.cost)[0];
+		const covered = families.filter(family => labModels.some(model => Number.isFinite(model.grades[family]))).length;
+		const modelRows = labModels.map(model => `<tr${pareto.has(model.name) ? ` class="pareto"` : ``}><td class="rank" data-value="${model.rank}">${model.rank}</td><td class="model" data-value="${encode(model.short)}"><a class="model-link" href="../models/${model.slug}.html" data-model-link="${model.slug}">${encode(model.short)}</a>${icons(model)}</td><td class="bar" data-value="${round(percent(model.score))}"><span class="meter" aria-hidden="true"><span class="fill" data-lab="${encode(lab)}" style="width:${round(percent(model.score))}%"></span><span class="ghost"></span></span></td><td class="num" data-value="${model.score}">${model.score.toFixed(1)}</td><td class="num" data-value="${model.cost}">${times(model.cost)}</td><td class="num" data-value="${model.tokens}">${times(model.tokens)}</td></tr>`).join(``);
+		const radarShapes = labModels.map((model, index) => {
+			const marks = families.flatMap((family, axis) => Number.isFinite(model.grades[family]) ? [{ axis, value: percent(50 + 18 * model.grades[family]) }] : []);
+			const attr = labModels.length > 1 ? `data-slot="${index % 6}"` : `data-lab="${encode(lab)}"`;
+			return `<g class="shape" ${attr}>${[
+				marks.length > 2 ? `<polygon class="area" points="${marks.map(mark => at(mark.axis, mark.value).map(round)).join(` `)}"/>` : ``,
+				...marks.map((mark, i) => {
+					if (marks.length < 2 || marks.length === 2 && i === 1) return ``;
+					const nxt = marks[(i + 1) % marks.length], start = at(mark.axis, mark.value).map(round), end = at(nxt.axis, nxt.value).map(round);
+					return `<line class="${(nxt.axis - mark.axis + count) % count > 1 ? `line gap` : `line`}" x1="${start[0]}" y1="${start[1]}" x2="${end[0]}" y2="${end[1]}"/>`;
+				}),
+				...marks.map(mark => {
+					const spot = at(mark.axis, mark.value).map(round), label = polar(mark.axis, Math.max(0, reach * mark.value / 100 - 17)).map(round);
+					return `<g class="point" data-axis="${mark.axis}"><circle class="vertex" cx="${spot[0]}" cy="${spot[1]}" r="3.5"/><text class="value" x="${label[0]}" y="${round(label[1] + 4)}" text-anchor="${anchor(mark.axis, `end`, `start`)}">${mark.value.toFixed(1)}</text></g>`;
+				}),
+			].join(``)}</g>`;
+		}).join(``);
+		const legend = labModels.length > 1 ? `<div class="lab-legend">${labModels.map((model, index) => `<a href="../models/${model.slug}.html" data-model-link="${model.slug}" data-slot="${index % 6}"><span class="swatch"></span>${encode(model.short)}</a>`).join(``)}</div>` : ``;
+		const benchRows = families.flatMap(family => {
+			const hits = labModels.flatMap(model => {
+				const entry = (byModel.get(model.name) ?? []).find(item => item.family === family);
+				return entry ? [{ model, ...entry }] : [];
+			});
+			if (!hits.length) return [];
+			hits.sort((a, b) => b.normScore - a.normScore);
+			return [hits[0]];
+		}).sort((a, b) => b.normScore - a.normScore).map(item => `<tr><td><a href="${item.site}" target="_blank" rel="noopener">${encode(item.family)}</a></td><td><a class="model-link" href="../models/${item.model.slug}.html" data-model-link="${item.model.slug}">${encode(item.model.short)}</a></td><td class="num" data-value="${item.normScore}">${item.normScore.toFixed(1)}</td><td class="num" data-value="${item.usd ?? 1e9}">${formatUsd(item.usd)}</td><td class="num" data-value="${item.tokens ?? 1e12}">${formatTokens(item.tokens)}</td></tr>`).join(``);
+		const html = `<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>${encode(lab)} — Models Engineering Index</title>
+	<meta name="description" content="${encode(lab)} engineering benchmark profile across ${labModels.length} model${labModels.length === 1 ? `` : `s`}: best Index ${best.score.toFixed(1)} (#${best.rank}), lowest cost ${times(cheapest.cost)}.">
+	<meta name="color-scheme" content="light dark">
+	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23f0a9b8'/%3E%3Cstop offset='1' stop-color='%237d9fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
+	<link rel="stylesheet" href="../index.css">
+	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../index.html","../models/*.html","*.html"]},"eagerness":"moderate"}]}</script>
+	<script defer src="https://cloud.umami.is/script.js" data-website-id="39ba71d6-92d6-4c6a-a7eb-06807a052eaa"></script>
+</head>
+<body>
+	<main>
+		<nav class="crumb" aria-label="Breadcrumb">
+			<a href="../index.html">&larr; Back</a>
+		</nav>
+		<header class="model-header">
+			<div class="title-row">
+				<h1 class="model-title" data-lab="${encode(lab)}" style="view-transition-name: lab-title-${labSlug}"><svg class="lab-logo" viewBox="0 0 24 24" width="22" height="22" fill-rule="evenodd" aria-hidden="true">${logos[lab] ?? ``}</svg>${encode(lab)}</h1>
+				<span class="rank-pill">#${labRank}</span>
+			</div>
+			<div class="kpis">
+				<div class="kpi"><span class="kpi-label">Best Index</span><span class="kpi-value">${best.score.toFixed(1)}</span></div>
+				<div class="kpi"><span class="kpi-label">Models</span><span class="kpi-value">${labModels.length}</span></div>
+				<div class="kpi"><span class="kpi-label">Lowest Cost</span><span class="kpi-value">${times(cheapest.cost)}</span></div>
+				<div class="kpi"><span class="kpi-label">Coverage</span><span class="kpi-value">${covered}/${families.length}</span></div>
+			</div>
+		</header>
+		<section class="rankings" aria-labelledby="lab-models">
+			<h2 class="reader" id="lab-models">Models</h2>
+			<table aria-label="${encode(lab)} model rankings">
+				<thead>
+					<tr>
+						<th class="rank" scope="col" aria-sort="ascending" data-first="ascending"><button type="button">#</button></th>
+						<th scope="col" aria-sort="none"><button type="button">Model</button></th>
+						<th class="bar" scope="col"><span class="reader">Index bar</span></th>
+						<th class="num" scope="col" aria-sort="descending" data-first="descending"><button type="button">Index</button></th>
+						<th class="num" scope="col" aria-sort="none"><button type="button">Cost</button></th>
+						<th class="num" scope="col" aria-sort="none"><button type="button">Tokens</button></th>
+					</tr>
+				</thead>
+				<tbody>${modelRows}</tbody>
+			</table>
+		</section>
+		<section class="scatter" aria-labelledby="scatter-title">
+			<p class="title" id="scatter-title">Performance versus
+				<input class="reader" type="radio" name="metric" id="cost" checked><label for="cost">cost</label><span aria-hidden="true"> or </span><input class="reader" type="radio" name="metric" id="tokens"><label for="tokens">tokens</label>.
+			</p>
+			<svg class="chart cost" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="${encode(lab)} performance versus relative cost">
+				<g class="cross" aria-hidden="true">
+					<line class="vertical" y1="26" y2="384"/>
+					<line class="horizontal" x1="48" x2="664"/>
+					<text class="across" y="400" text-anchor="middle"></text>
+					<text class="down" x="41" text-anchor="end" dominant-baseline="central"></text>
+				</g>
+				${labScatter(lab, `cost`)}
+			</svg>
+			<svg class="chart tokens" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="${encode(lab)} performance versus relative tokens">
+				<g class="cross" aria-hidden="true">
+					<line class="vertical" y1="26" y2="384"/>
+					<line class="horizontal" x1="48" x2="664"/>
+					<text class="across" y="400" text-anchor="middle"></text>
+					<text class="down" x="41" text-anchor="end" dominant-baseline="central"></text>
+				</g>
+				${labScatter(lab, `tokens`)}
+			</svg>
+		</section>
+		<section class="model-viz" aria-label="Profile">
+			${legend}
+			<svg class="radar" viewBox="0 0 680 520" width="680" height="520" role="img" aria-label="${encode(lab)} radar profile across 16 benchmarks">
+				${radarFrame}
+				<g class="shapes">${radarShapes}</g>
+			</svg>
+		</section>
+		<section class="rankings" aria-labelledby="lab-benchmarks">
+			<h2 class="reader" id="lab-benchmarks">Benchmark breakdown</h2>
+			<table aria-label="${encode(lab)} best benchmark results">
+				<thead>
+					<tr>
+						<th scope="col" aria-sort="none"><button type="button">Benchmark</button></th>
+						<th scope="col" aria-sort="none"><button type="button">Best Model</button></th>
+						<th class="num" scope="col" aria-sort="descending" data-first="descending"><button type="button">Index</button></th>
+						<th class="num" scope="col" aria-sort="none"><button type="button">Cost</button></th>
+						<th class="num" scope="col" aria-sort="none"><button type="button">Tokens</button></th>
+					</tr>
+				</thead>
+				<tbody>${benchRows}</tbody>
+			</table>
+		</section>
+		<footer>
+			<p>Models are tested on different subsets of benchmarks, so some scores rest on far less evidence than others, and there are no error bars, so small gaps are not meaningful. Scores are relative to the models listed, so adding or removing models shifts them. Benchmarks are weighted equally regardless of size or reliability. Cost is the reported cost of each benchmark run, so it reflects prices at the time and each benchmark's setup, not what a model costs on your workload. Results are reproduced as published, not independently verified, and may be affected by contamination or tuning to the benchmarks. Benchmarks are only a proxy for real engineering work.</p>
+			<p>Data from <a href="https://cognition.ai">Cognition</a>, <a href="https://cursor.com">Cursor</a>, the <a href="https://laude.org">Laude Institute</a>, <a href="https://www.mercor.com">Mercor</a>, <a href="https://www.proximal.ai">Proximal</a>, <a href="https://labs.ramp.com">Ramp Labs</a>, <a href="https://labs.scale.com">Scale Labs</a>, <a href="https://withspecific.com">Specific Labs</a> and <a href="https://vals.ai">Vals AI</a>. Source on <a href="https://github.com/git-aarvin/mei" target="_blank">GitHub</a>.</p>
+		</footer>
+	</main>
+	<script src="../index.js"></script>
+</body>
+</html>
+`;
+		return { path: `labs/${labSlug}.html`, text: html };
 	});
 };

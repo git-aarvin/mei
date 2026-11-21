@@ -215,7 +215,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 				middle = [0, 1].map(axis => mean(order.map(position => items[position].dot[axis]))),
 				blocks = items.map(other => [other.dot[0] - radius - 3, other.dot[1] - radius - 3, other.dot[0] + radius + 3, other.dot[1] + radius + 3]);
 			let best = { score: Infinity, list: [] };
-			for (const side of [`start`, `end`]) for (const reach of [1.45, 2.35, 3.45]) for (const lift of [0, -1.45, 1.45, -2.9, 2.9]) {
+			for (const side of [`start`, `end`]) for (const reach of [1.45, 2.35, 3.45]) for (const lift of [0, -1.45, 1.45, -2.2, 2.2, -2.9, 2.9]) {
 				let score = (reach + Math.abs(lift)) * font * .05;
 				const list = order.map((position, rank) => {
 					const entry = items[position], width = wide(entry.text),
@@ -225,7 +225,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 						shift = slide(start, width),
 						box = boxed(start + shift, base, width),
 						lead = [side === `start` ? box[0] - 3 : box[2] + 3, base - font * .28];
-					score += penalty(box) + Math.abs(shift) * .35;
+					score += penalty(box) + Math.abs(shift) * .35 + Math.hypot(lead[0] - entry.dot[0], lead[1] - entry.dot[1]) * .05;
 					for (let step = .2; step <= 1; step += .1) {
 						const spot = [entry.dot[0] + (lead[0] - entry.dot[0]) * step, entry.dot[1] + (lead[1] - entry.dot[1]) * step], mark = [...spot, ...spot];
 						blocks.forEach((block, other) => other !== position && hit(mark, block, 0) && (score += 900));

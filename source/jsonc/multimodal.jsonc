@@ -41,15 +41,6 @@
 		"usd": 3.26
 	},
 	{
-		"lab": "DeepSeek",
-		"name": "",
-		"score": 0.4646,
-		"series": "V4.1 1017",
-		"tier": "Flash",
-		"tokens": 14950000,
-		"usd": 0.23
-	},
-	{
 		"lab": "Meta",
 		"name": "Muse",
 		"score": 0.4563,

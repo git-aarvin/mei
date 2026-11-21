@@ -21,6 +21,7 @@
 	--gold: #f6d77a;
 	--gold-edge: #e0b53c;
 	--gold-ink: #4a3500;
+	--warn: #d99b00;
 	color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
@@ -40,6 +41,7 @@
 		--gold: #d9ae3f;
 		--gold-edge: #f0cb6a;
 		--gold-ink: #231900;
+		--warn: #f0cb6a;
 	}
 }
 [data-lab="Anthropic"] { --color: #c66e53; }
@@ -358,6 +360,52 @@ th.bar, td.bar {
 	opacity: 1;
 }
 .ghosting td.bar:hover .ghost { width: 0; }
+.warn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	margin-left: 5px;
+	vertical-align: -2px;
+	color: var(--warn);
+	cursor: default;
+}
+.warn:focus-visible {
+	outline: 2px solid var(--warn);
+	outline-offset: 2px;
+	border-radius: 3px;
+}
+.warn svg {
+	display: block;
+	flex: none;
+}
+.warn .tip {
+	position: absolute;
+	left: 50%;
+	bottom: calc(100% + 6px);
+	transform: translate(-50%, 2px);
+	padding: 4px 8px;
+	border-radius: 6px;
+	background: #111;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.4;
+	white-space: nowrap;
+	box-shadow: 0 10px 30px rgb(0 0 0 / 0.22);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 120ms, transform 120ms;
+	z-index: 10;
+}
+@media (prefers-color-scheme: dark) {
+	.warn .tip {
+		border: 1px solid var(--border);
+	}
+}
+.warn:is(:hover, :focus-visible) .tip {
+	opacity: 1;
+	transform: translate(-50%, 0);
+}
 .lab {
 	display: block;
 	color: var(--muted);

@@ -68,6 +68,15 @@
 		"usd": 0.2
 	},
 	{
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.1161,
+		"series": "2",
+		"tier": "Mini",
+		"tokens": 69650000,
+		"usd": 2.46
+	},
+	{
 		"lab": "xAI",
 		"name": "Grok",
 		"score": 0.5772,

@@ -153,6 +153,7 @@ export const modelPages = (list, data) => {
 	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23f0a9b8'/%3E%3Cstop offset='1' stop-color='%237d9fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
 	<link rel="stylesheet" href="../index.css">
 	<script type="speculationrules">{"prefetch":[{"where":{"href_matches":["../index.html","*.html"]},"eagerness":"moderate"}]}</script>
+	<script defer src="https://cloud.umami.is/script.js" data-website-id="39ba71d6-92d6-4c6a-a7eb-06807a052eaa"></script>
 </head>
 <body>
 	<main>

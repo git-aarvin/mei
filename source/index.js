@@ -112,6 +112,7 @@ const effects = matrix => {
 	return columns.map(value => value - mean(columns));
 };
 const tidy = text => text.replace(/\s+/g, ` `).trim();
+export const slug = name => name.toLowerCase().replace(/[^a-z0-9]+/g, `-`).replace(/^-|-$/g, ``);
 export const times = value => `${+value.toPrecision(2)}×`;
 export const encode = text => text.replace(/[&<>"]/g, char => `&#${char.charCodeAt()};`);
 export const models = data => {
@@ -134,6 +135,7 @@ export const models = data => {
 		score = fit(`score`), usd = fit(`usd`), tokens = fit(`tokens`), deviation = spread(score);
 	return names.map((name, index) => ({
 		name,
+		slug: slug(name),
 		lab: owners.get(name),
 		short: tidy((short[name] ?? name).replace(/\b(?:Muse|1017)\b/gi, ``)),
 		score: 50 + 10 * score[index] / deviation,
@@ -141,6 +143,42 @@ export const models = data => {
 		tokens: 10 ** tokens[index],
 		grades: Object.fromEntries(families.filter(family => cells.has(`${family}\0${name}`)).map(family => [family, mean(cells.get(`${family}\0${name}`).score)])),
 	})).sort((first, second) => second.score - first.score).map((model, index) => ({ ...model, rank: index + 1 }));
+};
+export const details = (data, list) => {
+	const byModel = new Map(list.map(model => [model.name, []]));
+	for (const { family, rows } of data) {
+		const rankedRows = [...rows].sort((first, second) => second.score - first.score),
+			midUsd = median(rows.map(row => row.usd).filter(Number.isFinite)),
+			midTokens = median(rows.map(row => row.tokens).filter(Number.isFinite)),
+			seen = new Map();
+		rankedRows.forEach((row, index) => {
+			const name = tidy(`${row.name} ${row.tier} ${row.lab === `Meta` ? `` : row.series}`);
+			if (!seen.has(name)) seen.set(name, { scores: [], usds: [], tokens: [], bestRank: index + 1 });
+			const entry = seen.get(name);
+			entry.scores.push(row.score);
+			if (row.usd != null) entry.usds.push(row.usd);
+			if (row.tokens != null) entry.tokens.push(row.tokens);
+		});
+		for (const [name, entry] of seen) {
+			const model = list.find(item => item.name === name);
+			if (!model) continue;
+			const usd = entry.usds.length ? mean(entry.usds) : null,
+				tokens = entry.tokens.length ? mean(entry.tokens) : null;
+			byModel.get(name).push({
+				family,
+				site: sites[family],
+				rawScore: mean(entry.scores),
+				normScore: Math.max(0, Math.min(100, 50 + 18 * model.grades[family])),
+				rank: entry.bestRank,
+				total: rankedRows.length,
+				usd,
+				tokens,
+				relCost: usd != null && Number.isFinite(midUsd) ? usd / midUsd : null,
+				relTokens: tokens != null && Number.isFinite(midTokens) ? tokens / midTokens : null,
+			});
+		}
+	}
+	return byModel;
 };
 const place = (items, obstacles, { left, right, top, bottom, radius, font }) => {
 	const taken = [], placed = [], line = font * 1.35,
@@ -219,7 +257,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 	return placed;
 };
 export const scatter = (list, metric, geometry) => {
-	const { left, right, top, bottom, radius, pad, gap, drop } = geometry,
+	const { left, right, top, bottom, radius, pad, gap, drop, links = false } = geometry,
 		values = list.map(model => model[metric]), scores = list.map(model => model.score),
 		least = Math.log10(Math.min(...values) * .9), most = Math.log10(Math.max(...values) * 1.1),
 		floor = Math.floor(Math.min(...scores) / 10) * 10, ceiling = Math.ceil(Math.max(...scores) / 10) * 10,
@@ -250,13 +288,13 @@ export const scatter = (list, metric, geometry) => {
 			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${value}×</text>`),
 			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
 			...labels.map((label, index) => label.leader ? `<line class="leader" ${tag(index)} stroke="${color(list[index].lab)}" x1="${round(label.dot[0])}" y1="${round(label.dot[1])}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}"/>` : ``),
-			...list.map((model, index) => `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`),
-			...labels.map((label, index) => `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`),
+			...list.map((model, index) => { const el = `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`; return links ? `<a href="models/${model.slug}.html" data-model-link="${model.slug}" tabindex="-1">${el}</a>` : el; }),
+			...labels.map((label, index) => { const el = `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`; return links ? `<a href="models/${list[index].slug}.html" data-model-link="${list[index].slug}" tabindex="-1">${el}</a>` : el; }),
 		].join(``),
 	};
 };
 export const bar = (list, metric, geometry) => {
-	const { left, right, top, bottom, radius, gap, drop, reference, tooltip = true } = geometry,
+	const { left, right, top, bottom, radius, gap, drop, reference, tooltip = true, links = false } = geometry,
 		log = metric !== `index`,
 		field = metric === `index` ? `score` : metric,
 		rows = log ? [...list].sort((first, second) => first[field] - second[field]) : list,
@@ -286,7 +324,7 @@ export const bar = (list, metric, geometry) => {
 			...rows.map((model, index) => {
 				const y = center(index), width = Math.max(2, horizontal(model[field]) - left), end = left + width;
 				const title = tooltip ? `<title>${encode(model.short)}: ${readout(model[field])}</title>` : ``;
-				return `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text><path class="bar" ${tag(index, ` fill="${color(model.lab)}" data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path><text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
+				const lbl = `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text>`, barEl = `<path class="bar" ${tag(index, ` fill="${color(model.lab)}" data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path>`; return (links ? `<a href="models/${model.slug}.html" data-model-link="${model.slug}" tabindex="-1">${lbl}${barEl}</a>` : `${lbl}${barEl}`) + `<text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
 			}),
 			...(reference ? rows.map((item, index) => {
 				const y = center(index);

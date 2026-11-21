@@ -206,7 +206,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 		},
 		root = items.map((item, index) => index),
 		find = index => root[index] === index ? index : root[index] = find(root[index]);
-	items.forEach((first, one) => items.forEach((second, two) => two > one && first.lab === second.lab && Math.hypot(first.dot[0] - second.dot[0], first.dot[1] - second.dot[1]) < line && (root[find(two)] = find(one))));
+	items.forEach((first, one) => items.forEach((second, two) => two > one && first.lab === second.lab && Math.hypot(first.dot[0] - second.dot[0], first.dot[1] - second.dot[1]) < font * 1.75 && (root[find(two)] = find(one))));
 	items.forEach((item, index) => {
 		if (placed[index]) return;
 		const members = items.map((other, position) => position).filter(position => find(position) === find(index));
@@ -228,7 +228,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 					score += penalty(box) + Math.abs(shift) * .35;
 					for (let step = .2; step <= 1; step += .1) {
 						const spot = [entry.dot[0] + (lead[0] - entry.dot[0]) * step, entry.dot[1] + (lead[1] - entry.dot[1]) * step], mark = [...spot, ...spot];
-						blocks.forEach((block, other) => !members.includes(other) && hit(mark, block, 0) && (score += 900));
+						blocks.forEach((block, other) => other !== position && hit(mark, block, 0) && (score += 900));
 						taken.forEach(block => hit(mark, block, 0) && (score += 400));
 					}
 					return { ...entry, at: [anchor + shift, base], anchor: side, box, leader: lead };

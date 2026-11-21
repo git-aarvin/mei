@@ -289,7 +289,7 @@ export const scatter = (list, metric, geometry) => {
 			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${value}×</text>`),
 			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
 			...labels.map((label, index) => label.leader ? `<line class="leader" ${tag(index)} stroke="${color(list[index].lab)}" x1="${round(label.dot[0])}" y1="${round(label.dot[1])}" x2="${round(label.leader[0])}" y2="${round(label.leader[1])}"/>` : ``),
-			...list.map((model, index) => { const el = `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`; return links ? `<a href="models/${model.slug}.html" data-model-link="${model.slug}" tabindex="-1">${el}</a>` : el; }),
+			...list.map((model, index) => { const el = `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`; return links ? `<a href="models/${model.slug}.html" data-model-link="${model.slug}" aria-label="${encode(model.short)}" tabindex="-1">${el}</a>` : el; }),
 			...labels.map((label, index) => { const el = `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`; return links ? `<a href="models/${list[index].slug}.html" data-model-link="${list[index].slug}" tabindex="-1">${el}</a>` : el; }),
 		].join(``),
 	};

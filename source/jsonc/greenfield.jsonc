@@ -185,6 +185,15 @@
 		"usd": 2.39
 	},
 	{
+		"lab": "Tencent",
+		"name": "Hy",
+		"score": 0.7484,
+		"series": "4",
+		"tier": "Flash",
+		"tokens": 19950000,
+		"usd": 0.12
+	},
+	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.7792,

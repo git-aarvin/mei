@@ -823,3 +823,38 @@ td.num,
 .radar .value {
 	font-variation-settings: "ROND" 0;
 }
+
+.lab-link {
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: transparent;
+	text-underline-offset: 2px;
+}
+.lab-link:hover,
+.lab-link:focus-visible {
+	color: var(--ink);
+	text-decoration-color: var(--rule);
+	outline: none;
+}
+.chart .dot-bg {
+	fill: var(--line);
+	opacity: 0.55;
+}
+.lab-legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+	margin: 0 0 16px;
+	font-size: 13px;
+	color: var(--muted);
+}
+.lab-legend a {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	color: var(--ink);
+}
+.lab-legend a:hover {
+	text-decoration: underline;
+	text-decoration-color: var(--rule);
+}

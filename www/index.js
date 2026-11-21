@@ -100,8 +100,7 @@ for (const chart of document.querySelectorAll(`.bars .chart`)) {
 	};
 	chart.onpointerleave = clear;
 }
-const table = document.querySelector(`table`);
-if (table) {
+for (const table of document.querySelectorAll(`table`)) {
 	const body = table.tBodies[0], meters = [...table.querySelectorAll(`.meter`)];
 	table.onclick = event => {
 		const header = event.target.closest(`th`);
@@ -224,7 +223,11 @@ document.addEventListener(`pointerenter`, event => prefetch(event.target.closest
 document.addEventListener(`focusin`, event => prefetch(event.target.closest?.(`a[href]`)));
 document.addEventListener(`click`, event => {
 	const link = event.target.closest?.(`a[data-model-link]`);
-	if (!link) return;
-	const target = link.querySelector(`.label`) ?? link;
-	target.style.viewTransitionName = `model-title-${link.dataset.modelLink}`;
+	if (link) {
+		const target = link.querySelector(`.label`) ?? link;
+		target.style.viewTransitionName = `model-title-${link.dataset.modelLink}`;
+		return;
+	}
+	const labLink = event.target.closest?.(`a[data-lab-link]`);
+	if (labLink) labLink.style.viewTransitionName = `lab-title-${labLink.dataset.labLink}`;
 });

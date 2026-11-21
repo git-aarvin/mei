@@ -64,7 +64,7 @@
 		"score": 0.389,
 		"series": "4",
 		"tier": "Hydrogen",
-		"tokens": 154000,
+		"tokens": 153700,
 		"usd": 4.95
 	},
 	{
@@ -73,7 +73,7 @@
 		"score": 0.462,
 		"series": "4",
 		"tier": "Neon",
-		"tokens": 86000,
+		"tokens": 85600,
 		"usd": 4.38
 	},
 	{
@@ -115,20 +115,20 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.441,
+		"score": 0.442,
 		"series": "6.2",
 		"tier": "Astra",
-		"tokens": 28600,
-		"usd": 4.29
+		"tokens": 46000,
+		"usd": 5.97
 	},
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.398,
+		"score": 0.438,
 		"series": "6.2",
 		"tier": "Sol",
-		"tokens": 26400,
-		"usd": 0.98
+		"tokens": 38100,
+		"usd": 1.29
 	},
 	{
 		"lab": "Reflection",
@@ -149,15 +149,6 @@
 		"usd": 0.58
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.289,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 110790,
-		"usd": 14.36
-	},
-	{
 		"lab": "Z.ai",
 		"name": "GLM",
 		"score": 0.202,
@@ -166,4 +157,13 @@
 		"tokens": 100700,
 		"usd": 7.52
 	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.289,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 110800,
+		"usd": 14.36
+	}
 ]

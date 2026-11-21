@@ -68,6 +68,15 @@
 		"usd": null
 	},
 	{
+		"lab": "Mistral",
+		"name": "Mistral",
+		"score": 0.3533,
+		"series": "4",
+		"tier": "Large",
+		"tokens": null,
+		"usd": null
+	},
+	{
 		"lab": "Moonshot",
 		"name": "Kimi",
 		"score": 0.6133,
@@ -93,5 +102,5 @@
 		"tier": "",
 		"tokens": null,
 		"usd": null
-	},
+	}
 ]

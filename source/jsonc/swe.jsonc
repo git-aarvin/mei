@@ -59,6 +59,15 @@
 		"usd": 61.79
 	},
 	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.624,
+		"series": "4",
+		"tier": "Neon",
+		"tokens": null,
+		"usd": 96.13
+	},
+	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.251,
@@ -73,7 +82,7 @@
 		"score": 0.302,
 		"series": "5.3",
 		"tier": "",
-		"tokens": null,
+		"tokens": 333000000,
 		"usd": 97.22
 	},
 	{
@@ -84,5 +93,5 @@
 		"tier": "",
 		"tokens": null,
 		"usd": 318.77
-	},
+	}
 ]

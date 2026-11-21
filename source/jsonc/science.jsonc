@@ -47,8 +47,8 @@
 		"score": 0.6286,
 		"series": "4",
 		"tier": "Neon",
-		"tokens": null,
-		"usd": null
+		"tokens": 34920000,
+		"usd": 13.74
 	},
 	{
 		"lab": "Meta",
@@ -141,15 +141,6 @@
 		"usd": 5.55
 	},
 	{
-		"lab": "xAI",
-		"name": "Grok",
-		"score": 0.1,
-		"series": "4.7",
-		"tier": "",
-		"tokens": 16720000,
-		"usd": 17.04
-	},
-	{
 		"lab": "Xiaomi",
 		"name": "MiMo",
 		"score": 0.0429,
@@ -176,4 +167,13 @@
 		"tokens": 53010000,
 		"usd": 15.63
 	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.1,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 16720000,
+		"usd": 17.04
+	}
 ]

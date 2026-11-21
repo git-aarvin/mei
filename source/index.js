@@ -77,6 +77,7 @@ const short = {
 	"GPT Luna 6": `6 Luna`,
 	"Kimi Pro K3.1": `K3.1 Pro`,
 	"MiMo Pro V2.6": `V2.6-Pro`,
+	"MiMo Flash V2.6": `V2.6-Flash`,
 	"Qwen Max 4": `4-Max`,
 	"Hy 4": `Hy4`,
 	"Hy Flash 4": "Hy4 Flash",

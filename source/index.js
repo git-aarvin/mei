@@ -193,7 +193,7 @@ export const details = (data, list) => {
 	return byModel;
 };
 const place = (items, obstacles, { left, right, top, bottom, radius, font }) => {
-	const taken = [], placed = [], line = font * 1.35,
+	const taken = [], placed = [],
 		hit = (first, second, pad) => first[0] < second[2] + pad && first[2] + pad > second[0] && first[1] < second[3] + pad && first[3] + pad > second[1],
 		wide = text => text.length * font * .68,
 		slide = (start, width) => Math.max(left + 6 - start, Math.min(0, right - 6 - start - width)),
@@ -203,44 +203,8 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 			for (const [obstacle, weight] of obstacles) if (hit(box, obstacle, 2)) score += weight;
 			for (const other of taken) if (hit(box, other, 5)) score += 1600;
 			return score;
-		},
-		root = items.map((item, index) => index),
-		find = index => root[index] === index ? index : root[index] = find(root[index]);
-	items.forEach((first, one) => items.forEach((second, two) => two > one && first.lab === second.lab && Math.hypot(first.dot[0] - second.dot[0], first.dot[1] - second.dot[1]) < font * 1.75 && (root[find(two)] = find(one))));
+		};
 	items.forEach((item, index) => {
-		if (placed[index]) return;
-		const members = items.map((other, position) => position).filter(position => find(position) === find(index));
-		if (members.length > 1) {
-			const order = members.sort((first, second) => items[second].score - items[first].score || items[first].dot[1] - items[second].dot[1]),
-				middle = [0, 1].map(axis => mean(order.map(position => items[position].dot[axis]))),
-				blocks = items.map(other => [other.dot[0] - radius - 3, other.dot[1] - radius - 3, other.dot[0] + radius + 3, other.dot[1] + radius + 3]);
-			let best = { score: Infinity, list: [] };
-			for (const side of [`start`, `end`]) for (const reach of [1.45, 2.35, 3.45]) for (const lift of [0, -1.45, 1.45, -2.2, 2.2, -2.9, 2.9]) {
-				let score = (reach + Math.abs(lift)) * font * .05;
-				const list = order.map((position, rank) => {
-					const entry = items[position], width = wide(entry.text),
-						base = middle[1] + lift * font + (rank - (order.length - 1) / 2) * line + font * .3,
-						anchor = middle[0] + (side === `start` ? reach : -reach) * font,
-						start = side === `start` ? anchor : anchor - width,
-						shift = slide(start, width),
-						box = boxed(start + shift, base, width),
-						lead = [side === `start` ? box[0] - 3 : box[2] + 3, base - font * .28];
-					score += penalty(box) + Math.abs(shift) * .35 + Math.hypot(lead[0] - entry.dot[0], lead[1] - entry.dot[1]) * .05;
-					for (let step = .2; step <= 1; step += .1) {
-						const spot = [entry.dot[0] + (lead[0] - entry.dot[0]) * step, entry.dot[1] + (lead[1] - entry.dot[1]) * step], mark = [...spot, ...spot];
-						blocks.forEach((block, other) => other !== position && hit(mark, block, 0) && (score += 900));
-						taken.forEach(block => hit(mark, block, 0) && (score += 400));
-					}
-					return { ...entry, at: [anchor + shift, base], anchor: side, box, leader: lead };
-				});
-				if (score < best.score) best = { score, list };
-			}
-			order.forEach((position, rank) => {
-				placed[position] = best.list[rank];
-				taken.push(best.list[rank].box);
-			});
-			return;
-		}
 		const width = wide(item.text);
 		let best = { score: Infinity }, tries = 0;
 		for (const factor of [1, 1.7, 2.5, 3.5, 4.7]) {

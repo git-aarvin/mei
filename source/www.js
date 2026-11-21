@@ -359,9 +359,9 @@ export const labPages = (list, data) => {
 				<span class="rank-pill">#${labRank}</span>
 			</div>
 			<div class="kpis">
-				<div class="kpi"><span class="kpi-label">Best Index</span><span class="kpi-value">${best.score.toFixed(1)}</span></div>
+				<div class="kpi"><span class="kpi-label">Best</span><span class="kpi-value">${best.score.toFixed(1)}</span></div>
 				<div class="kpi"><span class="kpi-label">Models</span><span class="kpi-value">${labModels.length}</span></div>
-				<div class="kpi"><span class="kpi-label">Lowest Cost</span><span class="kpi-value">${times(cheapest.cost)}</span></div>
+				<div class="kpi"><span class="kpi-label">Cheapest</span><span class="kpi-value">${times(cheapest.cost)}</span></div>
 				<div class="kpi"><span class="kpi-label">Coverage</span><span class="kpi-value">${covered}/${families.length}</span></div>
 			</div>
 		</header>

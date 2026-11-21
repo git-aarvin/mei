@@ -23,7 +23,7 @@
 	--gold-ink: #4a3500;
 	--warn: #d99b00;
 	--badge: #3b6fd4;
-	--pareto: #2f9e6e;
+	--pareto-row: rgb(0 0 0 / 0.035);
 	color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
@@ -45,7 +45,7 @@
 		--gold-ink: #231900;
 		--warn: #f0cb6a;
 		--badge: #6094f5;
-		--pareto: #43b883;
+		--pareto-row: rgb(255 255 255 / 0.045);
 	}
 }
 [data-lab="Anthropic"] { --color: #c66e53; }
@@ -365,8 +365,7 @@ th.bar, td.bar {
 }
 .ghosting td.bar:hover .ghost { width: 0; }
 .warn,
-.badge,
-.pareto {
+.badge {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
@@ -376,19 +375,18 @@ th.bar, td.bar {
 }
 .warn { color: var(--warn); }
 .badge { color: var(--badge); }
-.pareto { color: var(--pareto); }
-:is(.warn, .badge, .pareto):focus-visible {
+tr.pareto td { background: var(--pareto-row); }
+:is(.warn, .badge):focus-visible {
 	outline: 2px solid currentColor;
 	outline-offset: 2px;
 	border-radius: 3px;
 }
 .warn svg,
-.badge svg,
-.pareto svg {
+.badge svg {
 	display: block;
 	flex: none;
 }
-:is(.warn, .badge, .pareto) .tip {
+:is(.warn, .badge) .tip {
 	position: absolute;
 	left: 50%;
 	bottom: calc(100% + 6px);
@@ -408,11 +406,11 @@ th.bar, td.bar {
 	z-index: 10;
 }
 @media (prefers-color-scheme: dark) {
-	:is(.warn, .badge, .pareto) .tip {
+	:is(.warn, .badge) .tip {
 		border: 1px solid var(--border);
 	}
 }
-:is(.warn, .badge, .pareto):is(:hover, :focus-visible) .tip {
+:is(.warn, .badge):is(:hover, :focus-visible) .tip {
 	opacity: 1;
 	transform: translate(-50%, 0);
 }

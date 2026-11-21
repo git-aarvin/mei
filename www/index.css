@@ -63,6 +63,7 @@
 [data-lab="Mistral"] { --color: #d46b27; }
 [data-lab="Thinking Machines"] { --color: #4f8f58; }
 [data-lab="MiniMax"] { --color: #9e58b5; }
+[data-lab="StepFun"] { --color: #537d90; }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 ::selection { background: var(--selection); }

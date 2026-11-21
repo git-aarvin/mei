@@ -79,6 +79,7 @@ const short = {
 	"MiMo Pro V2.6": `V2.6-Pro`,
 	"Qwen Max 4": `4-Max`,
 	"Hy 4": `Hy4`,
+	"Hy Flash 4": "Hy4 Flash",
 	"Mistral Large 4": `Large 4`,
 	"Inkling Mini 2": `Inkling 2 Mini`,
 	"Inkling Small 2": `Inkling 2 Small`,

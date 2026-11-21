@@ -1,22 +1,8 @@
 @font-face {
-	font-family: Inter;
-	src: url("fonts/Inter-Regular.woff2") format("woff2");
+	font-family: Allo;
+	src: url("fonts/AlloVariable.woff2") format("woff2");
 	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-}
-@font-face {
-	font-family: Inter;
-	src: url("fonts/Inter-Medium.woff2") format("woff2");
-	font-style: normal;
-	font-weight: 500;
-	font-display: swap;
-}
-@font-face {
-	font-family: Inter;
-	src: url("fonts/Inter-SemiBold.woff2") format("woff2");
-	font-style: normal;
-	font-weight: 600;
+	font-weight: 100 900;
 	font-display: swap;
 }
 :root {
@@ -75,7 +61,8 @@
 [hidden] { display: none !important; }
 ::selection { background: var(--selection); }
 html {
-	font: 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	font: 16px/1.5 Allo, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	font-variation-settings: "ROND" 50;
 	color: var(--ink);
 	background: var(--background);
 	-webkit-text-size-adjust: 100%;
@@ -140,6 +127,7 @@ header p {
 	max-width: 36em;
 	font-size: clamp(20px, 3.2vw, 24px);
 	font-weight: 400;
+	font-variation-settings: "ROND" 25;
 	letter-spacing: -0.015em;
 	line-height: 1.4;
 }
@@ -620,6 +608,7 @@ th.bar, td.bar {
 	color: var(--gold-ink);
 	font-size: 14px;
 	font-weight: 500;
+	font-variation-settings: "ROND" 80;
 	text-align: center;
 	text-decoration: none;
 	transition: filter 120ms, transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -676,6 +665,7 @@ th.bar, td.bar {
 	border-radius: 999px;
 	font-size: 12px;
 	font-variant-numeric: tabular-nums;
+	font-variation-settings: "ROND" 100;
 }
 .model-header { margin-bottom: 48px; }
 .model-title {
@@ -685,6 +675,7 @@ th.bar, td.bar {
 	margin: 0;
 	font-size: clamp(24px, 4vw, 30px);
 	font-weight: 500;
+	font-variation-settings: "ROND" 25;
 	letter-spacing: -0.02em;
 	line-height: 1.2;
 }
@@ -759,3 +750,17 @@ th.bar, td.bar {
 }
 .pager a { text-decoration: none; }
 .pager a:hover { color: var(--ink); }
+
+/* Variable rounding: sharp precision for tabular data, KPI values, and chart readouts */
+th,
+td.rank,
+td.num,
+.kpi-value,
+.chart .tick,
+.chart .across,
+.chart .down,
+.chart .value,
+.radar .scale,
+.radar .value {
+	font-variation-settings: "ROND" 0;
+}

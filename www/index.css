@@ -22,6 +22,8 @@
 	--gold-edge: #e0b53c;
 	--gold-ink: #4a3500;
 	--warn: #d99b00;
+	--badge: #3b6fd4;
+	--pareto: #2f9e6e;
 	color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
@@ -42,6 +44,8 @@
 		--gold-edge: #f0cb6a;
 		--gold-ink: #231900;
 		--warn: #f0cb6a;
+		--badge: #6094f5;
+		--pareto: #43b883;
 	}
 }
 [data-lab="Anthropic"] { --color: #c66e53; }
@@ -360,25 +364,31 @@ th.bar, td.bar {
 	opacity: 1;
 }
 .ghosting td.bar:hover .ghost { width: 0; }
-.warn {
+.warn,
+.badge,
+.pareto {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 	margin-left: 5px;
 	vertical-align: -2px;
-	color: var(--warn);
 	cursor: default;
 }
-.warn:focus-visible {
-	outline: 2px solid var(--warn);
+.warn { color: var(--warn); }
+.badge { color: var(--badge); }
+.pareto { color: var(--pareto); }
+:is(.warn, .badge, .pareto):focus-visible {
+	outline: 2px solid currentColor;
 	outline-offset: 2px;
 	border-radius: 3px;
 }
-.warn svg {
+.warn svg,
+.badge svg,
+.pareto svg {
 	display: block;
 	flex: none;
 }
-.warn .tip {
+:is(.warn, .badge, .pareto) .tip {
 	position: absolute;
 	left: 50%;
 	bottom: calc(100% + 6px);
@@ -398,11 +408,11 @@ th.bar, td.bar {
 	z-index: 10;
 }
 @media (prefers-color-scheme: dark) {
-	.warn .tip {
+	:is(.warn, .badge, .pareto) .tip {
 		border: 1px solid var(--border);
 	}
 }
-.warn:is(:hover, :focus-visible) .tip {
+:is(.warn, .badge, .pareto):is(:hover, :focus-visible) .tip {
 	opacity: 1;
 	transform: translate(-50%, 0);
 }

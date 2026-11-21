@@ -80,6 +80,7 @@ const short = {
 	"Qwen Max 4": `4-Max`,
 	"Hy 4": `Hy4`,
 	"Mistral Large 4": `Large 4`,
+	"Inkling Mini 2": `Inkling 2 Mini`,
 	"Inkling Small 2": `Inkling 2 Small`,
 	"MiniMax Flash M3.1": `M3.1 Flash`,
 };

@@ -10,7 +10,7 @@ const barPath = (left, top, width, height, radius) => {
 };
 for (const chart of document.querySelectorAll(`.chart`)) {
 	const dots = [...chart.querySelectorAll(`.dot`)], ticks = [...chart.querySelectorAll(`.tick`)], across = chart.querySelector(`.across`), down = chart.querySelector(`.down`);
-	if (!dots.length) continue;
+	if (!dots.length || !across || !down) continue;
 	let frame;
 	chart.onpointermove = event => {
 		if (event.pointerType !== `mouse`) return;
@@ -50,6 +50,7 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 }
 for (const chart of document.querySelectorAll(`.bars .chart`)) {
 	const references = [...chart.querySelectorAll(`.reference`)], values = [...chart.querySelectorAll(`.value`)];
+	if (!references.length) continue;
 	const ghosts = references.map(reference => ({
 		reference,
 		left: +reference.dataset.left,
@@ -99,75 +100,131 @@ for (const chart of document.querySelectorAll(`.bars .chart`)) {
 	};
 	chart.onpointerleave = clear;
 }
-const table = document.querySelector(`table`), body = table.tBodies[0], meters = [...table.querySelectorAll(`.meter`)];
-table.onclick = event => {
-	const header = event.target.closest(`th`);
-	if (!header || !event.target.closest(`button`)) return;
-	const state = header.getAttribute(`aria-sort`), next = state === `ascending` ? `descending` : state === `descending` ? `ascending` : header.dataset.first ?? `ascending`,
-		value = row => row.cells[header.cellIndex].dataset.value,
-		direction = next === `ascending` ? 1 : -1;
-	for (const other of table.querySelectorAll(`th[aria-sort]`)) other.setAttribute(`aria-sort`, `none`);
-	header.setAttribute(`aria-sort`, next);
-	body.append(...[...body.rows].sort((first, second) => direction * (isNaN(value(first)) ? value(first).localeCompare(value(second)) : value(first) - value(second))));
-};
-table.onpointerover = event => {
-	if (event.pointerType !== `mouse`) return;
-	const cell = event.target.closest(`td.bar`);
-	table.classList.toggle(`ghosting`, Boolean(cell));
-	if (!cell) return;
-	table.style.setProperty(`--width`, `${cell.dataset.value}%`);
-	for (const meter of meters) meter.classList.toggle(`under`, +cell.dataset.value > +meter.parentNode.dataset.value);
-};
-table.onpointerleave = () => table.classList.remove(`ghosting`);
-const compare = document.querySelector(`.compare`), svg = compare.querySelector(`.radar`), select = compare.querySelector(`select`), add = compare.querySelector(`.add`),
-	chosen = compare.querySelector(`.chosen`), spare = compare.querySelector(`.picks .spare`), shapes = svg.querySelector(`.shapes`), idle = svg.querySelector(`.spare`),
-	pairs = new Map([...chosen.children, ...spare.children].map((pick, index) => [pick, [...shapes.children, ...idle.children][index]]));
-const refresh = () => {
-	const picks = [...chosen.children];
-	picks.forEach((pick, slot) => {
+const table = document.querySelector(`table`);
+if (table) {
+	const body = table.tBodies[0], meters = [...table.querySelectorAll(`.meter`)];
+	table.onclick = event => {
+		const header = event.target.closest(`th`);
+		if (!header || !event.target.closest(`button`)) return;
+		const state = header.getAttribute(`aria-sort`), next = state === `ascending` ? `descending` : state === `descending` ? `ascending` : header.dataset.first ?? `ascending`,
+			value = row => row.cells[header.cellIndex].dataset.value,
+			direction = next === `ascending` ? 1 : -1;
+		for (const other of table.querySelectorAll(`th[aria-sort]`)) other.setAttribute(`aria-sort`, `none`);
+		header.setAttribute(`aria-sort`, next);
+		body.append(...[...body.rows].sort((first, second) => direction * (isNaN(value(first)) ? value(first).localeCompare(value(second)) : value(first) - value(second))));
+	};
+	table.onpointerover = event => {
+		if (event.pointerType !== `mouse`) return;
+		const cell = event.target.closest(`td.bar`);
+		table.classList.toggle(`ghosting`, Boolean(cell));
+		if (!cell) return;
+		table.style.setProperty(`--width`, `${cell.dataset.value}%`);
+		for (const meter of meters) meter.classList.toggle(`under`, +cell.dataset.value > +meter.parentNode.dataset.value);
+	};
+	table.onpointerleave = () => table.classList.remove(`ghosting`);
+}
+const compare = document.querySelector(`.compare`);
+if (compare) {
+	const svg = compare.querySelector(`.radar`), select = compare.querySelector(`select`), add = compare.querySelector(`.add`),
+		chosen = compare.querySelector(`.chosen`), spare = compare.querySelector(`.picks .spare`), shapes = svg.querySelector(`.shapes`), idle = svg.querySelector(`.spare`),
+		pairs = new Map([...chosen.children, ...spare.children].map((pick, index) => [pick, [...shapes.children, ...idle.children][index]])),
+		slots = [0, 1, 2, 3, 4, 5];
+	const refresh = (focus = true) => {
+		const picks = [...chosen.children];
+		for (const pick of picks) {
+			pick.querySelector(`button`).disabled = picks.length < 2;
+			shapes.append(pairs.get(pick));
+		}
+		add.hidden = picks.length > 5;
+		for (const option of select.options) if (option.value) option.disabled = picks.some(pick => pick.dataset.name === option.value);
+		select.value = ``;
+		if (focus) select.focus();
+	};
+	select.onchange = () => {
+		const pick = [...spare.children].find(item => item.dataset.name === select.value);
+		if (!pick) return;
+		const used = new Set([...chosen.children].map(item => +item.dataset.slot));
+		const slot = slots.find(index => !used.has(index));
+		if (slot === undefined) return;
 		pick.dataset.slot = pairs.get(pick).dataset.slot = slot;
-		pick.querySelector(`button`).disabled = picks.length < 2;
-		shapes.append(pairs.get(pick));
-	});
-	add.hidden = picks.length > 5;
-	for (const option of select.options) option.hidden = picks.some(pick => pick.dataset.name === option.value);
-	select.value = ``;
-	select.focus();
-};
-select.onchange = () => {
-	const pick = [...spare.children].find(item => item.dataset.name === select.value);
-	if (!pick) return;
-	chosen.append(pick);
-	refresh();
-};
-chosen.onclick = event => {
-	const pick = event.target.closest(`.pick`);
-	if (!pick || !event.target.closest(`button`) || chosen.children.length < 2) return;
-	spare.append(pick);
-	idle.append(pairs.get(pick));
-	refresh();
-};
-svg.onpointermove = event => {
-	if (event.pointerType !== `mouse`) return;
-	const spot = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
-	let nearest, distance = Infinity;
-	for (const point of shapes.querySelectorAll(`.point`)) {
-		const vertex = point.firstElementChild, gap = Math.hypot(vertex.cx.baseVal.value - spot.x, vertex.cy.baseVal.value - spot.y);
-		if (gap <= distance) [nearest, distance] = [point, gap];
+		chosen.append(pick);
+		refresh();
+	};
+	chosen.onclick = event => {
+		const pick = event.target.closest(`.pick`);
+		if (!pick || !event.target.closest(`button`) || chosen.children.length < 2) return;
+		delete pick.dataset.slot;
+		delete pairs.get(pick).dataset.slot;
+		spare.append(pick);
+		idle.append(pairs.get(pick));
+		refresh();
+	};
+	svg.onpointermove = event => {
+		if (event.pointerType !== `mouse`) return;
+		const spot = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
+		let nearest, distance = Infinity;
+		for (const point of shapes.querySelectorAll(`.point`)) {
+			const vertex = point.firstElementChild, gap = Math.hypot(vertex.cx.baseVal.value - spot.x, vertex.cy.baseVal.value - spot.y);
+			if (gap <= distance) [nearest, distance] = [point, gap];
+		}
+		if (!nearest) return;
+		const shape = nearest.parentNode;
+		if (shape !== shapes.lastElementChild) shapes.append(shape);
+		svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
+		nearest.classList.add(`snapped`);
+		svg.classList.add(`snapping`);
+		svg.dataset.slot = shape.dataset.slot;
+		for (const label of svg.querySelectorAll(`.axis`)) label.classList.toggle(`active`, label.dataset.axis === nearest.dataset.axis);
+	};
+	svg.onpointerleave = () => {
+		svg.classList.remove(`snapping`);
+		svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
+		svg.querySelector(`.axis.active`)?.classList.remove(`active`);
+		delete svg.dataset.slot;
+		for (const pick of chosen.children) shapes.append(pairs.get(pick));
+	};
+} else {
+	for (const svg of document.querySelectorAll(`.radar`)) {
+		const shapes = svg.querySelector(`.shapes`);
+		svg.onpointermove = event => {
+			if (event.pointerType !== `mouse`) return;
+			const spot = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
+			let nearest, distance = Infinity;
+			for (const point of shapes.querySelectorAll(`.point`)) {
+				const vertex = point.firstElementChild, gap = Math.hypot(vertex.cx.baseVal.value - spot.x, vertex.cy.baseVal.value - spot.y);
+				if (gap <= distance) [nearest, distance] = [point, gap];
+			}
+			if (!nearest) return;
+			svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
+			nearest.classList.add(`snapped`);
+			svg.classList.add(`snapping`);
+			svg.dataset.lab = nearest.parentNode.dataset.lab;
+			for (const label of svg.querySelectorAll(`.axis`)) label.classList.toggle(`active`, label.dataset.axis === nearest.dataset.axis);
+		};
+		svg.onpointerleave = () => {
+			svg.classList.remove(`snapping`);
+			svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
+			svg.querySelector(`.axis.active`)?.classList.remove(`active`);
+			delete svg.dataset.lab;
+		};
 	}
-	if (!nearest) return;
-	const shape = nearest.parentNode;
-	if (shape !== shapes.lastElementChild) shapes.append(shape);
-	svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
-	nearest.classList.add(`snapped`);
-	svg.classList.add(`snapping`);
-	svg.dataset.slot = shape.dataset.slot;
-	for (const label of svg.querySelectorAll(`.axis`)) label.classList.toggle(`active`, label.dataset.axis === nearest.dataset.axis);
+}
+const prefetched = new Set();
+const prefetch = link => {
+	const href = link?.getAttribute?.(`href`);
+	if (!href || href.startsWith(`http`) || href.startsWith(`#`) || prefetched.has(href)) return;
+	prefetched.add(href);
+	const el = document.createElement(`link`);
+	el.rel = `prefetch`;
+	el.as = `document`;
+	el.href = href;
+	document.head.append(el);
 };
-svg.onpointerleave = () => {
-	svg.classList.remove(`snapping`);
-	svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
-	svg.querySelector(`.axis.active`)?.classList.remove(`active`);
-	delete svg.dataset.slot;
-	for (const pick of chosen.children) shapes.append(pairs.get(pick));
-};
+document.addEventListener(`pointerenter`, event => prefetch(event.target.closest?.(`a[href]`)), true);
+document.addEventListener(`focusin`, event => prefetch(event.target.closest?.(`a[href]`)));
+document.addEventListener(`click`, event => {
+	const link = event.target.closest?.(`a[data-model-link]`);
+	if (!link) return;
+	const target = link.querySelector(`.label`) ?? link;
+	target.style.viewTransitionName = `model-title-${link.dataset.modelLink}`;
+});

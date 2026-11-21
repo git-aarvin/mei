@@ -86,6 +86,7 @@ const short = {
 	"Inkling Mini 2": `Inkling 2 Mini`,
 	"Inkling Small 2": `Inkling 2 Small`,
 	"MiniMax Flash M3.1": `M3.1 Flash`,
+	"Step 5 Preview": `5 Preview`,
 };
 const local = import.meta.url.startsWith(`file:`);
 const disk = () => import(`node:fs/promises`);

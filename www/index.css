@@ -187,6 +187,7 @@ footer strong { font-weight: 500; color: inherit; }
 		transition-duration: 0.01ms !important;
 		scroll-behavior: auto !important;
 	}
+	@view-transition { navigation: none !important; }
 }
 .bars { margin-bottom: var(--section-gap); }
 .bars:has(#bar-performance:checked) .chart:not(.performance),

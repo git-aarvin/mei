@@ -15,6 +15,7 @@ export const files = {
 	human: `HiL-Bench`,
 	ramp: `Ramp SWE-Bench v2`,
 	real: `Real-SWE 1.1`,
+	marathon: `SWE Marathon 1.2`,
 };
 export const sites = {
 	CursorBench: `https://cursor.com/cursorbench`,
@@ -33,6 +34,7 @@ export const sites = {
 	"HiL-Bench": `https://labs.scale.com/leaderboard/hil`,
 	"Ramp SWE-Bench v2": `https://labs.ramp.com/swebench`,
 	"Real-SWE 1.1": `https://withspecific.com/benchmarks/real-swe`,
+	"SWE Marathon 1.2": `https://swe-marathon.org`,
 };
 export const families = [...new Set(Object.values(files))];
 export const palette = {

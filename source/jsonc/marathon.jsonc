@@ -1,0 +1,97 @@
+/*
+	Data sourced from Abundant's SWE Marathon 1.2. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Abundant.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.75,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.421,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.731,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.64,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.565,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.478,
+		"series": "4",
+		"tier": "Hydrogen",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.581,
+		"series": "4",
+		"tier": "Neon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.3,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.825,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.688,
+		"series": "6.2",
+		"tier": "Sol",
+		"tokens": null,
+		"usd": null
+	}
+]

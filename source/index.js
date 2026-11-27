@@ -16,6 +16,11 @@ export const files = {
 	ramp: `Ramp SWE-Bench v2`,
 	real: `Real-SWE 1.1`,
 	marathon: `SWE Marathon 1.2`,
+	aa3d: `AA-3D`,
+	cyber: `CyberBench v1.1`,
+	sre: `SRE Bench`,
+	scicode: `SciCode`,
+	rsi: `Vals RSI Index`,
 };
 export const sites = {
 	CursorBench: `https://cursor.com/cursorbench`,
@@ -35,6 +40,11 @@ export const sites = {
 	"Ramp SWE-Bench v2": `https://labs.ramp.com/swebench`,
 	"Real-SWE 1.1": `https://withspecific.com/benchmarks/real-swe`,
 	"SWE Marathon 1.2": `https://swe-marathon.org`,
+	"AA-3D": `https://artificialanalysis.ai/evaluations/aa-3d`,
+	"CyberBench v1.1": `https://www.vals.ai/benchmarks/cyber`,
+	"SRE Bench": `https://www.vals.ai/benchmarks/srebench`,
+	SciCode: `https://artificialanalysis.ai/evaluations/scicode`,
+	"Vals RSI Index": `https://www.vals.ai/benchmarks/rsi_index`,
 };
 export const families = [...new Set(Object.values(files))];
 export const palette = {
@@ -153,7 +163,7 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 	items.forEach((item, index) => {
 		const width = wide(item.text);
 		let best = { score: Infinity }, tries = 0;
-		for (const factor of [1, 1.7, 2.5, 3.5, 4.7]) {
+		for (const factor of [1, 1.25, 1.7, 2.5, 3.5, 4.7]) {
 			const gap = (radius + 8) * factor, diagonal = gap * .78, level = font * .34, below = font * .6;
 			for (const [across, down, anchor] of [
 				[gap, level, `start`],
@@ -161,8 +171,8 @@ const place = (items, obstacles, { left, right, top, bottom, radius, font }) => 
 				[0, -gap - 3, `middle`],
 				[0, gap + font * .78, `middle`],
 				[diagonal, -diagonal, `start`],
-				[diagonal, diagonal + below, `start`],
 				[-diagonal, -diagonal, `end`],
+				[diagonal, diagonal + below, `start`],
 				[-diagonal, diagonal + below, `end`],
 			]) {
 				const column = item.dot[0] + across, base = item.dot[1] + down,

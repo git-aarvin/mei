@@ -3,11 +3,6 @@ const box = (element, across, down) => {
 	return [rect.x + across, rect.y + down, rect.x + rect.width + across, rect.y + rect.height + down];
 };
 const touches = (first, second) => first[0] < second[2] + 4 && first[2] > second[0] - 4 && first[1] < second[3] + 2 && first[3] > second[1] - 2;
-const rounded = value => +value.toFixed(1);
-const barPath = (left, top, width, height, radius) => {
-	const r = Math.min(radius, width);
-	return `M${rounded(left)} ${rounded(top)}H${rounded(left + width - r)}Q${rounded(left + width)} ${rounded(top)} ${rounded(left + width)} ${rounded(top + r)}V${rounded(top + height - r)}Q${rounded(left + width)} ${rounded(top + height)} ${rounded(left + width - r)} ${rounded(top + height)}H${rounded(left)}Z`;
-};
 for (const chart of document.querySelectorAll(`.chart`)) {
 	const dots = [...chart.querySelectorAll(`.dot`)], ticks = [...chart.querySelectorAll(`.tick`)], across = chart.querySelector(`.across`), down = chart.querySelector(`.down`);
 	if (!dots.length || !across || !down) continue;
@@ -48,7 +43,7 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 		for (const tick of ticks) tick.style.visibility = ``;
 	};
 }
-for (const chart of document.querySelectorAll(`.bars .chart:not(.static)`)) {
+for (const chart of document.querySelectorAll(`.bars .chart`)) {
 	const values = [...chart.querySelectorAll(`.value`)];
 	if (!values.length) continue;
 	let active;
@@ -146,55 +141,4 @@ if (compare) {
 		delete svg.dataset.slot;
 		for (const pick of chosen.children) shapes.append(pairs.get(pick));
 	};
-} else {
-	for (const svg of document.querySelectorAll(`.radar`)) {
-		const shapes = svg.querySelector(`.shapes`);
-		svg.onpointermove = event => {
-			if (event.pointerType !== `mouse`) return;
-			const spot = new DOMPoint(event.clientX, event.clientY).matrixTransform(svg.getScreenCTM().inverse());
-			let nearest, distance = Infinity;
-			for (const point of shapes.querySelectorAll(`.point`)) {
-				const vertex = point.firstElementChild, gap = Math.hypot(vertex.cx.baseVal.value - spot.x, vertex.cy.baseVal.value - spot.y);
-				if (gap <= distance) [nearest, distance] = [point, gap];
-			}
-			if (!nearest) return;
-			svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
-			nearest.classList.add(`snapped`);
-			svg.classList.add(`snapping`);
-			const shape = nearest.parentNode;
-			if (shape.dataset.slot !== undefined) svg.dataset.slot = shape.dataset.slot;
-			else svg.dataset.lab = shape.dataset.lab;
-			for (const label of svg.querySelectorAll(`.axis`)) label.classList.toggle(`active`, label.dataset.axis === nearest.dataset.axis);
-		};
-		svg.onpointerleave = () => {
-			svg.classList.remove(`snapping`);
-			svg.querySelector(`.snapped`)?.classList.remove(`snapped`);
-			svg.querySelector(`.axis.active`)?.classList.remove(`active`);
-			delete svg.dataset.lab;
-			delete svg.dataset.slot;
-		};
-	}
 }
-const prefetched = new Set();
-const prefetch = link => {
-	const href = link?.getAttribute?.(`href`);
-	if (!href || href.startsWith(`http`) || href.startsWith(`#`) || prefetched.has(href)) return;
-	prefetched.add(href);
-	const el = document.createElement(`link`);
-	el.rel = `prefetch`;
-	el.as = `document`;
-	el.href = href;
-	document.head.append(el);
-};
-document.addEventListener(`pointerenter`, event => prefetch(event.target.closest?.(`a[href]`)), true);
-document.addEventListener(`focusin`, event => prefetch(event.target.closest?.(`a[href]`)));
-document.addEventListener(`click`, event => {
-	const link = event.target.closest?.(`a[data-model-link]`);
-	if (link) {
-		const target = link.querySelector(`.label`) ?? link;
-		target.style.viewTransitionName = `model-title-${link.dataset.modelLink}`;
-		return;
-	}
-	const labLink = event.target.closest?.(`a[data-lab-link]`);
-	if (labLink) labLink.style.viewTransitionName = `lab-title-${labLink.dataset.labLink}`;
-});

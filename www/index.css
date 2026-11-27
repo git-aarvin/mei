@@ -19,6 +19,9 @@
 	--number: #555;
 	--ghost: rgb(0 0 0 / 0.18);
 	--shade: 0.7;
+	--gold: #f6d77a;
+	--gold-edge: #e0b53c;
+	--gold-ink: #4a3500;
 	--warn: #d99b00;
 	--badge: #3b6fd4;
 	--pareto-row: rgb(0 0 0 / 0.035);
@@ -46,6 +49,9 @@
 		--number: #b4b4b4;
 		--ghost: rgb(255 255 255 / 0.24);
 		--shade: 1.35;
+		--gold: #d9ae3f;
+		--gold-edge: #f0cb6a;
+		--gold-ink: #231900;
 		--warn: #f0cb6a;
 		--badge: #6094f5;
 		--pareto-row: rgb(255 255 255 / 0.045);
@@ -640,6 +646,31 @@ tr.pareto td { background: var(--pareto-row); }
 .radar .snapped .vertex { transform: scale(1.6); }
 .radar .snapped .value { opacity: 1; }
 .radar.snapping .point:not(.snapped) .vertex { opacity: 0.35; }
+.ribbon {
+	display: block;
+	margin: 0 0 var(--section-gap);
+	padding: 10px 8px;
+	border-top: 1px solid var(--gold-edge);
+	border-bottom: 1px solid var(--gold-edge);
+	border-radius: 4px;
+	background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 82%, var(--gold-edge)));
+	color: var(--gold-ink);
+	font-size: 14px;
+	font-weight: 500;
+	font-variation-settings: "ROND" 80;
+	text-align: center;
+	text-decoration: none;
+	transition: filter 120ms, transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ribbon:is(:hover, :focus-visible) {
+	color: var(--gold-ink);
+	text-decoration: none;
+	filter: brightness(1.06) saturate(1.1);
+}
+.ribbon:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+@media (max-width: 480px) {
+	.ribbon { padding: 9px 6px; font-size: 13px; }
+}
 th,
 td.rank,
 td.num,

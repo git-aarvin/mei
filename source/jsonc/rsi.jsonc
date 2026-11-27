@@ -1,0 +1,79 @@
+/*
+	Data sourced from Vals AI's Vals RSI Index v1.1. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Vals AI.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.3788,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": 1536
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.3731,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": 1647
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.2775,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": null,
+		"usd": 922
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 0.345,
+		"series": "4",
+		"tier": "Neon",
+		"tokens": null,
+		"usd": 475
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.245,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.2901,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": null,
+		"usd": 1367
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.2275,
+		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": 247
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.2025,
+		"series": "4.7",
+		"tier": "",
+		"tokens": null,
+		"usd": 948
+	}
+]

@@ -94,4 +94,22 @@
 		"tokens": 20290000,
 		"usd": 46.49
 	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.055,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": null,
+		"usd": 36.53
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.085,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": null,
+		"usd": null
+	}
 ]

@@ -1,0 +1,124 @@
+/*
+	Data sourced from Vals AI's CyberBench v1.1. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Vals AI.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.7548,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 19500000,
+		"usd": 1.25
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.7458,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 6800000,
+		"usd": 4.17
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.5958,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 14850000,
+		"usd": 2.91
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.7369,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": 6720000,
+		"usd": 0.11
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.6952,
+		"series": "1",
+		"tier": "Ember",
+		"tokens": 4870000,
+		"usd": 2.43
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.8036,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": 12520000,
+		"usd": 3.66
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.7363,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": 10030000,
+		"usd": 3.63
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.7625,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 6390000,
+		"usd": 0.13
+	},
+	{
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.7274,
+		"series": "2",
+		"tier": "Small",
+		"tokens": 38420000,
+		"usd": 1.27
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.7536,
+		"series": "V2.6",
+		"tier": "Flash",
+		"tokens": 5290000,
+		"usd": 0.05
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.7286,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 3730000,
+		"usd": 0.09
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.7208,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 9280000,
+		"usd": 2.69
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.6946,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 9350000,
+		"usd": 8.54
+	}
+]

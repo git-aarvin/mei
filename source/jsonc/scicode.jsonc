@@ -1,0 +1,133 @@
+/*
+	Data sourced from Artificial Analysis's SciCode evaluation. Benchmark results
+	are reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Artificial Analysis and the SciCode authors.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.677,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.55,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.669,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.61,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.559,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.603,
+		"series": "1",
+		"tier": "Wonder",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.626,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.608,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.546,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.551,
+		"series": "6.1",
+		"tier": "Terra",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.523,
+		"series": "2",
+		"tier": "Small",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.609,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.59,
+		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.574,
+		"series": "4.7",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	}
+]

@@ -1,0 +1,115 @@
+/*
+	Data sourced from Vals AI's SRE Bench. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Vals AI.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.0572,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": 39420000,
+		"usd": 3.14
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.2176,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": 39520000,
+		"usd": 33.13
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 0.3015,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": 78990000,
+		"usd": 17.27
+	},
+	{
+		"lab": "DeepSeek",
+		"name": "",
+		"score": 0.0076,
+		"series": "V4.1 1017",
+		"tier": "Flash",
+		"tokens": 39510000,
+		"usd": 0.55
+	},
+	{
+		"lab": "Meta",
+		"name": "Muse",
+		"score": 0.1183,
+		"series": "1",
+		"tier": "Wonder Full",
+		"tokens": 33310000,
+		"usd": 33.81
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 0.271,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": 120600000,
+		"usd": 27.39
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 0.0267,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": 67870000,
+		"usd": 1.55
+	},
+	{
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 0.0191,
+		"series": "2",
+		"tier": "Small",
+		"tokens": 199740000,
+		"usd": 6.67
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.042,
+		"series": "V2.6",
+		"tier": "Flash",
+		"tokens": 74430000,
+		"usd": 0.4
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 0.0305,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": 31820000,
+		"usd": 0.53
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 0.0916,
+		"series": "5.3",
+		"tier": "",
+		"tokens": 62750000,
+		"usd": 27.47
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 0.0382,
+		"series": "4.7",
+		"tier": "",
+		"tokens": 53500000,
+		"usd": 64.77
+	}
+]

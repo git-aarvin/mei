@@ -1,0 +1,142 @@
+/*
+	Data sourced from Artificial Analysis's AA-3D v1.0. Benchmark results are
+	reproduced for aggregation and comparison purposes. All benchmark data
+	and methodology are attributed to Artificial Analysis.
+*/
+[
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 1271,
+		"series": "5.2",
+		"tier": "Fable",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 998,
+		"series": "5.5",
+		"tier": "Haiku",
+		"tokens": null,
+		"usd": 0.49
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 1202,
+		"series": "5.5",
+		"tier": "Opus",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Anthropic",
+		"name": "Claude",
+		"score": 1204,
+		"series": "5.5",
+		"tier": "Sonnet",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 1200,
+		"series": "4",
+		"tier": "Carbon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 1196,
+		"series": "4",
+		"tier": "Hydrogen",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Google",
+		"name": "Gemini",
+		"score": 1246,
+		"series": "4",
+		"tier": "Neon",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Moonshot",
+		"name": "Kimi",
+		"score": 1112,
+		"series": "K3.1",
+		"tier": "Pro",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 1318,
+		"series": "6.2",
+		"tier": "Astra",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 1000,
+		"series": "6",
+		"tier": "Luna",
+		"tokens": null,
+		"usd": 0.2
+	},
+	{
+		"lab": "OpenAI",
+		"name": "GPT",
+		"score": 1259,
+		"series": "6.2",
+		"tier": "Sol",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Thinking Machines",
+		"name": "Inkling",
+		"score": 1027,
+		"series": "2",
+		"tier": "Small",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "Xiaomi",
+		"name": "MiMo",
+		"score": 983,
+		"series": "V2.6",
+		"tier": "Pro",
+		"tokens": null,
+		"usd": 0.44
+	},
+	{
+		"lab": "Z.ai",
+		"name": "GLM",
+		"score": 794,
+		"series": "5.3",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	},
+	{
+		"lab": "xAI",
+		"name": "Grok",
+		"score": 992,
+		"series": "4.7",
+		"tier": "",
+		"tokens": null,
+		"usd": null
+	}
+]

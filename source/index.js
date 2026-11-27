@@ -75,7 +75,6 @@ const short = {
 	"Kimi Pro K3.1": `K3.1 Pro`,
 	"MiMo Pro V2.6": `V2.6-Pro`,
 	"MiMo Flash V2.6": `V2.6-Flash`,
-	"Inkling Mini 2": `Inkling 2 Mini`,
 	"Inkling Small 2": `Inkling 2 Small`,
 };
 const disk = () => import(`node:fs/promises`);

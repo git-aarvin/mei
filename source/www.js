@@ -1,11 +1,9 @@
-import { bar, encode, families, fill, read, scatter, sites, times } from "./index.js";
+import { encode, families, fill, read, scatter, sites, times } from "./index.js";
 const geometry = { left: 48, right: 664, top: 26, bottom: 384, radius: 4.5, font: 12, pad: 0, gap: 7, drop: 16 };
-const barGeometry = { left: 104, right: 640, top: 26, bottom: 384, radius: 2, font: 12, pad: 0, gap: 8, drop: 16, tooltip: false };
 const round = value => +value.toFixed(1);
 const percent = value => Math.max(0, Math.min(100, value));
 export const page = async list => {
 	const chosen = list.slice(0, 2), spare = list.slice(2);
-	const bars = Object.fromEntries([`index`, `cost`, `tokens`].map(metric => [metric, bar(list, metric, barGeometry)]));
 	const middle = [340, 264], reach = 174, count = families.length;
 	const angle = index => -Math.PI / 2 + index * 2 * Math.PI / count;
 	const polar = (index, radius) => [middle[0] + Math.cos(angle(index)) * radius, middle[1] + Math.sin(angle(index)) * radius];
@@ -45,9 +43,6 @@ export const page = async list => {
 	return fill(await read(`../www/index.html`), {
 		cost: scatter(list, `cost`, geometry).markup,
 		tokens: scatter(list, `tokens`, geometry).markup,
-		barIndex: `<path class="axis" d="${bars.index.axis}"/>${bars.index.markup}`,
-		barCost: `<path class="axis" d="${bars.cost.axis}"/>${bars.cost.markup}`,
-		barTokens: `<path class="axis" d="${bars.tokens.axis}"/>${bars.tokens.markup}`,
 		rows: list.map(row).join(``),
 		chosen: chosen.map(pick).join(``),
 		options: list.map(option).join(``),

@@ -26,7 +26,6 @@ const data = await load();
 const list = models(data);
 const [svg, html] = await Promise.all([charts(list), page(list)]);
 await Promise.all([
-	mkdir(new URL(`bar/`, root), { recursive: true }),
 	mkdir(new URL(`scatter/`, root), { recursive: true }),
 ]);
 await Promise.all([

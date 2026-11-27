@@ -49,11 +49,11 @@ export const palette = {
 	Xiaomi: `#dc7a30`,
 	"Thinking Machines": `#4f8f58`,
 };
-const typical = (models, field) => field === `score` ? Math.max(...models.map(model => model.score)) : Math.min(...models.map(model => model[field]));
-export const ranked = (list, field = `score`) => {
+const typical = models => Math.max(...models.map(model => model.score));
+export const ranked = list => {
 	const labs = [...new Set([...list].sort((first, second) => first.rank - second.rank).map(model => model.lab))],
-		value = new Map(labs.map(lab => [lab, typical(list.filter(model => model.lab === lab), field)]));
-	return labs.sort((first, second) => field === `score` ? value.get(second) - value.get(first) : value.get(first) - value.get(second));
+		value = new Map(labs.map(lab => [lab, typical(list.filter(model => model.lab === lab))]));
+	return labs.sort((first, second) => value.get(second) - value.get(first));
 };
 const muted = `#6b6b6b`;
 export const color = lab => palette[lab] ?? muted;
@@ -211,42 +211,6 @@ export const scatter = (list, metric, geometry) => {
 			`<polyline class="front" points="${stairs.map(dot => dot.map(round)).join(` `)}"/>`,
 			...list.map((model, index) => `<circle class="dot" ${tag(index, ` data-edge="${times(model[metric])}" data-score="${model.score.toFixed(1)}" fill="${color(model.lab)}"`)} cx="${round(dots[index][0])}" cy="${round(dots[index][1])}" r="${radius}"/>`),
 			...labels.map((label, index) => `<text class="label" ${tag(index)} fill="${shade(color(list[index].lab), .7)}" x="${round(label.at[0])}" y="${round(label.at[1])}" text-anchor="${label.anchor}">${encode(label.text)}</text>`),
-		].join(``),
-	};
-};
-export const bar = (list, metric, geometry) => {
-	const { left, right, top, bottom, radius, gap, drop, tooltip = true } = geometry,
-		log = metric !== `index`,
-		field = metric === `index` ? `score` : metric,
-		rows = log ? [...list].sort((first, second) => first[field] - second[field]) : list,
-		values = rows.map(model => model[field]),
-		floor = log ? Math.log10(Math.min(...values) * .9) : Math.floor(Math.min(...values) / 10) * 10,
-		ceiling = log ? Math.log10(Math.max(...values) * 1.1) : Math.ceil(Math.max(...values) / 10) * 10,
-		horizontal = value => left + (log ? (Math.log10(value) - floor) / (ceiling - floor) : (value - floor) / (ceiling - floor)) * (right - left),
-		step = (bottom - top) / rows.length,
-		height = Math.min(step * .62, 22),
-		center = index => top + step * (index + .5),
-		upper = Math.floor(Math.log2(10 ** ceiling)), lower = Math.ceil(Math.log2(10 ** floor)),
-		powers = Array.from({ length: Math.max(0, upper - lower + 1) }, (item, index) => 2 ** (upper - index)),
-		columns = log ? (powers.length % 2 ? powers.filter((power, index) => index % 2 === 0) : powers) : Array.from({ length: (ceiling - floor) / 10 + 1 }, (item, index) => floor + index * 10),
-		round = value => +value.toFixed(1),
-		shape = (x, y, width, size) => {
-			const r = Math.min(radius, width);
-			return `M${round(x)} ${round(y)}H${round(x + width - r)}Q${round(x + width)} ${round(y)} ${round(x + width)} ${round(y + r)}V${round(y + size - r)}Q${round(x + width)} ${round(y + size)} ${round(x + width - r)} ${round(y + size)}H${round(x)}Z`;
-		},
-		readout = value => log ? times(value) : value.toFixed(1),
-		tag = (index, extra = ``) => `data-key="${index}" data-lab="${rows[index].lab}"${extra}`;
-	return {
-		axis: `M${left} ${top}V${bottom}H${right}`,
-		labs: ranked(list, field),
-		markup: [
-			...columns.map(value => `<line class="grid" x1="${round(horizontal(value))}" y1="${top}" x2="${round(horizontal(value))}" y2="${bottom}"/>`),
-			...columns.map(value => `<text class="tick" x="${round(horizontal(value))}" y="${bottom + drop}" text-anchor="middle">${log ? `${value}×` : value}</text>`),
-			...rows.map((model, index) => {
-				const y = center(index), width = Math.max(2, horizontal(model[field]) - left), end = left + width;
-				const title = tooltip ? `<title>${encode(model.short)}: ${readout(model[field])}</title>` : ``;
-				return `<text class="label" ${tag(index)} x="${left - gap}" y="${round(y)}" text-anchor="end" dominant-baseline="central">${encode(model.short)}</text><path class="bar" ${tag(index, ` fill="${color(model.lab)}" data-width="${round(width)}"`)} d="${shape(left, y - height / 2, width, height)}">${title}</path><text class="value" ${tag(index)} x="${round(end + 8)}" y="${round(y)}" dominant-baseline="central">${readout(model[field])}</text>`;
-			}),
 		].join(``),
 	};
 };

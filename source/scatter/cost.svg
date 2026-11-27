@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="743" viewBox="0 0 1100 743" role="img">
-	<title>Model performance versus relative benchmark cost</title>
+	<title>Model capability versus relative benchmark cost</title>
 	<style>
 		text{font-family:system-ui,sans-serif}
 		.tick{font-size:15px;fill:#777}
@@ -25,7 +25,7 @@
 	</defs>
 	<rect width="1100" height="743" fill="#fff"/>
 	<g transform="translate(0 35)">
-		<text class="key" x="76" y="22">Performance</text>
+		<text class="key" x="76" y="22">Capability</text>
 		<text class="key" x="1050" y="668" text-anchor="end">Cost ↘</text>
 		<!--axis--><!--/axis-->
 		<!--legend--><!--/legend-->

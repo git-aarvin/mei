@@ -107,15 +107,6 @@
 	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
-		"score": 0,
-		"series": "2",
-		"tier": "Mini",
-		"tokens": 145030000,
-		"usd": 4.57
-	},
-	{
-		"lab": "Thinking Machines",
-		"name": "Inkling",
 		"score": 0.0286,
 		"series": "2",
 		"tier": "Small",

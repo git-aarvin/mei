@@ -4,19 +4,19 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Models Engineering Index</title>
-	<meta name="description" content="Language model performance on engineering tasks, compared by cost and token use.">
+	<meta name="description" content="Language model capability on engineering tasks, compared by cost and token use.">
 	<meta name="color-scheme" content="light dark">
 	<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 	<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop stop-color='%23f0a9b8'/%3E%3Cstop offset='1' stop-color='%237d9fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='11' fill='url(%23g)'/%3E%3C/svg%3E">
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Models Engineering Index">
-	<meta property="og:description" content="Mei calculates language models' practical performance on engineering tasks.">
+	<meta property="og:description" content="Mei calculates language models' practical capability on engineering tasks.">
 	<meta property="og:image" content="https://git-aarvin.github.io/mei/scatter/cost.png">
 	<meta property="og:image:type" content="image/png">
 	<meta property="og:image:width" content="6875">
 	<meta property="og:image:height" content="4644">
-	<meta property="og:image:alt" content="A scatter plot of model performance versus relative cost, with higher-performing and cheaper models toward the upper right.">
+	<meta property="og:image:alt" content="A scatter plot of model capability versus relative cost, with more capable and cheaper models toward the upper right.">
 	<meta name="twitter:card" content="summary_large_image">
 	<link rel="stylesheet" href="index.css">
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="39ba71d6-92d6-4c6a-a7eb-06807a052eaa"></script>
@@ -25,16 +25,16 @@
 	<main>
 		<header>
 			<h1 class="intro">
-				<span class="wide"><span class="brand">Mei</span><span class="callout">&mdash;or, the Models Engineering Index&mdash;</span>calculates language models' practical performance on engineering tasks.</span>
-				<span class="narrow"><span class="brand">Mei</span> calculates language models' engineering performance.</span>
+				<span class="wide"><span class="brand">Mei</span><span class="callout">&mdash;or, the Models Engineering Index&mdash;</span>calculates language models' practical capability on engineering tasks.</span>
+				<span class="narrow"><span class="brand">Mei</span> calculates language models' engineering capability.</span>
 			</h1>
-			<p>Each model's score is a composite index across 17 coding benchmarks, adjusted for benchmark difficulty and missing results so models average 50. Cost and token use are adjusted the same way and shown relative to the typical model (1×).</p>
+			<p>Each model's score is a composite capability across 17 coding benchmarks, adjusted for benchmark difficulty and missing results so models average 50. Cost and token use are adjusted the same way and shown relative to the typical model (1×).</p>
 		</header>
 		<section class="scatter" aria-labelledby="title">
-			<p class="title" id="title">Performance versus
+			<p class="title" id="title">Capability versus
 				<input class="reader" type="radio" name="metric" id="cost" checked><label for="cost">cost</label><span aria-hidden="true"> or </span><input class="reader" type="radio" name="metric" id="tokens"><label for="tokens">tokens</label>.
 			</p>
-			<svg class="chart cost" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Performance versus relative cost. Higher is better; right is cheaper.">
+			<svg class="chart cost" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Capability versus relative cost. Higher is better; right is cheaper.">
 				<g class="cross" aria-hidden="true">
 					<line class="vertical" y1="26" y2="384"/>
 					<line class="horizontal" x1="48" x2="664"/>
@@ -43,7 +43,7 @@
 				</g>
 				<!--cost--><!--/cost-->
 			</svg>
-			<svg class="chart tokens" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Performance versus relative tokens. Higher is better; right is leaner.">
+			<svg class="chart tokens" viewBox="0 0 680 424" width="680" height="424" role="img" aria-label="Capability versus relative tokens. Higher is better; right is leaner.">
 				<g class="cross" aria-hidden="true">
 					<line class="vertical" y1="26" y2="384"/>
 					<line class="horizontal" x1="48" x2="664"/>
@@ -61,8 +61,8 @@
 					<tr>
 						<th class="rank" scope="col" aria-sort="none"><button type="button">#</button></th>
 						<th scope="col" aria-sort="none"><button type="button">Model</button></th>
-						<th class="bar" scope="col"><span class="reader">Index bar</span></th>
-						<th class="num" scope="col" aria-sort="descending" data-first="descending"><button type="button">Index</button></th>
+						<th class="bar" scope="col"><span class="reader">Capability bar</span></th>
+						<th class="num" scope="col" aria-sort="descending" data-first="descending"><button type="button">Capability</button></th>
 						<th class="num" scope="col" aria-sort="none"><button type="button">Cost</button></th>
 						<th class="num" scope="col" aria-sort="none"><button type="button">Tokens</button></th>
 					</tr>
@@ -70,9 +70,9 @@
 				<tbody><!--rows--><!--/rows--></tbody>
 			</table>
 		</section>
-		<section class="compare" aria-label="Performance by benchmark">
+		<section class="compare" aria-label="Capability by benchmark">
 			<p class="picks"><span class="lead">Comparing</span> <span class="chosen"><!--chosen--><!--/chosen--></span> <span class="and">and</span> <span class="add"><span aria-hidden="true">…</span><select aria-label="Add a model to the comparison"><option value="" selected disabled>…</option><!--options--><!--/options--></select></span><span class="spare" hidden><!--others--><!--/others--></span></p>
-			<svg class="radar" viewBox="0 0 680 520" width="680" height="520" role="img" aria-label="Performance by benchmark">
+			<svg class="radar" viewBox="0 0 680 520" width="680" height="520" role="img" aria-label="Capability by benchmark">
 				<!--frame--><!--/frame-->
 				<g class="shapes"><!--active--><!--/active--></g>
 				<g class="spare" hidden><!--idle--><!--/idle--></g>

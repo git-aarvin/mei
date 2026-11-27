@@ -1,22 +1,13 @@
 /*
-	Data sourced from Vals AI's Vibe Code Bench v1.1. Benchmark results are
+	Data sourced from Vals AI's Vibe Code Bench v1.1.1. Benchmark results are
 	reproduced for aggregation and comparison purposes. All benchmark data
 	and methodology are attributed to Vals AI.
 */
 [
 	{
-		"lab": "Alibaba",
-		"name": "Qwen",
-		"score": 0.8666,
-		"series": "4",
-		"tier": "Max",
-		"tokens": 31210000,
-		"usd": 41.4
-	},
-	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.9377,
+		"score": 0.8352,
 		"series": "5.2",
 		"tier": "Fable",
 		"tokens": 34710000,
@@ -25,7 +16,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.9044,
+		"score": 0.7659,
 		"series": "5.5",
 		"tier": "Haiku",
 		"tokens": 92490000,
@@ -34,7 +25,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.9029,
+		"score": 0.7849,
 		"series": "5.5",
 		"tier": "Opus",
 		"tokens": 112330000,
@@ -43,7 +34,7 @@
 	{
 		"lab": "Anthropic",
 		"name": "Claude",
-		"score": 0.9239,
+		"score": 0.8088,
 		"series": "5.5",
 		"tier": "Sonnet",
 		"tokens": 116970000,
@@ -52,7 +43,7 @@
 	{
 		"lab": "DeepSeek",
 		"name": "",
-		"score": 0.8773,
+		"score": 0.7464,
 		"series": "V4.1 1017",
 		"tier": "Flash",
 		"tokens": 43650000,
@@ -61,7 +52,7 @@
 	{
 		"lab": "Google",
 		"name": "Gemini",
-		"score": 0.8906,
+		"score": 0.7577,
 		"series": "4",
 		"tier": "Carbon",
 		"tokens": 16860000,
@@ -70,7 +61,7 @@
 	{
 		"lab": "Google",
 		"name": "Gemini",
-		"score": 0.8778,
+		"score": 0.7616,
 		"series": "4",
 		"tier": "Hydrogen",
 		"tokens": 17300000,
@@ -79,7 +70,7 @@
 	{
 		"lab": "Google",
 		"name": "Gemini",
-		"score": 0.937,
+		"score": 0.8023,
 		"series": "4",
 		"tier": "Neon",
 		"tokens": 18460000,
@@ -88,7 +79,7 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
-		"score": 0.837,
+		"score": 0.6396,
 		"series": "1",
 		"tier": "Ember",
 		"tokens": 5400000,
@@ -97,7 +88,7 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
-		"score": 0.8309,
+		"score": 0.6709,
 		"series": "1",
 		"tier": "Wonder",
 		"tokens": 2930000,
@@ -106,34 +97,16 @@
 	{
 		"lab": "Meta",
 		"name": "Muse",
-		"score": 0.86,
+		"score": 0.6864,
 		"series": "1",
 		"tier": "Wonder Full",
 		"tokens": 4500000,
 		"usd": 2.29
 	},
 	{
-		"lab": "MiniMax",
-		"name": "MiniMax",
-		"score": 0.7394,
-		"series": "M3.1",
-		"tier": "Flash",
-		"tokens": 66860000,
-		"usd": 1.15
-	},
-	{
-		"lab": "Mistral",
-		"name": "Mistral",
-		"score": 0.8156,
-		"series": "4",
-		"tier": "Large",
-		"tokens": 24440000,
-		"usd": 11.72
-	},
-	{
 		"lab": "Moonshot",
 		"name": "Kimi",
-		"score": 0.8489,
+		"score": 0.7146,
 		"series": "K3.1",
 		"tier": "Pro",
 		"tokens": 28140000,
@@ -142,7 +115,7 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.8165,
+		"score": 0.6531,
 		"series": "6",
 		"tier": "Luna",
 		"tokens": 63910000,
@@ -151,7 +124,7 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.84,
+		"score": 0.7552,
 		"series": "6.1",
 		"tier": "Terra",
 		"tokens": 49210000,
@@ -160,7 +133,7 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.899,
+		"score": 0.7857,
 		"series": "6.2",
 		"tier": "Astra",
 		"tokens": 7110000,
@@ -169,52 +142,16 @@
 	{
 		"lab": "OpenAI",
 		"name": "GPT",
-		"score": 0.8762,
+		"score": 0.7948,
 		"series": "6.2",
 		"tier": "Sol",
 		"tokens": 13910000,
 		"usd": 3.23
 	},
 	{
-		"lab": "Reflection",
-		"name": "Beam",
-		"score": 0.6644,
-		"series": "1.0",
-		"tier": "",
-		"tokens": 8650000,
-		"usd": null
-	},
-	{
-		"lab": "StepFun",
-		"name": "Step",
-		"score": 0.704,
-		"series": "5 Preview",
-		"tier": "",
-		"tokens": 50260000,
-		"usd": 5.86
-	},
-	{
-		"lab": "Tencent",
-		"name": "Hy",
-		"score": 0.8101,
-		"series": "4",
-		"tier": "",
-		"tokens": 34760000,
-		"usd": 2.39
-	},
-	{
-		"lab": "Tencent",
-		"name": "Hy",
-		"score": 0.7484,
-		"series": "4",
-		"tier": "Flash",
-		"tokens": 19950000,
-		"usd": 0.12
-	},
-	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
-		"score": 0.7792,
+		"score": 0.58,
 		"series": "2",
 		"tier": "Mini",
 		"tokens": 60520000,
@@ -223,7 +160,7 @@
 	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
-		"score": 0.8155,
+		"score": 0.6683,
 		"series": "2",
 		"tier": "Small",
 		"tokens": 51080000,
@@ -232,7 +169,7 @@
 	{
 		"lab": "xAI",
 		"name": "Grok",
-		"score": 0.8617,
+		"score": 0.6907,
 		"series": "4.7",
 		"tier": "",
 		"tokens": 15500000,
@@ -241,7 +178,7 @@
 	{
 		"lab": "Xiaomi",
 		"name": "MiMo",
-		"score": 0.7896,
+		"score": 0.5657,
 		"series": "V2.6",
 		"tier": "Flash",
 		"tokens": 27490000,
@@ -250,7 +187,7 @@
 	{
 		"lab": "Xiaomi",
 		"name": "MiMo",
-		"score": 0.8522,
+		"score": 0.6478,
 		"series": "V2.6",
 		"tier": "Pro",
 		"tokens": 21680000,
@@ -259,7 +196,7 @@
 	{
 		"lab": "Z.ai",
 		"name": "GLM",
-		"score": 0.7813,
+		"score": 0.6627,
 		"series": "5.3",
 		"tier": "",
 		"tokens": 39590000,

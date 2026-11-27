@@ -77,15 +77,6 @@
 		"usd": null
 	},
 	{
-		"lab": "Mistral",
-		"name": "Mistral",
-		"score": 0.4519,
-		"series": "4",
-		"tier": "Large",
-		"tokens": null,
-		"usd": null
-	},
-	{
 		"lab": "Moonshot",
 		"name": "Kimi",
 		"score": 0.6111,
@@ -131,15 +122,6 @@
 		"usd": null
 	},
 	{
-		"lab": "Reflection",
-		"name": "Beam",
-		"score": 0.3472,
-		"series": "1.0",
-		"tier": "",
-		"tokens": null,
-		"usd": null
-	},
-	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.6189,
@@ -165,5 +147,5 @@
 		"tier": "",
 		"tokens": null,
 		"usd": null
-	}
+	},
 ]

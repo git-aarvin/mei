@@ -95,15 +95,6 @@
 		"usd": 2500
 	},
 	{
-		"lab": "Mistral",
-		"name": "Mistral",
-		"score": 0.276,
-		"series": "4",
-		"tier": "Large",
-		"tokens": 5800000000,
-		"usd": 700
-	},
-	{
 		"lab": "Moonshot",
 		"name": "Kimi",
 		"score": 0.597,
@@ -149,33 +140,6 @@
 		"usd": 349
 	},
 	{
-		"lab": "Reflection",
-		"name": "Beam",
-		"score": 0.064,
-		"series": "1.0",
-		"tier": "",
-		"tokens": 4100000000,
-		"usd": 200
-	},
-	{
-		"lab": "Tencent",
-		"name": "Hy",
-		"score": 0.379,
-		"series": "4",
-		"tier": "",
-		"tokens": 5300000000,
-		"usd": 347.6
-	},
-	{
-		"lab": "Tencent",
-		"name": "Hy",
-		"score": 0.118,
-		"series": "4",
-		"tier": "Flash",
-		"tokens": 4500000000,
-		"usd": 15
-	},
-	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.13,
@@ -219,5 +183,5 @@
 		"tier": "",
 		"tokens": 5500000000,
 		"usd": 3700
-	}
+	},
 ]

@@ -59,24 +59,6 @@
 		"usd": null
 	},
 	{
-		"lab": "MiniMax",
-		"name": "MiniMax",
-		"score": 0.6567,
-		"series": "M3.1",
-		"tier": "Flash",
-		"tokens": null,
-		"usd": null
-	},
-	{
-		"lab": "Mistral",
-		"name": "Mistral",
-		"score": 0.3533,
-		"series": "4",
-		"tier": "Large",
-		"tokens": null,
-		"usd": null
-	},
-	{
 		"lab": "Moonshot",
 		"name": "Kimi",
 		"score": 0.6133,
@@ -102,5 +84,5 @@
 		"tier": "",
 		"tokens": null,
 		"usd": null
-	}
+	},
 ]

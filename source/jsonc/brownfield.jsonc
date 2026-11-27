@@ -32,15 +32,6 @@
 		"usd": 57.92
 	},
 	{
-		"lab": "MiniMax",
-		"name": "MiniMax",
-		"score": 0.1983,
-		"series": "M3.1",
-		"tier": "Flash",
-		"tokens": 100160000,
-		"usd": 3.72
-	},
-	{
 		"lab": "OpenAI",
 		"name": "GPT",
 		"score": 0.5516,

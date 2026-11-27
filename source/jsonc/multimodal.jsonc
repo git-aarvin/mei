@@ -68,15 +68,6 @@
 		"usd": 0.03
 	},
 	{
-		"lab": "StepFun",
-		"name": "Step",
-		"score": 0.4083,
-		"series": "5 Preview",
-		"tier": "",
-		"tokens": 6130000,
-		"usd": 0.61
-	},
-	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0.3792,

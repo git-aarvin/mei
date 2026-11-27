@@ -77,15 +77,6 @@
 		"usd": 191
 	},
 	{
-		"lab": "Reflection",
-		"name": "Beam",
-		"score": 0.033,
-		"series": "1.0",
-		"tier": "",
-		"tokens": 15000000,
-		"usd": 1.47
-	},
-	{
 		"lab": "Z.ai",
 		"name": "GLM",
 		"score": 0.118,
@@ -102,5 +93,5 @@
 		"tier": "",
 		"tokens": 146000000,
 		"usd": 146
-	}
+	},
 ]

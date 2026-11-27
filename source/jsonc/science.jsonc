@@ -105,24 +105,6 @@
 		"usd": 2.53
 	},
 	{
-		"lab": "Reflection",
-		"name": "Beam",
-		"score": 0.0143,
-		"series": "1.0",
-		"tier": "",
-		"tokens": 26040000,
-		"usd": null
-	},
-	{
-		"lab": "StepFun",
-		"name": "Step",
-		"score": 0.0286,
-		"series": "5 Preview",
-		"tier": "",
-		"tokens": 58900000,
-		"usd": 4.25
-	},
-	{
 		"lab": "Thinking Machines",
 		"name": "Inkling",
 		"score": 0,
@@ -175,5 +157,5 @@
 		"tier": "",
 		"tokens": 16720000,
 		"usd": 17.04
-	}
+	},
 ]

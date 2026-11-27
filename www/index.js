@@ -43,22 +43,6 @@ for (const chart of document.querySelectorAll(`.chart`)) {
 		for (const tick of ticks) tick.style.visibility = ``;
 	};
 }
-for (const chart of document.querySelectorAll(`.bars .chart`)) {
-	const values = [...chart.querySelectorAll(`.value`)];
-	if (!values.length) continue;
-	let active;
-	chart.onpointermove = event => {
-		if (event.pointerType !== `mouse`) return;
-		const bar = event.target.closest(`.bar`);
-		if (!bar || bar.dataset.key === active) return;
-		active = bar.dataset.key;
-		for (const value of values) value.classList.toggle(`snapped`, value.dataset.key === active);
-	};
-	chart.onpointerleave = () => {
-		active = undefined;
-		for (const value of values) value.classList.remove(`snapped`);
-	};
-}
 for (const table of document.querySelectorAll(`table`)) {
 	const body = table.tBodies[0], meters = [...table.querySelectorAll(`.meter`)];
 	table.onclick = event => {

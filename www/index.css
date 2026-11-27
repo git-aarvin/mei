@@ -22,8 +22,6 @@
 	--gold: #f6d77a;
 	--gold-edge: #e0b53c;
 	--gold-ink: #4a3500;
-	--warn: #d99b00;
-	--badge: #3b6fd4;
 	--pareto-row: rgb(0 0 0 / 0.035);
 	--popover-bg: #111;
 	--popover-ink: #fff;
@@ -52,8 +50,6 @@
 		--gold: #d9ae3f;
 		--gold-edge: #f0cb6a;
 		--gold-ink: #231900;
-		--warn: #f0cb6a;
-		--badge: #6094f5;
 		--pareto-row: rgb(255 255 255 / 0.045);
 		--popover-bg: #1c1c1c;
 		--popover-ink: #ececec;
@@ -340,52 +336,7 @@ th.bar, td.bar {
 	opacity: 1;
 }
 .ghosting td.bar:hover .ghost { width: 0; }
-.warn,
-.badge {
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	margin-left: 5px;
-	vertical-align: -2px;
-	cursor: default;
-}
-.warn { color: var(--warn); }
-.badge { color: var(--badge); }
 tr.pareto td { background: var(--pareto-row); }
-:is(.warn, .badge):focus-visible {
-	outline: 2px solid currentColor;
-	outline-offset: 2px;
-	border-radius: 3px;
-}
-.warn svg,
-.badge svg {
-	display: block;
-	flex: none;
-}
-:is(.warn, .badge) .tip {
-	position: absolute;
-	left: 50%;
-	bottom: calc(100% + 6px);
-	transform: translate(-50%, 2px);
-	padding: 4px 8px;
-	border-radius: 6px;
-	border: 1px solid var(--popover-border);
-	background: var(--popover-bg);
-	color: var(--popover-ink);
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 1.4;
-	white-space: nowrap;
-	box-shadow: 0 10px 30px rgb(0 0 0 / 0.22);
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 120ms, transform 120ms;
-	z-index: 10;
-}
-:is(.warn, .badge):is(:hover, :focus-visible) .tip {
-	opacity: 1;
-	transform: translate(-50%, 0);
-}
 .lab {
 	display: block;
 	color: var(--subtle);

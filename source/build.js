@@ -5,7 +5,7 @@ import { load, models } from "./index.js";
 import { encodePng } from "./png.js";
 import { charts } from "./svg.js";
 import { readme } from "./readme.js";
-import { labPages, modelPages, page } from "./www.js";
+import { page } from "./www.js";
 const root = new URL(`../www/`, import.meta.url);
 const scale = 6.25;
 const font = {
@@ -24,17 +24,14 @@ const rasterize = async ({ path, text }) => {
 };
 const data = await load();
 const list = models(data);
-const [svg, html, pages, labs] = await Promise.all([charts(list), page(list), modelPages(list, data), labPages(list, data)]);
+const [svg, html] = await Promise.all([charts(list), page(list)]);
 await Promise.all([
 	mkdir(new URL(`bar/`, root), { recursive: true }),
 	mkdir(new URL(`scatter/`, root), { recursive: true }),
-	...[...pages, ...labs].map(item => mkdir(new URL(`.`, new URL(item.path, root)), { recursive: true })),
 ]);
 await Promise.all([
 	...svg.map(chart => write(chart.path, chart.text)),
 	...svg.map(rasterize),
 	write(`index.html`, html),
-	...pages.map(item => write(item.path, item.text)),
-	...labs.map(item => write(item.path, item.text)),
 	writeFile(new URL(`../README.md`, import.meta.url), readme(list)),
 ]);
